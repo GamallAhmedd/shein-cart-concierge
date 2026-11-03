@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -24,7 +24,7 @@ export function TrustAndGuarantees() {
       desc: isRtl
         ? 'المشرف بيتأكد من المقاس واللون وتطبيق كود الخصم الأنسب لسلتك قبل الدفع والتأكيد.'
         : 'Our team verifies your chosen sizes, colors, and applies the highest SHEIN coupon available.',
-      color: 'text-purple-500 bg-purple-50 dark:bg-purple-950/40 border-purple-200 dark:border-purple-900/60',
+      color: 'text-[#3A0F34] dark:text-[#DDE3E8] bg-[#EBF0F4] dark:bg-[#240E23] border-[#DDE3E8] dark:border-[#3A0F34]',
     },
     {
       icon: Lock,

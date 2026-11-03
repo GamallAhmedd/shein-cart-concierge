@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -134,7 +134,7 @@ export function CancelOrderModal({
                   key={item.id}
                   className={`flex items-center gap-3 p-3 rounded-xl border text-xs font-semibold cursor-pointer transition-colors ${
                     reason === item.id
-                      ? 'bg-purple-50 dark:bg-purple-950/40 border-purple-500 text-purple-900 dark:text-purple-200 shadow-2xs'
+                      ? 'bg-[#EBF0F4] dark:bg-[#240E23] border-[#3A0F34] dark:border-[#DDE3E8] text-[#3A0F34] dark:text-[#DDE3E8] shadow-2xs'
                       : 'bg-neutral-50 dark:bg-[#181423] border-neutral-200/80 dark:border-[#2a243b] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100/70 dark:hover:bg-[#1f1a2d]'
                   }`}
                 >
@@ -144,7 +144,7 @@ export function CancelOrderModal({
                     value={item.id}
                     checked={reason === item.id}
                     onChange={() => setReason(item.id)}
-                    className="accent-purple-600"
+                    className="accent-[#3A0F34]"
                   />
                   <span>{isRtl ? item.textAr : item.textEn}</span>
                 </label>
@@ -158,7 +158,7 @@ export function CancelOrderModal({
                   value={customReason}
                   onChange={(e) => setCustomReason(e.target.value)}
                   placeholder={isRtl ? 'اكتب سبب الإلغاء هنا...' : 'State your reason here...'}
-                  className="w-full px-4 py-2.5 text-xs bg-neutral-50 dark:bg-[#181423] border border-neutral-200 dark:border-[#2b243b] rounded-xl focus:bg-white dark:focus:bg-[#1f1a2d] focus:outline-none focus:ring-2 focus:ring-purple-500 text-neutral-900 dark:text-white"
+                  className="w-full px-4 py-2.5 text-xs bg-neutral-50 dark:bg-[#181423] border border-neutral-200 dark:border-[#2b243b] rounded-xl focus:bg-white dark:focus:bg-[#1f1a2d] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] text-neutral-900 dark:text-white"
                 />
               </div>
             )}

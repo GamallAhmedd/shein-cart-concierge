@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useEffect } from 'react';
 import { getSupabase } from '@/lib/supabase';
@@ -59,7 +59,7 @@ export default function AuthCallbackPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white dark:bg-[#0c0a0f] p-4 text-center">
       <div className="space-y-4">
-        <div className="w-10 h-10 border-3 border-[#8B5CF6] border-t-transparent rounded-full animate-spin mx-auto" />
+        <div className="w-10 h-10 border-3 border-[#3A0F34] dark:border-[#DDE3E8] border-t-transparent rounded-full animate-spin mx-auto" />
         <p className="text-xs font-bold text-neutral-600 dark:text-neutral-300">
           جاري إتمام تسجيل الدخول عبر Google...
         </p>

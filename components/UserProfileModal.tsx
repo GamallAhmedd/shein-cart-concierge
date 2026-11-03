@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -141,7 +141,7 @@ export function UserProfileModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-          className="relative z-10 w-full max-w-lg bg-white dark:bg-[#120f1d] rounded-[32px] border border-neutral-200/80 dark:border-[#2a243a] shadow-2xl p-6 sm:p-7 space-y-6 text-neutral-900 dark:text-white my-auto overflow-hidden"
+          className="relative z-10 w-full max-w-lg bg-white dark:bg-[#1A0919] rounded-[32px] border border-[#DDE3E8] dark:border-[#3A0F34]/60 shadow-2xl p-6 sm:p-7 space-y-6 text-neutral-900 dark:text-white my-auto overflow-hidden"
         >
           {/* Header */}
           <div className="flex items-center justify-between pb-4 border-b border-neutral-100 dark:border-[#1e192c]">
@@ -153,7 +153,7 @@ export function UserProfileModal({
                     `https://api.dicebear.com/7.x/initials/svg?seed=${user?.name || 'User'}`
                   }
                   alt={user?.name || 'User'}
-                  className="w-12 h-12 rounded-2xl object-cover ring-2 ring-[#8B5CF6]/50 shadow-sm"
+                  className="w-12 h-12 rounded-2xl object-cover ring-2 ring-[#3A0F34]/50 dark:ring-[#DDE3E8]/50 shadow-sm"
                 />
                 <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-[#120f1d]" />
               </div>
@@ -163,7 +163,7 @@ export function UserProfileModal({
                     {user?.name || (isRtl ? 'بيانات الحساب' : 'Account Profile')}
                   </h3>
                   {user?.role === 'admin' ? (
-                    <span className="text-[10px] font-black uppercase tracking-wider text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-950 px-2 py-0.5 rounded-full border border-purple-300 dark:border-purple-800">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#3A0F34] dark:text-[#DDE3E8] bg-[#EBF0F4] dark:bg-[#240E23] px-2 py-0.5 rounded-full border border-[#DDE3E8] dark:border-[#3A0F34]">
                       Admin
                     </span>
                   ) : (
@@ -189,8 +189,8 @@ export function UserProfileModal({
           {/* Form */}
           <form onSubmit={handleSave} className="space-y-4">
             {/* Auto-fill Tip Banner */}
-            <div className="p-3 rounded-2xl bg-purple-50/70 dark:bg-purple-950/30 border border-purple-200/60 dark:border-purple-900/40 flex items-start gap-2.5 text-xs text-purple-900 dark:text-purple-200">
-              <Sparkles className="w-4 h-4 text-[#8B5CF6] shrink-0 mt-0.5" />
+            <div className="p-3 rounded-2xl bg-[#EBF0F4]/70 dark:bg-[#240E23]/70 border border-[#DDE3E8] dark:border-[#3A0F34]/50 flex items-start gap-2.5 text-xs text-[#3A0F34] dark:text-[#DDE3E8]">
+              <Sparkles className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8] shrink-0 mt-0.5" />
               <span>
                 {isRtl
                   ? 'يتم استخدام هذه البيانات تلقائياً عند استخراج أي سلة لملء بيانات الشحن وتأكيد طلبك بضغطة واحدة دون إعادة كتابتها.'
@@ -201,7 +201,7 @@ export function UserProfileModal({
             {/* Full Name */}
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300 flex items-center gap-1.5">
-                <UserIcon className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                <UserIcon className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
                 <span>{isRtl ? 'الاسم بالكامل' : 'Full Name'}</span>
                 <span className="text-rose-500">*</span>
               </label>
@@ -211,7 +211,7 @@ export function UserProfileModal({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={isRtl ? 'اكتب اسمك الثلاثي أو الثنائي' : 'Your full name'}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-[#181325] border border-neutral-200 dark:border-[#2e2642] focus:border-[#8B5CF6] dark:focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 text-xs font-medium outline-hidden transition-all text-neutral-900 dark:text-white"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34]/60 focus:border-[#3A0F34] dark:focus:border-[#DDE3E8] focus:ring-2 focus:ring-[#3A0F34]/20 text-xs font-medium outline-hidden transition-all text-neutral-900 dark:text-white"
               />
             </div>
 
@@ -220,7 +220,7 @@ export function UserProfileModal({
               {/* Phone */}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300 flex items-center gap-1.5">
-                  <Phone className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                  <Phone className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
                   <span>{isRtl ? 'رقم الموبايل (واتساب)' : 'Mobile / WhatsApp'}</span>
                 </label>
                 <input
@@ -229,20 +229,20 @@ export function UserProfileModal({
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="01xxxxxxxxx"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-[#181325] border border-neutral-200 dark:border-[#2e2642] focus:border-[#8B5CF6] dark:focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 text-xs font-medium font-mono outline-hidden transition-all text-neutral-900 dark:text-white"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34]/60 focus:border-[#3A0F34] dark:focus:border-[#DDE3E8] focus:ring-2 focus:ring-[#3A0F34]/20 text-xs font-medium font-mono outline-hidden transition-all text-neutral-900 dark:text-white"
                 />
               </div>
 
               {/* City / Governorate */}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300 flex items-center gap-1.5">
-                  <Building className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                  <Building className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
                   <span>{isRtl ? 'المحافظة / المدينة' : 'City / Governorate'}</span>
                 </label>
                 <select
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-[#181325] border border-neutral-200 dark:border-[#2e2642] focus:border-[#8B5CF6] dark:focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 text-xs font-medium outline-hidden transition-all text-neutral-900 dark:text-white cursor-pointer"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34]/60 focus:border-[#3A0F34] dark:focus:border-[#DDE3E8] focus:ring-2 focus:ring-[#3A0F34]/20 text-xs font-medium outline-hidden transition-all text-neutral-900 dark:text-white cursor-pointer"
                 >
                   <option value="">{isRtl ? '— اختاري المحافظة —' : 'Select Governorate'}</option>
                   {EGYPT_GOVERNORATES.map((gov) => (
@@ -257,7 +257,7 @@ export function UserProfileModal({
             {/* Delivery Address */}
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300 flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                <MapPin className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
                 <span>{isRtl ? 'عنوان التوصيل بالتفصيل' : 'Detailed Shipping Address'}</span>
               </label>
               <textarea
@@ -269,7 +269,7 @@ export function UserProfileModal({
                     ? 'المنطقة، اسم الشارع، رقم العمارة، رقم الشقة، علامة مميزة...'
                     : 'Street name, building number, apartment, landmark...'
                 }
-                className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-[#181325] border border-neutral-200 dark:border-[#2e2642] focus:border-[#8B5CF6] dark:focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 text-xs font-medium outline-hidden transition-all text-neutral-900 dark:text-white resize-none"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34]/60 focus:border-[#3A0F34] dark:focus:border-[#DDE3E8] focus:ring-2 focus:ring-[#3A0F34]/20 text-xs font-medium outline-hidden transition-all text-neutral-900 dark:text-white resize-none"
               />
             </div>
 
@@ -287,7 +287,7 @@ export function UserProfileModal({
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isSaving}
-                className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] hover:from-[#7C3AED] hover:to-[#6D28D9] text-white text-xs font-black shadow-md shadow-purple-500/25 flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-60"
+                className="flex-1 py-3 px-4 rounded-xl bg-[#3A0F34] hover:bg-[#4E1646] text-white text-xs font-black shadow-md shadow-[#3A0F34]/25 border border-[#DDE3E8]/30 flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-60"
               >
                 {saveSuccess ? (
                   <>
@@ -326,9 +326,9 @@ export function UserProfileModal({
               <Link
                 href="/orders"
                 onClick={onClose}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-[#181325] hover:bg-purple-50 dark:hover:bg-[#221c32] text-neutral-700 dark:text-neutral-300 font-bold border border-neutral-200/60 dark:border-[#2e2642] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-[#181325] hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] text-neutral-700 dark:text-neutral-300 font-bold border border-neutral-200/60 dark:border-[#2e2642] transition-colors"
               >
-                <ShoppingBag className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                <ShoppingBag className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
                 <span>{isRtl ? 'طلباتي' : 'My Orders'}</span>
               </Link>
 
@@ -339,9 +339,9 @@ export function UserProfileModal({
                     onClose();
                     onOpenSupport();
                   }}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-[#181325] hover:bg-purple-50 dark:hover:bg-[#221c32] text-neutral-700 dark:text-neutral-300 font-bold border border-neutral-200/60 dark:border-[#2e2642] transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-[#181325] hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] text-neutral-700 dark:text-neutral-300 font-bold border border-neutral-200/60 dark:border-[#2e2642] transition-colors cursor-pointer"
                 >
-                  <Headphones className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                  <Headphones className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
                   <span>{isRtl ? 'الدعم الفني' : 'Support'}</span>
                 </button>
               )}

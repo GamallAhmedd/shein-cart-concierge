@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -110,8 +110,8 @@ export default function HomePage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0A0713] flex items-center justify-center">
-        <div className="w-9 h-9 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-[#F4F6F8] dark:bg-[#130712] flex items-center justify-center">
+        <div className="w-9 h-9 border-2 border-[#3A0F34] dark:border-[#DDE3E8] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -125,9 +125,9 @@ export default function HomePage() {
   const bottomSections = settings?.customSections?.filter((s) => s.enabled && s.position === 'bottom') || [];
 
   return (
-    <div className="min-h-screen bg-[#FBFBFC] dark:bg-[#0c0a0f] text-neutral-900 dark:text-white pb-32 md:pb-24 transition-colors relative overflow-hidden">
-      {/* Background ambient lighting - Warm Rose Silk & Soft Champagne Honey */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-rose-300/15 via-pink-200/10 to-transparent dark:from-rose-950/25 dark:via-purple-950/15 dark:to-transparent pointer-events-none blur-3xl -z-10" />
+    <div className="min-h-screen bg-[#F4F6F8] dark:bg-[#130712] text-neutral-900 dark:text-white pb-32 md:pb-24 transition-colors relative overflow-hidden">
+      {/* Background ambient lighting - Deep Aubergine & Ice Silver */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-[#3A0F34]/10 via-[#DDE3E8]/20 to-transparent dark:from-[#3A0F34]/25 dark:via-[#1A0919]/40 dark:to-transparent pointer-events-none blur-3xl -z-10" />
 
       {/* Optional Top Announcement Bar Configured by Admin */}
       {settings?.announcementEnabled !== false && settings?.announcementText && (
@@ -139,7 +139,7 @@ export default function HomePage() {
               ? 'bg-emerald-600 text-white'
               : settings?.announcementBg === 'rose'
               ? 'bg-rose-600 text-white'
-              : 'bg-gradient-to-r from-rose-700 via-pink-700 to-amber-600 text-white'
+              : 'bg-[#3A0F34] text-white border-b border-[#DDE3E8]/30'
           }`}
         >
           <Sparkles className="w-3.5 h-3.5 shrink-0 opacity-90 animate-sparkle-twinkle" />
@@ -154,14 +154,14 @@ export default function HomePage() {
           <div className="space-y-10">
             {/* Header Title: Fashion Editorial Hierarchy */}
             <motion.div {...heroEntrance} className="text-center sm:text-start space-y-3 pt-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/70 border border-rose-200 dark:border-rose-900 text-rose-700 dark:text-rose-300 text-[11px] font-black tracking-wide shadow-2xs">
-                <Sparkles className="w-3.5 h-3.5 text-rose-500 animate-sparkle-twinkle" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-black tracking-wide shadow-2xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8] animate-sparkle-twinkle" />
                 <span>{settings?.heroBadge || (dir === 'rtl' ? 'خدمة التسوق والاستخراج الأولى للبنات في مصر 🛍️✨' : t.heroBadge)}</span>
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white tracking-tight leading-tight text-balance">
                 {settings?.heroTitle || (dir === 'rtl' ? 'كل سلات وفساتين شي إن.. بالجنيه المصري لباب بيتكِ' : t.heroTitle)}
               </h1>
-              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 max-w-xl leading-relaxed text-balance">
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-[#9BAAB6] max-w-xl leading-relaxed text-balance">
                 {settings?.heroSubtitle || (dir === 'rtl' ? 'وداعاً لمشاكل الدفع بالدولار وبطاقات البنوك! الصقي رابط سلتك، واحسبي إجمالي طلبك بالجنيه فوراً، وادفعي عبر إنستاباي أو فودافون كاش واستلمي شحنتك أينما كنتِ في مصر.' : t.heroSubtitle)}
               </p>
             </motion.div>
@@ -192,12 +192,12 @@ export default function HomePage() {
                 {...scrollReveal}
                 className="grid grid-cols-2 md:grid-cols-4 gap-3 py-2"
               >
-                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#14111d] border border-neutral-200 dark:border-neutral-800 shadow-xs flex items-center gap-3 cursor-pointer">
+                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs flex items-center gap-3 cursor-pointer">
                   <div className="flex items-center -space-x-1.5 shrink-0">
-                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#1b1726] p-1 border border-purple-200 dark:border-purple-800 flex items-center justify-center overflow-hidden">
+                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#240E23] p-1 border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center overflow-hidden">
                       <img src="/images/instapay.png" alt="InstaPay" className="w-full h-full object-contain" />
                     </div>
-                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#1b1726] p-0.5 border border-rose-200 dark:border-rose-800 flex items-center justify-center overflow-hidden">
+                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#240E23] p-0.5 border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center overflow-hidden">
                       <img src="/images/vodafone-cash.png" alt="Vodafone Cash" className="w-full h-full object-contain" />
                     </div>
                   </div>
@@ -205,37 +205,37 @@ export default function HomePage() {
                     <h4 className="text-xs font-black text-neutral-900 dark:text-white leading-tight">
                       {settings?.enableInstapay ? (dir === 'rtl' ? 'إنستاباي وفودافون كاش' : 'InstaPay & Vodafone') : 'Mobile Wallets'}
                     </h4>
-                    <p className="text-[10px] text-neutral-400 dark:text-neutral-500">{dir === 'rtl' ? 'دفع فوري بالجنيه المصري' : 'Instant EGP Transfer'}</p>
+                    <p className="text-[10px] text-neutral-400 dark:text-[#9BAAB6]">{dir === 'rtl' ? 'دفع فوري بالجنيه المصري' : 'Instant EGP Transfer'}</p>
                   </div>
                 </motion.div>
 
-                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#14111d] border border-neutral-200 dark:border-neutral-800 shadow-xs flex items-center gap-3 cursor-pointer">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200/80 dark:border-emerald-800/60 flex items-center justify-center shrink-0">
+                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs flex items-center gap-3 cursor-pointer">
+                  <div className="w-9 h-9 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center shrink-0">
                     <ShieldCheck className="w-4 h-4" />
                   </div>
                   <div>
                     <h4 className="text-xs font-black text-neutral-900 dark:text-white leading-tight">{dir === 'rtl' ? 'فحص ومراجعة دقيقة' : 'Supervisor Verified'}</h4>
-                    <p className="text-[10px] text-neutral-400 dark:text-neutral-500">{dir === 'rtl' ? 'ضمان توافر المقاسات' : 'Inventory & size check'}</p>
+                    <p className="text-[10px] text-neutral-400 dark:text-[#9BAAB6]">{dir === 'rtl' ? 'ضمان توافر المقاسات' : 'Inventory & size check'}</p>
                   </div>
                 </motion.div>
 
-                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#14111d] border border-neutral-200 dark:border-neutral-800 shadow-xs flex items-center gap-3 cursor-pointer">
-                  <div className="w-9 h-9 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 border border-amber-200/80 dark:border-amber-800/60 flex items-center justify-center shrink-0">
+                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs flex items-center gap-3 cursor-pointer">
+                  <div className="w-9 h-9 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center shrink-0">
                     <Truck className="w-4 h-4" />
                   </div>
                   <div>
                     <h4 className="text-xs font-black text-neutral-900 dark:text-white leading-tight">{dir === 'rtl' ? 'توصيل لباب بيتك' : 'Doorstep Delivery'}</h4>
-                    <p className="text-[10px] text-neutral-400 dark:text-neutral-500">{dir === 'rtl' ? 'كل محافظات مصر' : 'Across all Egypt'}</p>
+                    <p className="text-[10px] text-neutral-400 dark:text-[#9BAAB6]">{dir === 'rtl' ? 'كل محافظات مصر' : 'Across all Egypt'}</p>
                   </div>
                 </motion.div>
 
-                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#14111d] border border-neutral-200 dark:border-neutral-800 shadow-xs flex items-center gap-3 cursor-pointer">
-                  <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200/80 dark:border-blue-800/60 flex items-center justify-center shrink-0">
+                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs flex items-center gap-3 cursor-pointer">
+                  <div className="w-9 h-9 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center shrink-0">
                     <Lock className="w-4 h-4" />
                   </div>
                   <div>
                     <h4 className="text-xs font-black text-neutral-900 dark:text-white leading-tight">{dir === 'rtl' ? 'خصوصية كاملة' : '100% Privacy'}</h4>
-                    <p className="text-[10px] text-neutral-400 dark:text-neutral-500">{dir === 'rtl' ? 'طلباتك محمية وموثقة' : 'Strict user data security'}</p>
+                    <p className="text-[10px] text-neutral-400 dark:text-[#9BAAB6]">{dir === 'rtl' ? 'طلباتك محمية وموثقة' : 'Strict user data security'}</p>
                   </div>
                 </motion.div>
               </motion.div>
@@ -262,7 +262,7 @@ export default function HomePage() {
                   </h3>
                   <Link
                     href="/orders"
-                    className="text-xs font-black text-[#8B5CF6] hover:text-[#7C3AED] transition-colors flex items-center gap-1 group"
+                    className="text-xs font-black text-[#3A0F34] dark:text-[#DDE3E8] hover:text-[#5C1D53] transition-colors flex items-center gap-1 group"
                   >
                     <span>{t.seeAll}</span>
                     {dir === 'rtl' ? (
@@ -290,10 +290,10 @@ export default function HomePage() {
                     >
                       <Link
                         href={`/orders/${ord.id}`}
-                        className="bg-white/90 dark:bg-[#14111d]/90 backdrop-blur-md rounded-3xl p-5 border border-neutral-200/70 dark:border-[#2a243a] shadow-xs hover:border-purple-300 dark:hover:border-purple-700 transition-all flex flex-col justify-between gap-4 group h-full cursor-pointer"
+                        className="bg-white/90 dark:bg-[#14111d]/90 backdrop-blur-md rounded-3xl p-5 border border-neutral-200/70 dark:border-[#2a243a] shadow-xs hover:border-[#3A0F34] dark:hover:border-[#DDE3E8] transition-all flex flex-col justify-between gap-4 group h-full cursor-pointer"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-12 h-14 rounded-2xl bg-purple-50 dark:bg-purple-950/40 overflow-hidden shrink-0 border border-neutral-100 dark:border-[#2a243a]">
+                          <div className="w-12 h-14 rounded-2xl bg-[#EBF0F4] dark:bg-[#240E23] overflow-hidden shrink-0 border border-neutral-100 dark:border-[#2a243a]">
                             {ord.items[0]?.image ? (
                               <SafeImage
                                 src={ord.items[0].image}
@@ -301,20 +301,20 @@ export default function HomePage() {
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                               />
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center text-purple-400">
+                              <div className="w-full h-full flex items-center justify-center text-[#3A0F34] dark:text-[#DDE3E8]">
                                 <ShoppingBag className="w-5 h-5" />
                               </div>
                             )}
                           </div>
 
                           <div className="space-y-0.5 overflow-hidden">
-                            <span className="font-mono font-black text-xs text-neutral-900 dark:text-white block group-hover:text-[#8B5CF6] transition-colors">
+                            <span className="font-mono font-black text-xs text-neutral-900 dark:text-white block group-hover:text-[#3A0F34] dark:group-hover:text-[#DDE3E8] transition-colors">
                               {ord.id}
                             </span>
                             <span className="text-[11px] text-neutral-400 dark:text-neutral-500 block truncate">
                               {ord.items.length} {t.goodsCount} • {new Date(ord.createdAt).toLocaleDateString()}
                             </span>
-                            <span className="inline-block text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-950/60 text-[#7C3AED] dark:text-purple-300">
+                            <span className="inline-block text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34]">
                               {ord.status.replace(/_/g, ' ')}
                             </span>
                           </div>
@@ -360,7 +360,7 @@ export default function HomePage() {
                       {...interactiveFeedback}
                       className="bg-white/90 dark:bg-[#14111d]/90 backdrop-blur-md p-6 rounded-3xl border border-neutral-200/70 dark:border-[#2a243a] shadow-xs space-y-3 cursor-pointer"
                     >
-                      <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#8B5CF6] to-[#C084FC] text-white flex items-center justify-center font-black text-sm shadow-sm shadow-purple-500/20">
+                      <div className="w-10 h-10 rounded-2xl bg-[#3A0F34] text-white flex items-center justify-center font-black text-sm shadow-sm shadow-[#3A0F34]/20 border border-[#DDE3E8]/40">
                         {s.step}
                       </div>
                       <h4 className="font-black text-neutral-950 dark:text-white text-sm">

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -41,7 +41,7 @@ export function ObjectionsFaq() {
   return (
     <div className="space-y-4 pt-4">
       <div className="text-center sm:text-start space-y-1 px-1">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-950/50 border border-purple-200/80 dark:border-purple-800/80 text-purple-700 dark:text-purple-300 text-[11px] font-black uppercase tracking-wider">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34] text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-black uppercase tracking-wider">
           <HelpCircle className="w-3.5 h-3.5" />
           <span>{isRtl ? 'الأسئلة الشائعة والإجابات 💡' : 'Frequently Asked Questions 💡'}</span>
         </div>
@@ -64,7 +64,7 @@ export function ObjectionsFaq() {
                 className="w-full px-5 py-4 flex items-center justify-between gap-3 text-start hover:bg-neutral-50 dark:hover:bg-[#1b1726] transition-colors cursor-pointer"
               >
                 <span className="text-xs sm:text-sm font-black text-neutral-900 dark:text-white flex items-center gap-2">
-                  <span className="text-purple-600 dark:text-purple-400">Q:</span>
+                  <span className="text-[#3A0F34] dark:text-[#DDE3E8]">Q:</span>
                   <span>{faq.q}</span>
                 </span>
                 <div className="w-7 h-7 rounded-full bg-neutral-100 dark:bg-[#201a2d] flex items-center justify-center text-neutral-500 shrink-0">

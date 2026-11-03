@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -162,22 +162,22 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       id="cart-extractor-card"
-      className="relative rounded-[36px] p-6 sm:p-10 bg-white/95 dark:bg-[#16111D]/95 border border-rose-200/80 dark:border-rose-950/60 shadow-[0_20px_60px_-15px_rgba(225,29,72,0.08)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] space-y-7 transition-colors overflow-hidden"
+      className="relative rounded-[36px] p-6 sm:p-10 bg-white/95 dark:bg-[#1A0919]/95 border border-[#DDE3E8] dark:border-[#3A0F34]/60 shadow-[0_20px_60px_-15px_rgba(58,15,52,0.08)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] space-y-7 transition-colors overflow-hidden"
     >
       {/* Delicate Atmospheric Ambient Vignette */}
-      <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-gradient-to-bl from-rose-200/35 via-pink-200/20 to-transparent dark:from-rose-950/30 dark:via-purple-950/20 pointer-events-none blur-3xl -z-10" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-gradient-to-tr from-amber-100/30 via-pink-100/15 to-transparent dark:from-amber-950/20 pointer-events-none blur-3xl -z-10" />
+      <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-gradient-to-bl from-[#3A0F34]/10 via-[#DDE3E8]/20 to-transparent dark:from-[#3A0F34]/25 dark:via-[#1A0919]/40 pointer-events-none blur-3xl -z-10" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-gradient-to-tr from-[#DDE3E8]/30 via-[#3A0F34]/5 to-transparent dark:from-[#240E23]/30 pointer-events-none blur-3xl -z-10" />
 
       {/* Top Graphic Header: Haute Fashion & Female Shopper Focus */}
       <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6 pb-1">
         <div className="space-y-2.5 text-center sm:text-start">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 text-[11px] font-black uppercase tracking-wider border border-rose-200/80 dark:border-rose-800/60 shadow-xs">
-              <Crown className="w-3.5 h-3.5 text-rose-500 animate-sparkle-twinkle" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-black uppercase tracking-wider border border-[#DDE3E8] dark:border-[#3A0F34] shadow-xs">
+              <Crown className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8] animate-sparkle-twinkle" />
               <span>{isRtl ? 'المستخرج الذكي لسلات شي إن للبنات' : 'SHEIN Smart Cart Extractor'}</span>
             </span>
             {currentDynamicFeePercent > 0 && (
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 text-[11px] font-bold border border-amber-200/80 dark:border-amber-800">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-bold border border-[#DDE3E8]">
                 +{currentDynamicFeePercent}% {t.feeLabel}
               </span>
             )}
@@ -186,7 +186,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-950 dark:text-white tracking-tight text-balance leading-snug">
             {isRtl ? 'معاكي سلة أو دريس عاجبك من شي إن؟ 🛍️✨' : t.extractorTitle}
           </h2>
-          <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 max-w-xl leading-relaxed font-medium text-balance">
+          <p className="text-xs sm:text-sm text-neutral-600 dark:text-[#DDE3E8] max-w-xl leading-relaxed font-medium text-balance">
             {isRtl
               ? 'الصقي الرابط في الصندوق السحري بالأسفل، وسنقوم بحساب الإجمالي بالجنيه المصري فوراً ومراجعة مقاساتك والشراء والتوصيل لباب بيتكِ في أي محافظة بمصر!'
               : t.extractorDesc}
@@ -199,19 +199,19 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
           transition={{ duration: 0.3 }}
           className="relative shrink-0 flex items-center justify-center cursor-default"
         >
-          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-tr from-rose-50 via-white to-pink-50 dark:from-[#201827] dark:via-[#1a1322] dark:to-[#22162a] border border-rose-200/70 dark:border-rose-900/50 flex flex-col items-center justify-center gap-1.5 shadow-sm shadow-rose-500/10">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-600 via-pink-600 to-amber-500 text-white flex items-center justify-center shadow-md shadow-rose-500/25">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34] flex flex-col items-center justify-center gap-1.5 shadow-sm shadow-[#3A0F34]/10">
+            <div className="w-12 h-12 rounded-2xl bg-[#3A0F34] text-white flex items-center justify-center shadow-md shadow-[#3A0F34]/30 border border-[#DDE3E8]/30">
               <ShoppingBag className="w-6 h-6 animate-fashion-float" />
             </div>
-            <span className="text-[10px] font-black text-rose-700 dark:text-rose-300 tracking-wider">SHEIN EGYPT</span>
+            <span className="text-[10px] font-black text-[#3A0F34] dark:text-[#DDE3E8] tracking-wider">SHEIN EGYPT</span>
           </div>
         </motion.div>
       </div>
 
       {/* Interactive Fashion Category Pills (Chic & Delightful) */}
       <div className="relative z-10 pt-1">
-        <div className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400 mb-2 flex items-center gap-1.5">
-          <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
+        <div className="text-[11px] font-bold text-neutral-500 dark:text-[#9BAAB6] mb-2 flex items-center gap-1.5">
+          <Heart className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8] fill-[#3A0F34] dark:fill-[#DDE3E8]" />
           <span>{isRtl ? 'مشترياتكِ المفضلة اليوم من شي إن:' : 'Popular SHEIN Categories:'}</span>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -227,8 +227,8 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
               }}
               className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                 selectedTag === idx
-                  ? 'bg-rose-600 text-white shadow-xs shadow-rose-600/30 border border-rose-600'
-                  : 'bg-neutral-100/80 dark:bg-[#201827] text-neutral-700 dark:text-neutral-300 hover:bg-rose-50 dark:hover:bg-[#2a1e34] border border-neutral-200/70 dark:border-rose-950/80'
+                  ? 'bg-[#3A0F34] text-white shadow-xs shadow-[#3A0F34]/30 border border-[#3A0F34]'
+                  : 'bg-[#EBF0F4] dark:bg-[#1E0C1D] text-[#3A0F34] dark:text-[#DDE3E8] hover:bg-[#DDE3E8] dark:hover:bg-[#2C102A] border border-[#DDE3E8] dark:border-[#3A0F34]/60'
               }`}
             >
               <span>{cat.label}</span>
@@ -250,7 +250,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
             htmlFor="shein-cart-input"
             className="text-xs sm:text-sm font-black text-neutral-950 dark:text-white flex items-center gap-2"
           >
-            <Sparkles className="w-4 h-4 text-rose-500" />
+            <Sparkles className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
             <span>{isRtl ? 'الصقي رابط سلتكِ أو منتجكِ هنا:' : 'Paste your SHEIN link here:'}</span>
           </label>
 
@@ -264,7 +264,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
               className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 cursor-pointer shadow-xs ${
                 pasteSuccess
                   ? 'bg-emerald-600 text-white'
-                  : 'bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/50 dark:hover:bg-rose-900/50 text-rose-700 dark:text-rose-300 border border-rose-200/80 dark:border-rose-900/60'
+                  : 'bg-[#EBF0F4] hover:bg-[#DDE3E8] dark:bg-[#240E23] dark:hover:bg-[#321330] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34]'
               }`}
               title={isRtl ? 'لصق الرابط من الحافظة مباشرة' : 'Paste from clipboard'}
             >
@@ -275,7 +275,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
                 </>
               ) : (
                 <>
-                  <ClipboardPaste className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
+                  <ClipboardPaste className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
                   <span>{isRtl ? 'لصق سريع من الحافظة' : 'Quick Paste'}</span>
                 </>
               )}
@@ -285,7 +285,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
               <button
                 type="button"
                 onClick={handleClear}
-                className="p-1.5 rounded-xl text-neutral-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
+                className="p-1.5 rounded-xl text-neutral-400 hover:text-[#3A0F34] hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] transition-colors cursor-pointer"
                 title={isRtl ? 'مسح الرابط' : 'Clear'}
               >
                 <RotateCcw className="w-3.5 h-3.5" />
@@ -294,19 +294,19 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
           </div>
         </div>
 
-        {/* Input Box Container with Delicate Rose Shimmer Glow */}
-        <div className="relative rounded-2xl border border-rose-200/90 dark:border-rose-950 focus-within:border-rose-500 dark:focus-within:border-rose-500 focus-within:ring-3 focus-within:ring-rose-500/15 transition-all bg-neutral-50/80 dark:bg-[#1a1424] overflow-hidden shadow-xs">
+        {/* Input Box Container with Ice Silver Border & Deep Aubergine Accent */}
+        <div className="relative rounded-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 focus-within:border-[#3A0F34] dark:focus-within:border-[#DDE3E8] focus-within:ring-3 focus-within:ring-[#3A0F34]/15 transition-all bg-[#F9FBFC] dark:bg-[#180817] overflow-hidden shadow-xs">
           {/* Header indicator inside the box */}
-          <div className="flex items-center justify-between px-4 sm:px-5 pt-3 pb-2 border-b border-rose-100 dark:border-rose-950/60 bg-white/70 dark:bg-[#1e172a]">
+          <div className="flex items-center justify-between px-4 sm:px-5 pt-3 pb-2 border-b border-[#DDE3E8] dark:border-[#3A0F34]/60 bg-white/70 dark:bg-[#1E0C1D]">
             <div className="flex items-center gap-2">
-              <Link2 className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
+              <Link2 className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
               <span className="text-xs font-black text-neutral-900 dark:text-neutral-200">
                 {isRtl ? 'سلة أو منتجات شي إن (SHEIN)' : 'SHEIN Cart Extractor Input'}
               </span>
             </div>
 
-            <div className="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500 dark:text-neutral-400">
-              <Shirt className="w-3 h-3 text-rose-500" />
+            <div className="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500 dark:text-[#9BAAB6]">
+              <Shirt className="w-3 h-3 text-[#3A0F34] dark:text-[#DDE3E8]" />
               <span>{isRtl ? 'يقبل السلة بالكامل أو رابط فستان/قطعة واحدة' : 'Cart or single item'}</span>
             </div>
           </div>
@@ -326,7 +326,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
           />
 
           {/* Bottom Bar inside the box */}
-          <div className="px-4 sm:px-5 py-2.5 bg-neutral-100/70 dark:bg-[#150f1e] border-t border-rose-100 dark:border-rose-950/60 flex items-center justify-between text-[11px] text-neutral-500 dark:text-neutral-400">
+          <div className="px-4 sm:px-5 py-2.5 bg-[#EBF0F4]/60 dark:bg-[#130712] border-t border-[#DDE3E8] dark:border-[#3A0F34]/60 flex items-center justify-between text-[11px] text-neutral-500 dark:text-[#9BAAB6]">
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>{isRtl ? 'الصندوق جاهز للاستخراج الفوري' : 'Ready'}</span>
@@ -387,35 +387,35 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
 
         {/* 3 Step Chic Flow Ribbon */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 py-1">
-          <div className="flex items-center gap-2 p-2 rounded-xl bg-neutral-50 dark:bg-[#1a1424] border border-neutral-200/60 dark:border-rose-950/50 text-[11px] text-neutral-600 dark:text-neutral-300">
-            <span className="w-5 h-5 rounded-full bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 font-black text-[10px] flex items-center justify-center shrink-0">1</span>
+          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-neutral-700 dark:text-[#DDE3E8]">
+            <span className="w-5 h-5 rounded-full bg-[#3A0F34] text-white font-black text-[10px] flex items-center justify-center shrink-0">1</span>
             <span className="truncate">{isRtl ? 'انسخي الرابط من تطبيق SHEIN' : 'Copy link from SHEIN'}</span>
           </div>
-          <div className="flex items-center gap-2 p-2 rounded-xl bg-neutral-50 dark:bg-[#1a1424] border border-neutral-200/60 dark:border-rose-950/50 text-[11px] text-neutral-600 dark:text-neutral-300">
-            <span className="w-5 h-5 rounded-full bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 font-black text-[10px] flex items-center justify-center shrink-0">2</span>
+          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-neutral-700 dark:text-[#DDE3E8]">
+            <span className="w-5 h-5 rounded-full bg-[#3A0F34] text-white font-black text-[10px] flex items-center justify-center shrink-0">2</span>
             <span className="truncate">{isRtl ? 'اضغطي استخراج وشوفي السعر' : 'Extract & see EGP total'}</span>
           </div>
-          <div className="flex items-center gap-2 p-2 rounded-xl bg-neutral-50 dark:bg-[#1a1424] border border-neutral-200/60 dark:border-rose-950/50 text-[11px] text-neutral-600 dark:text-neutral-300">
-            <span className="w-5 h-5 rounded-full bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 font-black text-[10px] flex items-center justify-center shrink-0">3</span>
+          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-neutral-700 dark:text-[#DDE3E8]">
+            <span className="w-5 h-5 rounded-full bg-[#3A0F34] text-white font-black text-[10px] flex items-center justify-center shrink-0">3</span>
             <span className="truncate">{isRtl ? 'ادفعي بالمصري واستلمي بالبيت' : 'Pay in EGP & receive at home'}</span>
           </div>
         </div>
 
         {/* Submit Button & Payment Trust Logos */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-rose-100 dark:border-rose-950/60">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#DDE3E8] dark:border-[#3A0F34]/60">
           {/* Payment Logos Badge */}
           <div className="flex items-center gap-2.5">
-            <span className="text-[11px] font-bold text-neutral-500 dark:text-neutral-400">
+            <span className="text-[11px] font-bold text-neutral-500 dark:text-[#9BAAB6]">
               {isRtl ? 'دفع آمن بالجنيه عبر:' : 'Payment via:'}
             </span>
             <div className="flex items-center gap-2">
-              <div className="h-7 px-2.5 py-0.5 rounded-lg bg-white dark:bg-[#1b1726] border border-neutral-200 dark:border-neutral-800 flex items-center gap-1.5 shadow-2xs">
+              <div className="h-7 px-2.5 py-0.5 rounded-lg bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 flex items-center gap-1.5 shadow-2xs">
                 <img src="/images/instapay.png" alt="InstaPay" className="h-4 object-contain" />
-                <span className="text-[10px] font-black text-purple-700 dark:text-purple-300">InstaPay</span>
+                <span className="text-[10px] font-black text-neutral-800 dark:text-neutral-200">InstaPay</span>
               </div>
-              <div className="h-7 px-2.5 py-0.5 rounded-lg bg-white dark:bg-[#1b1726] border border-neutral-200 dark:border-neutral-800 flex items-center gap-1.5 shadow-2xs">
+              <div className="h-7 px-2.5 py-0.5 rounded-lg bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 flex items-center gap-1.5 shadow-2xs">
                 <img src="/images/vodafone-cash.png" alt="Vodafone Cash" className="h-4 object-contain" />
-                <span className="text-[10px] font-black text-rose-700 dark:text-rose-300">Vodafone Cash</span>
+                <span className="text-[10px] font-black text-[#3A0F34] dark:text-[#DDE3E8]">Vodafone</span>
               </div>
             </div>
           </div>
@@ -426,7 +426,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
             transition={{ duration: 0.15 }}
             type="submit"
             disabled={loading}
-            className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-rose-600 via-pink-600 to-amber-500 hover:from-rose-500 hover:to-amber-400 text-white font-black text-xs sm:text-sm rounded-2xl shadow-lg shadow-rose-500/25 transition-all flex items-center justify-center gap-2.5 cursor-pointer select-none disabled:opacity-50"
+            className="w-full sm:w-auto px-8 py-3.5 bg-[#3A0F34] hover:bg-[#4E1646] text-white font-black text-xs sm:text-sm rounded-2xl shadow-lg shadow-[#3A0F34]/25 transition-all flex items-center justify-center gap-2.5 cursor-pointer select-none disabled:opacity-50 border border-[#DDE3E8]/30"
           >
             {loading ? (
               <>

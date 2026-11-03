@@ -64,11 +64,11 @@ export function ShipmentBatchLiveNudge() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="rounded-2xl border border-rose-100 dark:border-rose-950/70 bg-white/95 dark:bg-[#16111D] p-4 shadow-xs"
+      className="rounded-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 bg-white/95 dark:bg-[#1A0919] p-4 shadow-xs"
     >
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-3 w-full sm:w-auto">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-rose-600 via-pink-600 to-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs shadow-rose-500/25">
+          <div className="w-9 h-9 rounded-xl bg-[#3A0F34] text-white flex items-center justify-center shrink-0 shadow-xs shadow-[#3A0F34]/25 border border-[#DDE3E8]/30">
             <Truck className="w-4 h-4" />
           </div>
           <div>
@@ -76,14 +76,14 @@ export function ShipmentBatchLiveNudge() {
               <span className="text-xs font-black text-neutral-950 dark:text-white">
                 {shipmentInfo.code}
               </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 border border-rose-200/80 dark:border-rose-900/60">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8]">
                 <Clock className="w-2.5 h-2.5" />
                 {isRtl
                   ? `متبقي ${shipmentInfo.remaining} قطع فقط للإغلاق`
                   : `Only ${shipmentInfo.remaining} items remaining`}
               </span>
             </div>
-            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5">
+            <p className="text-[11px] text-neutral-500 dark:text-[#9BAAB6] mt-0.5">
               {isRtl
                 ? 'اطلبي الآن لتنضم سلتكِ لدفعة الشحن الجوي الحالية وتستلمي في أقرب موعد بمصر ✈️'
                 : 'Order now to join this expedited air shipment batch'}
@@ -93,18 +93,18 @@ export function ShipmentBatchLiveNudge() {
 
         {/* Progress bar meter */}
         <div className="w-full sm:w-48 space-y-1.5 shrink-0">
-          <div className="flex items-center justify-between text-[10px] font-bold text-neutral-600 dark:text-neutral-400">
+          <div className="flex items-center justify-between text-[10px] font-bold text-neutral-600 dark:text-[#DDE3E8]">
             <span>{isRtl ? 'اكتمال دفعة الشحن:' : 'Batch Capacity:'}</span>
-            <span className="font-mono tabular-nums text-rose-600 dark:text-rose-400 font-black">
+            <span className="font-mono tabular-nums text-[#3A0F34] dark:text-[#DDE3E8] font-black">
               {shipmentInfo.percent}%
             </span>
           </div>
-          <div className="w-full h-2 rounded-full bg-neutral-100 dark:bg-[#201828] overflow-hidden">
+          <div className="w-full h-2 rounded-full bg-neutral-100 dark:bg-[#251024] overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${shipmentInfo.percent}%` }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="h-full bg-gradient-to-r from-rose-500 via-pink-500 to-amber-500 rounded-full"
+              className="h-full bg-[#3A0F34] dark:bg-[#DDE3E8] rounded-full"
             />
           </div>
         </div>

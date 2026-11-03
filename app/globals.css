@@ -4,15 +4,17 @@
 
 @layer base {
   :root {
-    --background: #FAF7F4;
-    --foreground: #18111B;
+    --background: #F4F6F8;
+    --foreground: #1E071B;
+    --brand-aubergine: #3A0F34;
+    --brand-ice-silver: #DDE3E8;
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   html.dark {
-    --background: #110D15;
-    --foreground: #FAF4F8;
+    --background: #130712;
+    --foreground: #F4F6F8;
     color-scheme: dark;
   }
 
@@ -51,39 +53,39 @@
   text-wrap: pretty;
 }
 
-/* Dark mode theme overrides with warm Rose-Espresso / Mulberry undertones */
+/* Dark mode theme overrides with Deep Aubergine & Ice Silver undertones */
 .dark body {
-  background-color: #110D15;
-  color: #FAF4F8;
+  background-color: #130712;
+  color: #F4F6F8;
 }
 
 .dark .bg-\[\#F9FAFB\],
 .dark .bg-\[\#FBFBFC\],
 .dark .bg-neutral-50 {
-  background-color: #18131E !important;
+  background-color: #1C0B1B !important;
 }
 
 .dark .bg-white {
-  background-color: #16111B !important;
+  background-color: #1A0919 !important;
 }
 
 .dark .bg-neutral-100 {
-  background-color: #201827 !important;
+  background-color: #240E23 !important;
 }
 
 .dark .text-neutral-900,
 .dark .text-neutral-950 {
-  color: #FAF4F8 !important;
+  color: #F4F6F8 !important;
 }
 
 .dark .text-neutral-800,
 .dark .text-neutral-700 {
-  color: #E8DFE9 !important;
+  color: #DDE3E8 !important;
 }
 
 .dark .text-neutral-600,
 .dark .text-neutral-500 {
-  color: #A396A6 !important;
+  color: #9BAAB6 !important;
 }
 
 .dark .border-neutral-100,
@@ -92,20 +94,20 @@
 .dark .border-neutral-200\/60,
 .dark .border-neutral-200\/50,
 .dark .border-neutral-300 {
-  border-color: #2A1F33 !important;
+  border-color: rgba(221, 227, 232, 0.16) !important;
 }
 
 .dark input,
 .dark textarea {
-  color: #FAF4F8 !important;
+  color: #F4F6F8 !important;
 }
 
 .dark input::placeholder,
 .dark textarea::placeholder {
-  color: #7D7082 !important;
+  color: #798894 !important;
 }
 
-/* Custom Fashion & Editorial Keyframe Animations */
+/* Custom Fashion & Editorial Keyframe Animations (Deep Aubergine & Ice Silver) */
 @keyframes delicate-shimmer {
   0% {
     background-position: -200% 0;
@@ -124,13 +126,13 @@
   }
 }
 
-@keyframes pulse-rose-glow {
+@keyframes pulse-aubergine-glow {
   0%, 100% {
-    opacity: 0.5;
+    opacity: 0.45;
     transform: scale(1);
   }
   50% {
-    opacity: 0.85;
+    opacity: 0.8;
     transform: scale(1.03);
   }
 }
@@ -141,7 +143,7 @@
     opacity: 0.9;
   }
   50% {
-    transform: scale(1.2) rotate(15deg);
+    transform: scale(1.18) rotate(12deg);
     opacity: 1;
   }
 }
@@ -150,40 +152,40 @@
   animation: fashion-float 3.5s ease-in-out infinite;
 }
 
-.animate-pulse-rose-glow {
-  animation: pulse-rose-glow 4s ease-in-out infinite;
+.animate-pulse-aubergine-glow {
+  animation: pulse-aubergine-glow 4s ease-in-out infinite;
 }
 
 .animate-sparkle-twinkle {
   animation: sparkle-twinkle 2.5s ease-in-out infinite;
 }
 
-/* Editorial Glass & Surface Cards */
+/* Editorial Glass & Surface Cards (Ice Silver #DDE3E8 border & Deep Aubergine #3A0F34 shadow) */
 .fashion-glass-card {
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(226, 208, 218, 0.6);
-  box-shadow: 0 10px 40px -10px rgba(190, 24, 93, 0.07);
+  border: 1px solid #DDE3E8;
+  box-shadow: 0 10px 40px -10px rgba(58, 15, 52, 0.08);
 }
 
 .dark .fashion-glass-card {
-  background: rgba(22, 17, 27, 0.92);
-  border: 1px solid rgba(62, 41, 68, 0.7);
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  background: rgba(26, 9, 25, 0.94);
+  border: 1px solid rgba(221, 227, 232, 0.16);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.65);
 }
 
-/* Shimmering Rose-Gold Border */
-.rose-gold-shimmer-border {
+/* Shimmering Editorial Deep Aubergine & Ice Silver Border */
+.editorial-shimmer-border {
   position: relative;
 }
-.rose-gold-shimmer-border::before {
+.editorial-shimmer-border::before {
   content: '';
   position: absolute;
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(90deg, #F43F5E, #EC4899, #F59E0B, #F43F5E);
+  background: linear-gradient(90deg, #3A0F34, #5C1D53, #DDE3E8, #3A0F34);
   background-size: 300% 100%;
   animation: delicate-shimmer 6s linear infinite;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -191,7 +193,7 @@
   pointer-events: none;
 }
 
-/* Clean micro scrollbars */
+/* Clean micro scrollbars with Ice Silver thumb */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -200,18 +202,18 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #E2D9E2;
+  background: #DDE3E8;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #C4B5C4;
+  background: #C4CFD8;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #33253B;
+  background: #331731;
 }
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #4A3657;
+  background: #4A2247;
 }
 
 /* Google Identity Services button container fix for dark mode */

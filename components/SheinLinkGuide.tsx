@@ -29,7 +29,7 @@ export function SheinLinkGuide() {
         : 'Open the SHEIN app on your phone, and go to your Shopping Cart 🛒 containing your items.',
       badge: isRtl ? 'الخطوة الأولى' : 'Step 1',
       icon: ShoppingBag,
-      color: 'from-pink-500 to-rose-500',
+      color: 'from-[#3A0F34] to-[#5C1D53]',
       tag: '🛒 Cart',
     },
     {
@@ -40,7 +40,7 @@ export function SheinLinkGuide() {
         : 'At the top of your screen (near search), look for the Share icon ↗️ or "Share Cart" button. Tap it.',
       badge: isRtl ? 'الخطوة الثانية' : 'Step 2',
       icon: Share2,
-      color: 'from-purple-500 to-indigo-500',
+      color: 'from-[#3A0F34] to-[#5C1D53]',
       tag: '↗️ Share',
     },
     {
@@ -51,21 +51,21 @@ export function SheinLinkGuide() {
         : 'From the popup menu, tap "Copy Link" (or share to WhatsApp and copy the link). Then come back here!',
       badge: isRtl ? 'الخطوة الثالثة' : 'Step 3',
       icon: Copy,
-      color: 'from-emerald-500 to-teal-500',
+      color: 'from-[#3A0F34] to-[#5C1D53]',
       tag: '📋 Copy Link',
     },
   ];
 
   return (
-    <div className="rounded-3xl border border-rose-200/80 dark:border-rose-950/70 bg-gradient-to-br from-rose-50/70 via-white/80 to-amber-50/40 dark:from-[#1c1424] dark:via-[#16111d] dark:to-[#1e1526] backdrop-blur-md shadow-xs overflow-hidden transition-all">
+    <div className="rounded-3xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 bg-white/80 dark:bg-[#1A0919]/80 backdrop-blur-md shadow-xs overflow-hidden transition-all">
       {/* Header bar that toggles the guide */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-5 py-4 flex items-center justify-between gap-3 text-start hover:bg-rose-100/30 dark:hover:bg-rose-950/20 transition-colors cursor-pointer group"
+        className="w-full px-5 py-4 flex items-center justify-between gap-3 text-start hover:bg-[#EBF0F4]/50 dark:hover:bg-[#240E23]/40 transition-colors cursor-pointer group"
       >
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-rose-600 to-pink-600 text-white flex items-center justify-center shrink-0 shadow-sm shadow-rose-500/25 group-hover:scale-105 transition-transform">
+          <div className="w-9 h-9 rounded-2xl bg-[#3A0F34] text-white flex items-center justify-center shrink-0 shadow-sm shadow-[#3A0F34]/25 group-hover:scale-105 transition-transform border border-[#DDE3E8]/30">
             <HelpCircle className="w-5 h-5" />
           </div>
           <div>
@@ -75,11 +75,11 @@ export function SheinLinkGuide() {
                   ? 'مش عارفة تجيبي الرابط من تطبيق SHEIN إزاي؟'
                   : 'Not sure how to get the link from the SHEIN app?'}
               </h3>
-              <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900/40">
+              <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8]">
                 {isRtl ? 'شرح بالخطوات 📸' : 'Visual Guide 📸'}
               </span>
             </div>
-            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5">
+            <p className="text-[11px] text-neutral-500 dark:text-[#9BAAB6] mt-0.5">
               {isRtl
                 ? 'اضغطي هنا لمعرفة خطوات نسخ رابط السلة في ١٥ ثانية فقط'
                 : 'Tap here to see how to copy your cart link in 15 seconds'}
@@ -88,10 +88,10 @@ export function SheinLinkGuide() {
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
-          <span className="text-xs font-bold text-rose-700 dark:text-rose-300 hidden md:inline">
+          <span className="text-xs font-bold text-[#3A0F34] dark:text-[#DDE3E8] hidden md:inline">
             {isOpen ? (isRtl ? 'إخفاء الشرح' : 'Hide Guide') : (isRtl ? 'شوفي الخطوات' : 'View Steps')}
           </span>
-          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#201828] border border-rose-200 dark:border-rose-900 flex items-center justify-center text-rose-600 dark:text-rose-400">
+          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center text-[#3A0F34] dark:text-[#DDE3E8]">
             {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </div>
         </div>
@@ -105,7 +105,7 @@ export function SheinLinkGuide() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-rose-100 dark:border-rose-950/60"
+            className="overflow-hidden border-t border-[#DDE3E8] dark:border-[#3A0F34]/60"
           >
             <div className="p-5 sm:p-6 space-y-6">
               {/* Step cards grid */}
@@ -119,30 +119,30 @@ export function SheinLinkGuide() {
                       onClick={() => setActiveStep(s.num)}
                       className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between gap-3 ${
                         isActive
-                          ? 'bg-white dark:bg-[#1e1526] border-rose-400 dark:border-rose-600 shadow-md ring-2 ring-rose-500/20'
-                          : 'bg-white/60 dark:bg-[#16111d] border-neutral-200/70 dark:border-neutral-800 hover:border-rose-300'
+                          ? 'bg-white dark:bg-[#1E0C1D] border-[#3A0F34] dark:border-[#DDE3E8] shadow-md ring-2 ring-[#3A0F34]/20'
+                          : 'bg-white/60 dark:bg-[#160A16] border-[#DDE3E8] dark:border-[#3A0F34]/40 hover:border-[#3A0F34]'
                       }`}
                     >
                       <div className="flex items-center justify-between gap-2">
-                        <div className={`w-8 h-8 rounded-xl bg-gradient-to-tr ${s.color} text-white flex items-center justify-center font-black text-xs shadow-xs`}>
+                        <div className="w-8 h-8 rounded-xl bg-[#3A0F34] text-white flex items-center justify-center font-black text-xs shadow-xs border border-[#DDE3E8]/30">
                           {s.num}
                         </div>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-[#251f33] text-neutral-600 dark:text-neutral-400 border border-neutral-200/60 dark:border-neutral-700">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#EBF0F4] dark:bg-[#251024] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34]">
                           {s.tag}
                         </span>
                       </div>
 
                       <div className="space-y-1">
                         <h4 className="text-xs sm:text-sm font-black text-neutral-900 dark:text-white flex items-center gap-1.5">
-                          <Icon className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
+                          <Icon className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8] shrink-0" />
                           <span>{s.title}</span>
                         </h4>
-                        <p className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                        <p className="text-[11px] text-neutral-500 dark:text-[#9BAAB6] leading-relaxed">
                           {s.desc}
                         </p>
                       </div>
 
-                      <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-[10px] text-purple-600 dark:text-purple-400 font-bold">
+                      <div className="pt-2 border-t border-[#DDE3E8] dark:border-[#3A0F34]/40 flex items-center justify-between text-[10px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold">
                         <span>{s.badge}</span>
                         {isActive && <CheckCircle2 className="w-3.5 h-3.5" />}
                       </div>
@@ -152,13 +152,13 @@ export function SheinLinkGuide() {
               </div>
 
               {/* Visual Simulated Mockup of the SHEIN App UI */}
-              <div className="rounded-2xl bg-neutral-950 p-4 sm:p-5 text-white relative overflow-hidden border border-neutral-800">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-2xl pointer-events-none" />
+              <div className="rounded-2xl bg-[#130712] p-4 sm:p-5 text-white relative overflow-hidden border border-[#DDE3E8]/20">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#3A0F34]/25 rounded-full blur-2xl pointer-events-none" />
 
                 <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="space-y-1 text-center sm:text-start">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-black border border-purple-500/30">
-                      <Sparkles className="w-3 h-3 text-purple-400" />
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#3A0F34]/40 text-[#DDE3E8] text-[10px] font-black border border-[#DDE3E8]/30">
+                      <Sparkles className="w-3 h-3 text-[#DDE3E8]" />
                       {isRtl ? 'محاكاة شكل تطبيق SHEIN' : 'SHEIN App Preview'}
                     </div>
                     <h5 className="text-xs sm:text-sm font-black text-white">

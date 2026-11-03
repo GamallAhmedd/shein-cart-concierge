@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import Link from 'next/link';
@@ -76,7 +76,7 @@ export function MobileAccountSheet({
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-            className="relative z-10 w-full max-h-[88vh] overflow-y-auto bg-white dark:bg-[#120f1d] rounded-t-[32px] border-t border-neutral-200/80 dark:border-[#2a243a] shadow-2xl p-5 pb-8 space-y-5"
+            className="relative z-10 w-full max-h-[88vh] overflow-y-auto bg-white dark:bg-[#1A0919] rounded-t-[32px] border-t border-[#DDE3E8] dark:border-[#3A0F34]/60 shadow-2xl p-5 pb-8 space-y-5"
           >
             {/* Sheet Handle */}
             <div className="flex justify-center pb-1">
@@ -86,7 +86,7 @@ export function MobileAccountSheet({
             {/* Header */}
             <div className="flex items-center justify-between pb-3 border-b border-neutral-100 dark:border-[#1e192c]">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-950/60 text-[#8B5CF6] flex items-center justify-center font-bold">
+                <div className="w-8 h-8 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center font-bold">
                   <UserIcon className="w-4 h-4" />
                 </div>
                 <div>
@@ -113,13 +113,13 @@ export function MobileAccountSheet({
 
             {/* User Profile Card or Guest Login Prompt */}
             {user ? (
-              <div className="p-4 rounded-2xl bg-gradient-to-br from-purple-50/70 via-white to-pink-50/40 dark:from-[#1b152b] dark:via-[#141021] dark:to-[#1d122b] border border-purple-200/70 dark:border-[#2f2545] flex items-center justify-between gap-3 shadow-xs">
+              <div className="p-4 rounded-2xl bg-gradient-to-br from-[#EBF0F4] via-white to-[#EBF0F4]/40 dark:from-[#240E23] dark:via-[#1A0919] dark:to-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34]/50 flex items-center justify-between gap-3 shadow-xs">
                 <div className="flex items-center gap-3">
                   <div className="relative">
                     <img
                       src={user.avatar || `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`}
                       alt={user.name}
-                      className="w-13 h-13 rounded-2xl object-cover ring-2 ring-[#8B5CF6]/40 shadow-sm"
+                      className="w-13 h-13 rounded-2xl object-cover ring-2 ring-[#3A0F34]/40 dark:ring-[#DDE3E8]/40 shadow-sm"
                     />
                     <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-[#120f1d] flex items-center justify-center">
                       <span className="w-1.5 h-1.5 rounded-full bg-white" />
@@ -131,7 +131,7 @@ export function MobileAccountSheet({
                         {user.name}
                       </h4>
                       {user.role === 'admin' ? (
-                        <span className="text-[10px] font-black uppercase tracking-wider text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-950 px-2 py-0.5 rounded-full border border-purple-300 dark:border-purple-800">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-[#3A0F34] dark:text-[#DDE3E8] bg-[#EBF0F4] dark:bg-[#240E23] px-2 py-0.5 rounded-full border border-[#DDE3E8] dark:border-[#3A0F34]">
                           Admin
                         </span>
                       ) : (
@@ -149,20 +149,20 @@ export function MobileAccountSheet({
                       </p>
                     )}
                     {user.address && (
-                      <p className="text-[11px] text-purple-700 dark:text-purple-300 font-medium truncate max-w-[220px]">
+                      <p className="text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] font-medium truncate max-w-[220px]">
                         📍 {user.address}
                       </p>
                     )}
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-purple-100 dark:border-purple-900/40">
+                <div className="pt-2 border-t border-[#DDE3E8] dark:border-[#3A0F34]/40">
                   <button
                     onClick={() => {
                       onClose();
                       onOpenProfile?.();
                     }}
-                    className="w-full py-2 px-3 rounded-xl bg-purple-100/90 dark:bg-purple-950/70 hover:bg-purple-200 dark:hover:bg-purple-900/60 text-[#7C3AED] dark:text-purple-300 text-xs font-black border border-purple-200 dark:border-purple-800 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                    className="w-full py-2 px-3 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] hover:bg-[#DDE3E8] dark:hover:bg-[#321330] text-[#3A0F34] dark:text-[#DDE3E8] text-xs font-black border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                   >
                     <UserIcon className="w-3.5 h-3.5" />
                     <span>{isRtl ? 'عرض وتعديل بيانات الحساب والعنوان' : 'View & Edit Profile / Address'}</span>
@@ -171,7 +171,7 @@ export function MobileAccountSheet({
               </div>
             ) : (
               <div className="p-4 rounded-2xl bg-neutral-50 dark:bg-[#181326] border border-neutral-200/70 dark:border-[#29223b] text-center space-y-3">
-                <div className="w-10 h-10 mx-auto rounded-full bg-[#8B5CF6]/15 text-[#8B5CF6] flex items-center justify-center">
+                <div className="w-10 h-10 mx-auto rounded-full bg-[#3A0F34]/15 dark:bg-[#DDE3E8]/15 text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center">
                   <LogIn className="w-5 h-5" />
                 </div>
                 <div className="space-y-1">
@@ -189,7 +189,7 @@ export function MobileAccountSheet({
                     onClose();
                     onOpenAuth();
                   }}
-                  className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white text-xs font-black shadow-md shadow-purple-500/25 flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-2.5 rounded-xl bg-[#3A0F34] hover:bg-[#4E1646] text-white text-xs font-black shadow-md shadow-[#3A0F34]/25 border border-[#DDE3E8]/30 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <LogIn className="w-4 h-4" />
                   <span>{isRtl ? 'تسجيل الدخول / إنشاء حساب' : 'Sign In / Register'}</span>
@@ -209,7 +209,7 @@ export function MobileAccountSheet({
                 className="w-full flex items-center justify-between p-3 rounded-2xl bg-neutral-50/70 dark:bg-[#161224] hover:bg-neutral-100 dark:hover:bg-[#1f1932] border border-neutral-200/50 dark:border-[#261f38] transition-colors text-start cursor-pointer"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-purple-100 dark:bg-purple-950/60 text-[#8B5CF6] flex items-center justify-center">
+                  <div className="w-9 h-9 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center">
                     <Sparkles className="w-4 h-4" />
                   </div>
                   <div>
@@ -274,10 +274,10 @@ export function MobileAccountSheet({
                 <>
                   <button
                     onClick={() => handleNavigate('/admin')}
-                    className="w-full flex items-center justify-between p-3 rounded-2xl bg-purple-50/60 dark:bg-purple-950/30 hover:bg-purple-100/70 dark:hover:bg-purple-900/40 border border-purple-200/60 dark:border-purple-800/60 transition-colors text-start cursor-pointer"
+                    className="w-full flex items-center justify-between p-3 rounded-2xl bg-[#EBF0F4]/70 dark:bg-[#240E23]/70 hover:bg-[#DDE3E8] dark:hover:bg-[#321330] border border-[#DDE3E8] dark:border-[#3A0F34]/60 transition-colors text-start cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-[#8B5CF6] text-white flex items-center justify-center">
+                      <div className="w-9 h-9 rounded-xl bg-[#3A0F34] text-white border border-[#DDE3E8]/40 flex items-center justify-center">
                         <ShieldCheck className="w-4 h-4" />
                       </div>
                       <div>
@@ -289,15 +289,15 @@ export function MobileAccountSheet({
                         </div>
                       </div>
                     </div>
-                    <Chevron className="w-4 h-4 text-purple-600" />
+                    <Chevron className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
                   </button>
 
                   <button
                     onClick={() => handleNavigate('/admin/analytics')}
-                    className="w-full flex items-center justify-between p-3 rounded-2xl bg-purple-50/60 dark:bg-purple-950/30 hover:bg-purple-100/70 dark:hover:bg-purple-900/40 border border-purple-200/60 dark:border-purple-800/60 transition-colors text-start cursor-pointer"
+                    className="w-full flex items-center justify-between p-3 rounded-2xl bg-[#EBF0F4]/70 dark:bg-[#240E23]/70 hover:bg-[#DDE3E8] dark:hover:bg-[#321330] border border-[#DDE3E8] dark:border-[#3A0F34]/60 transition-colors text-start cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-[#7C3AED] text-white flex items-center justify-center">
+                      <div className="w-9 h-9 rounded-xl bg-[#3A0F34] text-white border border-[#DDE3E8]/40 flex items-center justify-center">
                         <TrendingUp className="w-4 h-4" />
                       </div>
                       <div>
@@ -309,7 +309,7 @@ export function MobileAccountSheet({
                         </div>
                       </div>
                     </div>
-                    <Chevron className="w-4 h-4 text-purple-600" />
+                    <Chevron className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
                   </button>
                 </>
               )}
@@ -328,10 +328,10 @@ export function MobileAccountSheet({
                   className="flex items-center justify-between p-3 rounded-xl bg-neutral-100/80 dark:bg-[#1a1528] border border-neutral-200/60 dark:border-[#2a243a] text-xs font-bold text-neutral-800 dark:text-neutral-200 transition-colors cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
-                    <Globe className="w-4 h-4 text-[#8B5CF6]" />
+                    <Globe className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
                     <span>{isRtl ? 'اللغة' : 'Language'}</span>
                   </div>
-                  <span className="text-[11px] font-black text-[#8B5CF6] uppercase">
+                  <span className="text-[11px] font-black text-[#3A0F34] dark:text-[#DDE3E8] uppercase">
                     {lang === 'ar' ? 'English' : 'عربي'}
                   </span>
                 </button>

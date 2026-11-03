@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
@@ -213,7 +213,7 @@ export default function AdminAnalyticsPage() {
   if (authLoading) {
     return (
       <div className="min-h-screen bg-[#FBFBFC] dark:bg-[#0c0a0f] flex items-center justify-center">
-        <div className="w-9 h-9 border-3 border-purple-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-9 h-9 border-3 border-[#3A0F34] dark:border-[#DDE3E8] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -233,7 +233,7 @@ export default function AdminAnalyticsPage() {
             </p>
             <button
               onClick={() => setAuthOpen(true)}
-              className="w-full py-3 bg-neutral-950 dark:bg-purple-600 hover:bg-neutral-800 text-white font-black rounded-xl text-xs cursor-pointer shadow-md"
+              className="w-full py-3 bg-neutral-950 dark:bg-[#3A0F34] hover:bg-neutral-800 text-white font-black rounded-xl text-xs cursor-pointer shadow-md"
             >
               {isRtl ? 'تسجيل دخول المشرف' : 'Sign In as Admin'}
             </button>
@@ -247,7 +247,7 @@ export default function AdminAnalyticsPage() {
   return (
     <div className="min-h-screen bg-[#FBFBFC] dark:bg-[#0c0a0f] text-neutral-900 dark:text-white pb-32 md:pb-24 transition-colors relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-purple-400/8 via-pink-400/4 to-transparent dark:from-purple-600/10 dark:via-purple-900/5 dark:to-transparent pointer-events-none blur-3xl -z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-[#3A0F34]/10 via-[#DDE3E8]/5 to-transparent dark:from-[#3A0F34]/20 dark:via-[#3A0F34]/10 dark:to-transparent pointer-events-none blur-3xl -z-10" />
 
       <Navbar onOpenAuth={() => setAuthOpen(true)} />
 
@@ -256,8 +256,8 @@ export default function AdminAnalyticsPage() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
           <div className="space-y-1.5 text-start">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-950/60 text-[#7C3AED] dark:text-purple-300 text-[11px] font-black uppercase tracking-wider border border-purple-200/60 dark:border-purple-800/60">
-                <TrendingUp className="w-3.5 h-3.5 text-[#8B5CF6]" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-black uppercase tracking-wider border border-[#DDE3E8] dark:border-[#3A0F34]/60">
+                <TrendingUp className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
                 {isRtl ? 'تحليلات المنصة والأرباح' : 'Business Intelligence Hub'}
               </span>
               <span className="text-[11px] font-mono text-neutral-500 bg-white dark:bg-[#1a1626] px-2.5 py-0.5 rounded-full border border-neutral-200 dark:border-[#2f2742]">
@@ -287,7 +287,7 @@ export default function AdminAnalyticsPage() {
                   onClick={() => setTimeRange(tab.key as any)}
                   className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
                     timeRange === tab.key
-                      ? 'bg-purple-600 text-white shadow-xs font-black'
+                      ? 'bg-[#3A0F34] text-white shadow-xs font-black'
                       : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
                   }`}
                 >
@@ -300,7 +300,7 @@ export default function AdminAnalyticsPage() {
               href="/admin"
               className="px-4 py-2.5 bg-white dark:bg-[#14111d] hover:bg-neutral-50 dark:hover:bg-[#1d1829] text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-[#2a243a] rounded-2xl text-xs font-black transition-all flex items-center gap-2 shadow-xs"
             >
-              <ShieldCheck className="w-4 h-4 text-purple-600" />
+              <ShieldCheck className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
               <span>{isRtl ? 'إدارة الطلبات' : 'Orders Hub'}</span>
             </Link>
 
@@ -324,16 +324,16 @@ export default function AdminAnalyticsPage() {
           {/* 1. Gross Volume */}
           <motion.div
             variants={itemVariants}
-            className="col-span-2 bg-gradient-to-br from-purple-500 via-[#7C3AED] to-[#6D28D9] text-white p-6 rounded-3xl shadow-xl shadow-purple-500/20 relative overflow-hidden"
+            className="col-span-2 bg-[#3A0F34] text-white p-6 rounded-3xl shadow-xl shadow-[#3A0F34]/20 border border-[#DDE3E8]/30 relative overflow-hidden"
           >
-            <div className="flex items-center justify-between text-purple-200 text-xs font-bold mb-2">
+            <div className="flex items-center justify-between text-[#DDE3E8] text-xs font-bold mb-2">
               <span>{isRtl ? 'إجمالي حجم المبيعات (GMV)' : 'Gross Merchandise Value'}</span>
               <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-mono">EGP</span>
             </div>
             <div className="text-3xl sm:text-4xl font-black tracking-tight">
               {stats.totalGmv.toLocaleString()} <span className="text-sm font-bold">ج.م</span>
             </div>
-            <p className="text-[11px] text-purple-200 mt-2 font-medium">
+            <p className="text-[11px] text-[#DDE3E8] mt-2 font-medium">
               {isRtl
                 ? `منها ${stats.totalPaidGmv.toLocaleString()} ج.م مدفوعة ومؤكدة`
                 : `${stats.totalPaidGmv.toLocaleString()} EGP paid & verified`}
@@ -347,7 +347,7 @@ export default function AdminAnalyticsPage() {
           >
             <div className="flex items-center justify-between text-neutral-400 dark:text-neutral-500 text-xs font-bold mb-2">
               <span>{isRtl ? 'أرباح ورسوم الخدمة' : 'Net Dynamic Commission'}</span>
-              <Percent className="w-4 h-4 text-purple-600" />
+              <Percent className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
             </div>
             <div className="text-3xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight">
               {stats.totalCommission.toLocaleString()} <span className="text-xs font-bold text-neutral-400">ج.م</span>
@@ -371,7 +371,7 @@ export default function AdminAnalyticsPage() {
             <div className="text-2xl sm:text-3xl font-black text-neutral-950 dark:text-white">
               {stats.totalOrders}
             </div>
-            <div className="text-[11px] text-purple-600 dark:text-purple-400 font-bold mt-1">
+            <div className="text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold mt-1">
               {stats.conversionRate}% {isRtl ? 'نسبة التحويل' : 'Conversion'}
             </div>
           </motion.div>
@@ -428,7 +428,7 @@ export default function AdminAnalyticsPage() {
                   />
                   <div
                     style={{ width: `${(stats.paymentReview / stats.totalOrders) * 100}%` }}
-                    className="bg-purple-500 h-full transition-all"
+                    className="bg-[#3A0F34] dark:bg-[#DDE3E8] h-full transition-all"
                     title={`Receipt Review: ${stats.paymentReview}`}
                   />
                   <div
@@ -474,15 +474,15 @@ export default function AdminAnalyticsPage() {
                 <p className="text-[10px] text-blue-700/80 mt-0.5">{isRtl ? 'تمت الموافقة للعميل' : 'Customer notified'}</p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-purple-50/60 dark:bg-purple-950/20 border border-purple-200/60 dark:border-purple-900/40">
-                <div className="flex items-center gap-1.5 text-purple-800 dark:text-purple-300 font-bold text-xs">
+              <div className="p-3.5 rounded-2xl bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34]/50">
+                <div className="flex items-center gap-1.5 text-[#3A0F34] dark:text-[#DDE3E8] font-bold text-xs">
                   <FileCheck className="w-3.5 h-3.5" />
                   <span>{isRtl ? 'فحص إيصال التحويل' : 'Verify Receipt'}</span>
                 </div>
-                <div className="text-xl font-black text-purple-900 dark:text-purple-200 mt-1">
+                <div className="text-xl font-black text-[#3A0F34] dark:text-[#DDE3E8] mt-1">
                   {stats.paymentReview}
                 </div>
-                <p className="text-[10px] text-purple-700/80 mt-0.5">{isRtl ? 'تم رفع سكرين التحويل' : 'Uploaded screenshot'}</p>
+                <p className="text-[10px] text-[#3A0F34]/80 dark:text-[#DDE3E8]/80 mt-0.5">{isRtl ? 'تم رفع سكرين التحويل' : 'Uploaded screenshot'}</p>
               </div>
 
               <div className="p-3.5 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-900/40">
@@ -533,10 +533,10 @@ export default function AdminAnalyticsPage() {
 
             <div className="space-y-4">
               {/* InstaPay */}
-              <div className="p-4 rounded-2xl bg-purple-50/70 dark:bg-purple-950/20 border border-purple-200/60 dark:border-purple-900/40 space-y-2">
+              <div className="p-4 rounded-2xl bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34]/50 space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#1a1626] p-1 border border-purple-200 dark:border-purple-800 flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#1a1626] p-1 border border-[#DDE3E8] dark:border-[#3A0F34]/60 flex items-center justify-center shrink-0">
                       <img src="/images/instapay.png" alt="InstaPay" className="w-full h-full object-contain" />
                     </div>
                     <div>
@@ -544,16 +544,16 @@ export default function AdminAnalyticsPage() {
                       <span className="text-[10px] text-neutral-400">{stats.instapayOrders} {isRtl ? 'طلب مسدد' : 'orders'}</span>
                     </div>
                   </div>
-                  <span className="font-mono font-black text-sm text-purple-700 dark:text-purple-300">
+                  <span className="font-mono font-black text-sm text-[#3A0F34] dark:text-[#DDE3E8]">
                     {stats.instapayVolume.toLocaleString()} ج.م
                   </span>
                 </div>
-                <div className="w-full h-1.5 rounded-full bg-purple-200/60 dark:bg-purple-900/40 overflow-hidden">
+                <div className="w-full h-1.5 rounded-full bg-[#DDE3E8] dark:bg-[#321330] overflow-hidden">
                   <div
                     style={{
                       width: `${stats.totalGmv > 0 ? (stats.instapayVolume / stats.totalGmv) * 100 : 0}%`,
                     }}
-                    className="h-full bg-purple-600 rounded-full"
+                    className="h-full bg-[#3A0F34] dark:bg-[#DDE3E8] rounded-full"
                   />
                 </div>
               </div>
@@ -603,7 +603,7 @@ export default function AdminAnalyticsPage() {
                 {isRtl ? 'أعلى العملاء من حيث إجمالي الإنفاق وتكرار الطلبات' : 'Highest lifetime spend and cart submissions'}
               </p>
             </div>
-            <Users className="w-5 h-5 text-purple-600" />
+            <Users className="w-5 h-5 text-[#3A0F34] dark:text-[#DDE3E8]" />
           </div>
 
           <div className="overflow-x-auto">
@@ -628,7 +628,7 @@ export default function AdminAnalyticsPage() {
                   stats.topCustomers.map((c, i) => (
                     <tr key={i} className="hover:bg-neutral-50/50 dark:hover:bg-[#1a1626]/50 transition-colors">
                       <td className="py-4 px-6 font-bold text-neutral-900 dark:text-white flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-900/60 text-[#7C3AED] dark:text-purple-300 flex items-center justify-center font-mono text-[10px] font-black">
+                        <span className="w-6 h-6 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center font-mono text-[10px] font-black">
                           {i + 1}
                         </span>
                         <div>
@@ -700,7 +700,7 @@ export default function AdminAnalyticsPage() {
                           {u.avatar ? (
                             <img src={u.avatar} alt={u.name} className="w-7 h-7 rounded-full bg-neutral-100 dark:bg-neutral-800 object-cover border border-neutral-200 dark:border-neutral-700" />
                           ) : (
-                            <div className="w-7 h-7 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-xs">
+                            <div className="w-7 h-7 rounded-full bg-[#3A0F34] text-white flex items-center justify-center font-bold text-xs">
                               {u.name?.charAt(0) || 'U'}
                             </div>
                           )}
@@ -712,7 +712,7 @@ export default function AdminAnalyticsPage() {
                         <td className="py-4 px-6">
                           <span className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase ${
                             u.role === 'admin'
-                              ? 'bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 border border-purple-200 dark:border-purple-800'
+                              ? 'bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 border border-[#DDE3E8] dark:border-[#3A0F34]/60'
                               : 'bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300'
                           }`}>
                             {u.role === 'admin' ? (isRtl ? 'مشرف' : 'Admin') : (isRtl ? 'عميل' : 'Customer')}

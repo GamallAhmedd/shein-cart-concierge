@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -363,12 +363,12 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
         initial={{ opacity: 0, scale: 0.95, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-md bg-white dark:bg-[#14121a] text-neutral-900 dark:text-white rounded-3xl shadow-2xl border border-neutral-200 dark:border-[#2a2538] overflow-hidden transition-colors"
+        className="relative w-full max-w-md bg-white dark:bg-[#1A0919] text-neutral-900 dark:text-white rounded-3xl shadow-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 overflow-hidden transition-colors"
       >
         {/* Header */}
-        <div className="p-6 bg-neutral-50 dark:bg-[#1a1722] border-b border-neutral-200 dark:border-[#2a2538] flex items-center justify-between">
+        <div className="p-6 bg-[#EBF0F4] dark:bg-[#200D1F] border-b border-[#DDE3E8] dark:border-[#3A0F34]/60 flex items-center justify-between">
           <div className="text-start">
-            <div className="flex items-center gap-1.5 text-rose-600 dark:text-rose-400 text-[10px] font-black uppercase tracking-wider mb-0.5">
+            <div className="flex items-center gap-1.5 text-[#3A0F34] dark:text-[#DDE3E8] text-[10px] font-black uppercase tracking-wider mb-0.5">
               <Sparkles className="w-3 h-3" />
               <span>SHEIN Concierge</span>
             </div>
@@ -393,7 +393,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
           {defaultRole !== 'admin' && mode === 'signin' && (
             <div className="mb-5">
               {showGmailInput ? (
-                <div className="p-4 bg-gradient-to-br from-blue-50/80 via-white to-purple-50/60 dark:from-blue-950/30 dark:via-[#1a1722] dark:to-purple-950/20 rounded-2xl border border-blue-200 dark:border-blue-900/60 space-y-3 shadow-xs animate-in fade-in duration-200">
+                <div className="p-4 bg-gradient-to-br from-blue-50/80 via-white to-[#EBF0F4] dark:from-[#240E23]/60 dark:via-[#1A0919] dark:to-[#240E23]/40 rounded-2xl border border-blue-200 dark:border-blue-900/60 space-y-3 shadow-xs animate-in fade-in duration-200">
                   <div className="flex items-center justify-between pb-1 border-b border-blue-100 dark:border-blue-900/40">
                     <div className="flex items-center gap-2">
                       <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -470,7 +470,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                     className="w-full flex items-center justify-center gap-3 py-3 px-5 border border-neutral-300 dark:border-[#2f2742] rounded-full bg-white dark:bg-[#1a1626] hover:bg-neutral-50 dark:hover:bg-[#251f35] text-neutral-800 dark:text-neutral-100 font-bold text-xs transition-all shadow-xs active:scale-[0.99] cursor-pointer"
                   >
                     {googleLoading ? (
-                      <div className="w-4 h-4 border-2 border-[#8B5CF6] border-t-transparent rounded-full animate-spin shrink-0" />
+                      <div className="w-4 h-4 border-2 border-[#3A0F34] dark:border-[#DDE3E8] border-t-transparent rounded-full animate-spin shrink-0" />
                     ) : (
                       <svg className="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
@@ -533,7 +533,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder={isRtl ? 'مثال: سارة أحمد' : 'e.g. Sara Ahmed'}
-                    className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#1a1722] border border-neutral-200 dark:border-[#2a2538] rounded-xl focus:bg-white dark:focus:bg-[#201c2b] focus:outline-none focus:ring-2 focus:ring-purple-600 ${
+                    className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
                       isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                     }`}
                   />
@@ -553,7 +553,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
-                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#1a1722] border border-neutral-200 dark:border-[#2a2538] rounded-xl focus:bg-white dark:focus:bg-[#201c2b] focus:outline-none focus:ring-2 focus:ring-purple-600 ${
+                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
                     isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                   }`}
                 />
@@ -572,7 +572,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="010XXXXXXXX"
-                    className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#1a1722] border border-neutral-200 dark:border-[#2a2538] rounded-xl focus:bg-white dark:focus:bg-[#201c2b] focus:outline-none focus:ring-2 focus:ring-purple-600 font-mono ${
+                    className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-mono ${
                       isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                     }`}
                   />
@@ -592,7 +592,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#1a1722] border border-neutral-200 dark:border-[#2a2538] rounded-xl focus:bg-white dark:focus:bg-[#201c2b] focus:outline-none focus:ring-2 focus:ring-purple-600 ${
+                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] ${
                     isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                   }`}
                 />
@@ -602,7 +602,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
             <button
               type="submit"
               disabled={formLoading}
-              className="w-full mt-2 py-3 bg-[#8B5CF6] hover:bg-[#7C3AED] disabled:opacity-50 text-white rounded-xl text-xs font-black shadow-md shadow-purple-500/20 transition-all cursor-pointer flex items-center justify-center gap-2"
+              className="w-full mt-2 py-3 bg-[#3A0F34] hover:bg-[#4E1646] disabled:opacity-50 text-white rounded-xl text-xs font-black shadow-md shadow-[#3A0F34]/25 transition-all cursor-pointer flex items-center justify-center gap-2 border border-[#DDE3E8]/30"
             >
               {formLoading ? (
                 <>
@@ -619,7 +619,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
 
           {/* Toggle between Sign In / Sign Up */}
           {defaultRole !== 'admin' && (
-            <div className="mt-5 text-center text-xs text-neutral-500 dark:text-neutral-400">
+            <div className="mt-5 text-center text-xs text-neutral-500 dark:text-[#9BAAB6]">
               {mode === 'signin' ? (
                 <p>
                   {isRtl ? 'ليس لديك حساب؟ ' : "Don't have an account? "}
@@ -629,7 +629,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                       setMode('signup');
                       setError(null);
                     }}
-                    className="font-bold text-[#8B5CF6] hover:text-[#7C3AED] cursor-pointer"
+                    className="font-bold text-[#3A0F34] hover:text-[#5C1D53] dark:text-[#DDE3E8] cursor-pointer underline"
                   >
                     {isRtl ? 'إنشاء حساب جديد' : 'Sign up now'}
                   </button>
@@ -643,7 +643,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                       setMode('signin');
                       setError(null);
                     }}
-                    className="font-bold text-[#8B5CF6] hover:text-[#7C3AED] cursor-pointer"
+                    className="font-bold text-[#3A0F34] hover:text-[#5C1D53] dark:text-[#DDE3E8] cursor-pointer underline"
                   >
                     {isRtl ? 'تسجيل الدخول' : 'Sign in'}
                   </button>

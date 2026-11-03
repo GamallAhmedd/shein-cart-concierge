@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -122,7 +122,7 @@ export function OrderTrackingDashboard({ order, dir }: OrderTrackingDashboardPro
             {isRtl ? 'رقم بوليصة الشحن' : 'Tracking Number'}
           </span>
           <div className="flex items-center gap-2 mt-0.5">
-            <span className="font-mono text-sm font-black text-[#8B5CF6]">
+            <span className="font-mono text-sm font-black text-[#3A0F34] dark:text-[#DDE3E8]">
               {trackingNumber}
             </span>
             <button
@@ -153,7 +153,7 @@ export function OrderTrackingDashboard({ order, dir }: OrderTrackingDashboardPro
                 key={st.num}
                 className={`p-4 rounded-2xl border transition-all duration-200 text-start ${
                   st.isCurrent
-                    ? 'bg-purple-50/90 dark:bg-purple-950/40 border-purple-400 dark:border-purple-700 ring-2 ring-purple-500/20 shadow-sm'
+                    ? 'bg-[#EBF0F4] dark:bg-[#240E23] border-[#3A0F34] dark:border-[#DDE3E8] ring-2 ring-[#3A0F34]/20 shadow-sm'
                     : st.isDone
                     ? 'bg-emerald-50/70 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/60'
                     : 'bg-neutral-50/50 dark:bg-[#181423] border-neutral-200/60 dark:border-[#241e30] opacity-50'
@@ -163,7 +163,7 @@ export function OrderTrackingDashboard({ order, dir }: OrderTrackingDashboardPro
                   <div
                     className={`w-7 h-7 rounded-xl flex items-center justify-center text-xs font-black shrink-0 ${
                       st.isCurrent
-                        ? 'bg-[#8B5CF6] text-white animate-pulse'
+                        ? 'bg-[#3A0F34] text-white animate-pulse border border-[#DDE3E8]/40'
                         : st.isDone
                         ? 'bg-emerald-600 text-white'
                         : 'bg-neutral-200 dark:bg-[#282136] text-neutral-500'
@@ -174,7 +174,7 @@ export function OrderTrackingDashboard({ order, dir }: OrderTrackingDashboardPro
                   <Icon
                     className={`w-4 h-4 ${
                       st.isCurrent
-                        ? 'text-[#8B5CF6]'
+                        ? 'text-[#3A0F34] dark:text-[#DDE3E8]'
                         : st.isDone
                         ? 'text-emerald-600 dark:text-emerald-400'
                         : 'text-neutral-400'
@@ -195,9 +195,9 @@ export function OrderTrackingDashboard({ order, dir }: OrderTrackingDashboardPro
 
       {/* Live Updates & Admin Tracking Notes */}
       {(tracking.adminTrackingNote || order.adminComment) && (
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-50/80 to-indigo-50/80 dark:from-purple-950/40 dark:to-indigo-950/40 border border-purple-200/80 dark:border-purple-800/60 text-start space-y-1">
-          <div className="flex items-center gap-2 text-xs font-black text-[#6D28D9] dark:text-purple-300">
-            <Sparkles className="w-3.5 h-3.5 text-[#8B5CF6]" />
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-[#EBF0F4] to-[#EBF0F4]/60 dark:from-[#240E23] dark:to-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 text-start space-y-1">
+          <div className="flex items-center gap-2 text-xs font-black text-[#3A0F34] dark:text-[#DDE3E8]">
+            <Sparkles className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
             <span>{isRtl ? 'آخر تحديث من المشرف:' : 'Latest Supervisor Note:'}</span>
           </div>
           <p className="text-xs text-neutral-700 dark:text-neutral-300 font-medium leading-relaxed pl-5">
@@ -210,7 +210,7 @@ export function OrderTrackingDashboard({ order, dir }: OrderTrackingDashboardPro
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-start">
         <div className="p-4 rounded-2xl bg-neutral-50 dark:bg-[#181423] border border-neutral-200/70 dark:border-[#262035] space-y-1.5">
           <div className="flex items-center gap-2 font-black text-neutral-900 dark:text-white text-[11px]">
-            <MapPin className="w-3.5 h-3.5 text-[#8B5CF6]" />
+            <MapPin className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
             <span>{isRtl ? 'عنوان التوصيل' : 'Delivery Address'}</span>
           </div>
           <p className="text-neutral-600 dark:text-neutral-300 pl-5 leading-relaxed">
@@ -220,7 +220,7 @@ export function OrderTrackingDashboard({ order, dir }: OrderTrackingDashboardPro
 
         <div className="p-4 rounded-2xl bg-neutral-50 dark:bg-[#181423] border border-neutral-200/70 dark:border-[#262035] space-y-1.5">
           <div className="flex items-center gap-2 font-black text-neutral-900 dark:text-white text-[11px]">
-            <Phone className="w-3.5 h-3.5 text-[#8B5CF6]" />
+            <Phone className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
             <span>{isRtl ? 'بيانات المستلم' : 'Recipient Info'}</span>
           </div>
           <p className="text-neutral-600 dark:text-neutral-300 pl-5">

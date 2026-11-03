@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -19,7 +19,7 @@ export function FloatingSupportButton() {
           whileHover={{ scale: 1.08, y: -2 }}
           whileTap={{ scale: 0.94 }}
           onClick={() => setOpen(true)}
-          className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9] text-white font-extrabold text-xs rounded-full shadow-xl shadow-purple-500/30 transition-all cursor-pointer border border-white/20 dark:border-white/10"
+          className="flex items-center gap-2 px-4 py-3 bg-[#3A0F34] hover:bg-[#4E1646] text-white font-extrabold text-xs rounded-full shadow-xl shadow-[#3A0F34]/30 transition-all cursor-pointer border border-[#DDE3E8]/30"
           title={isRtl ? 'تحتاج مساعدة؟ تواصل مع الدعم الفني' : 'Need help? Contact Concierge Support'}
         >
           <MessageCircle className="w-4 h-4" />

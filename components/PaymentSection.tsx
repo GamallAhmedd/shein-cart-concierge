@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { Order, SystemSettings } from '@/lib/types';
@@ -87,7 +87,7 @@ export function PaymentSection({ order, settings, onPaymentSubmitted, onCancelCl
   return (
     <div className="relative group">
       {/* Decorative ambient glow */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 via-teal-500/15 to-purple-500/20 rounded-3xl blur-xl opacity-75 pointer-events-none" />
+      <div className="absolute -inset-1 bg-gradient-to-r from-[#3A0F34]/20 via-[#DDE3E8]/10 to-[#3A0F34]/20 rounded-3xl blur-xl opacity-75 pointer-events-none" />
 
       <div className="relative bg-white dark:bg-[#13101c] rounded-3xl p-6 sm:p-10 shadow-2xl border-2 border-emerald-500/30 dark:border-emerald-500/40 text-start">
         {/* Step 2 Header */}
@@ -137,11 +137,11 @@ export function PaymentSection({ order, settings, onPaymentSubmitted, onCancelCl
             onClick={() => setMethod('instapay')}
             className={`p-5 rounded-3xl border-2 transition-all duration-200 flex items-center gap-4 text-start cursor-pointer ${
               method === 'instapay'
-                ? 'border-purple-600 bg-purple-50/70 dark:bg-purple-950/40 shadow-lg shadow-purple-600/10 ring-2 ring-purple-600/20'
+                ? 'border-[#3A0F34] dark:border-[#DDE3E8] bg-[#EBF0F4] dark:bg-[#240E23] shadow-lg shadow-[#3A0F34]/10 ring-2 ring-[#3A0F34]/20'
                 : 'border-neutral-200/80 dark:border-[#282138] bg-neutral-50/60 dark:bg-[#181423] hover:bg-neutral-100/70 dark:hover:bg-[#1f1a2d]'
             }`}
           >
-            <div className="w-12 h-12 rounded-2xl bg-white p-1.5 border border-purple-200 shadow-md shadow-purple-600/10 flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-white p-1.5 border border-[#DDE3E8] dark:border-[#3A0F34]/40 shadow-sm flex items-center justify-center shrink-0">
               <img src="/images/instapay.png" alt="InstaPay" className="w-full h-full object-contain" />
             </div>
             <div className="min-w-0 flex-1">
@@ -149,7 +149,7 @@ export function PaymentSection({ order, settings, onPaymentSubmitted, onCancelCl
                 <span className="font-black text-neutral-950 dark:text-white text-base">
                   {isRtl ? 'إنستاباي (InstaPay)' : 'InstaPay'}
                 </span>
-                <span className="text-[10px] font-bold text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-950/80 px-2 py-0.5 rounded-full shrink-0">
+                <span className="text-[10px] font-bold text-[#3A0F34] dark:text-[#DDE3E8] bg-[#EBF0F4] dark:bg-[#240E23] px-2 py-0.5 rounded-full shrink-0">
                   {isRtl ? 'تحويل لحظي' : 'Instant EBC'}
                 </span>
               </div>
@@ -197,7 +197,7 @@ export function PaymentSection({ order, settings, onPaymentSubmitted, onCancelCl
                 href={settings.instapayPaymentUrl || 'https://ipn.eg/S/anasashraf10/instapay/6OaEAR'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-5 bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-700 hover:from-purple-800 hover:to-indigo-800 text-white font-black rounded-2xl shadow-lg shadow-purple-600/25 hover:shadow-xl transition-all flex items-center justify-between group active:scale-[0.99] border border-purple-400/30"
+                className="w-full py-4 px-5 bg-[#3A0F34] hover:bg-[#4E1646] text-white font-black rounded-2xl shadow-lg shadow-[#3A0F34]/25 hover:shadow-xl transition-all flex items-center justify-between group active:scale-[0.99] border border-[#DDE3E8]/30"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0 shadow-md">
@@ -212,7 +212,7 @@ export function PaymentSection({ order, settings, onPaymentSubmitted, onCancelCl
                         Direct Link
                       </span>
                     </div>
-                    <span className="text-[11px] text-purple-100 font-medium block mt-0.5">
+                    <span className="text-[11px] text-[#DDE3E8]/80 font-medium block mt-0.5">
                       {isRtl
                         ? 'فتح تطبيق InstaPay مباشرة على هاتفك للتحويل فوراً'
                         : 'Open InstaPay mobile app directly to complete payment'}
@@ -226,17 +226,17 @@ export function PaymentSection({ order, settings, onPaymentSubmitted, onCancelCl
               </a>
 
               {/* InstaPay IPA Details Card */}
-              <div className="p-4 rounded-2xl bg-white dark:bg-[#1f1a2d] border border-purple-100/80 dark:border-purple-900/40 shadow-xs space-y-3">
+              <div className="p-4 rounded-2xl bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-lg bg-purple-50 dark:bg-purple-950/60 p-1 flex items-center justify-center">
+                    <div className="w-6 h-6 rounded-lg bg-[#EBF0F4] dark:bg-[#240E23] p-1 flex items-center justify-center">
                       <img src="/images/instapay.png" alt="InstaPay" className="w-full h-full object-contain" />
                     </div>
                     <span className="text-xs font-bold text-neutral-700 dark:text-neutral-300">
                       {isRtl ? 'عنوان الدفع اللحظي (IPA):' : 'InstaPay Payment Address (IPA):'}
                     </span>
                   </div>
-                  <span className="text-[10px] font-black tracking-wide text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/80 border border-purple-200/60 dark:border-purple-800 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[10px] font-black tracking-wide text-[#3A0F34] dark:text-[#DDE3E8] bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34]/50 px-2.5 py-0.5 rounded-full">
                     Powered by InstaPay
                   </span>
                 </div>
@@ -246,7 +246,7 @@ export function PaymentSection({ order, settings, onPaymentSubmitted, onCancelCl
                   <button
                     type="button"
                     onClick={() => handleCopy(settings.instapayAddress || 'anasashraf10@instapay', 'ipa')}
-                    className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer"
+                    className="px-3 py-1.5 bg-[#3A0F34] hover:bg-[#4E1646] text-white rounded-lg border border-[#DDE3E8]/30 text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer"
                   >
                     {copiedField === 'ipa' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     <span>

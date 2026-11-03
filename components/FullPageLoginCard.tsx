@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -347,7 +347,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4 sm:p-6 overflow-hidden bg-[#0A0713]">
+    <div className="min-h-screen relative flex items-center justify-center p-4 sm:p-6 overflow-hidden bg-[#F4F6F8] dark:bg-[#130712]">
       {/* High-Fashion Editorial Background Image ("وراها BACKGROUND كده") */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-luminosity scale-105 pointer-events-none transition-all duration-1000"
@@ -357,31 +357,31 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
       />
 
       {/* Atmospheric Dark Luxury Vignette & Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-black via-[#0c0914]/90 to-[#221035]/80 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-black via-[#0d040c]/90 to-[#220920]/80 pointer-events-none" />
 
-      {/* Ambient Breathing Glow Orbs */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-purple-600/25 blur-3xl pointer-events-none animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 rounded-full bg-rose-600/20 blur-3xl pointer-events-none animate-pulse" />
+      {/* Ambient Breathing Glow Orbs (Deep Aubergine & Ice Silver) */}
+      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#3A0F34]/35 blur-3xl pointer-events-none animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 rounded-full bg-[#DDE3E8]/15 blur-3xl pointer-events-none animate-pulse" />
 
       {/* Centered Liquid Glass Login Card ("مربع ف الوش") */}
       <motion.div
         initial={{ opacity: 0, scale: 0.94, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 w-full max-w-md bg-white/95 dark:bg-[#14101e]/90 backdrop-blur-3xl rounded-[36px] shadow-[0_30px_90px_rgba(0,0,0,0.65)] border border-white/60 dark:border-purple-500/25 p-7 sm:p-9 text-neutral-900 dark:text-white transition-colors"
+        className="relative z-10 w-full max-w-md bg-white/95 dark:bg-[#1A0919]/90 backdrop-blur-3xl rounded-[36px] shadow-[0_30px_90px_rgba(0,0,0,0.65)] border border-[#DDE3E8] dark:border-[#3A0F34]/50 p-7 sm:p-9 text-neutral-900 dark:text-white transition-colors"
       >
         {/* Top Floating Controls inside the card */}
-        <div className="flex items-center justify-between pb-5 border-b border-neutral-100 dark:border-[#262035]">
+        <div className="flex items-center justify-between pb-5 border-b border-[#DDE3E8]/80 dark:border-[#2C102A]">
           {/* Brand Logo & Title */}
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-rose-500 via-pink-500 to-amber-400 text-white flex items-center justify-center font-black text-base shadow-md shadow-rose-500/25">
+            <div className="w-9 h-9 rounded-2xl bg-[#3A0F34] text-white flex items-center justify-center font-black text-base shadow-md shadow-[#3A0F34]/30 border border-[#DDE3E8]/40">
               S
             </div>
             <div>
               <div className="font-extrabold text-neutral-950 dark:text-white text-sm tracking-tight leading-none">
-                SHEIN <span className="text-rose-600 dark:text-rose-400">Concierge</span>
+                SHEIN <span className="text-[#3A0F34] dark:text-[#DDE3E8]">Concierge</span>
               </div>
-              <p className="text-[10px] text-neutral-400 dark:text-neutral-500 font-medium mt-0.5">
+              <p className="text-[10px] text-neutral-400 dark:text-[#9BAAB6] font-medium mt-0.5">
                 {isRtl ? 'فرع القاهرة • مصر' : 'Cairo Hub • Egypt'}
               </p>
             </div>
@@ -391,27 +391,27 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
           <div className="flex items-center gap-1.5">
             <button
               onClick={toggleLang}
-              className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-neutral-100 dark:bg-[#201a2c] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-[#2c243c] transition-colors cursor-pointer border border-neutral-200/60 dark:border-[#2f2742] flex items-center gap-1"
+              className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] hover:bg-[#DDE3E8] dark:hover:bg-[#321330] transition-colors cursor-pointer border border-[#DDE3E8] dark:border-[#3A0F34]/60 flex items-center gap-1"
               title={lang === 'ar' ? 'English' : 'عربي'}
             >
-              <Globe className="w-3 h-3 text-rose-500" />
+              <Globe className="w-3 h-3 text-[#3A0F34] dark:text-[#DDE3E8]" />
               <span>{lang === 'ar' ? 'En' : 'عربي'}</span>
             </button>
 
             <button
               onClick={toggleTheme}
-              className="w-7 h-7 rounded-full bg-neutral-100 dark:bg-[#201a2c] text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-[#2c243c] flex items-center justify-center transition-colors cursor-pointer border border-neutral-200/60 dark:border-[#2f2742]"
+              className="w-7 h-7 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] hover:bg-[#DDE3E8] dark:hover:bg-[#321330] flex items-center justify-center transition-colors cursor-pointer border border-[#DDE3E8] dark:border-[#3A0F34]/60"
               title={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
             >
-              {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5" />}
+              {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-[#DDE3E8]" /> : <Moon className="w-3.5 h-3.5 text-[#3A0F34]" />}
             </button>
           </div>
         </div>
 
         {/* Card Headline */}
         <div className="pt-5 pb-4 text-start">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 text-[10px] font-black uppercase tracking-wider mb-2 border border-rose-200/60 dark:border-rose-900/40">
-            <Sparkles className="w-3 h-3 text-rose-500" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] text-[10px] font-black uppercase tracking-wider mb-2 border border-[#DDE3E8] dark:border-[#3A0F34]">
+            <Sparkles className="w-3 h-3 text-[#3A0F34] dark:text-[#DDE3E8]" />
             <span>{isRtl ? 'بوابة التسوق والاستخراج الآمن في مصر' : 'Secure Extraction & Payment'}</span>
           </div>
           <h2 className="text-2xl font-black text-neutral-950 dark:text-white tracking-tight">
@@ -423,7 +423,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
               ? 'إنشاء حساب عميل جديد'
               : 'Create Customer Account'}
           </h2>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">
+          <p className="text-xs text-neutral-500 dark:text-[#9BAAB6] mt-1 leading-relaxed">
             {mode === 'signin'
               ? isRtl
                 ? 'سجّل دخولك لمتابعة سلالك ومعاملاتك السابقة بالجنيه المصري'
@@ -438,7 +438,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
         {mode === 'signin' && (
           <div className="mb-4">
             {showGmailInput ? (
-              <div className="p-4 bg-gradient-to-br from-blue-50/80 via-white to-purple-50/60 dark:from-blue-950/30 dark:via-[#1a1722] dark:to-purple-950/20 rounded-2xl border border-blue-200 dark:border-blue-900/60 space-y-3 shadow-xs">
+              <div className="p-4 bg-gradient-to-br from-blue-50/80 via-white to-[#EBF0F4] dark:from-[#240E23]/60 dark:via-[#1A0919] dark:to-[#240E23]/40 rounded-2xl border border-blue-200 dark:border-blue-900/60 space-y-3 shadow-xs">
                 <div className="flex items-center justify-between pb-1 border-b border-blue-100 dark:border-blue-900/40">
                   <span className="text-xs font-black text-neutral-800 dark:text-neutral-200">
                     {isRtl ? 'الدخول السريع ببريد Gmail' : 'Sign in with Gmail Address'}
@@ -460,7 +460,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
                       value={gmailEmail}
                       onChange={(e) => setGmailEmail(e.target.value)}
                       placeholder="yourname@gmail.com"
-                      className="w-full px-3 py-2 text-xs bg-white dark:bg-[#1a1722] border border-blue-200 dark:border-[#2a2538] rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
+                      className="w-full px-3 py-2 text-xs bg-white dark:bg-[#1a1722] border border-[#DDE3E8] dark:border-[#3A0F34]/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3A0F34] font-medium"
                     />
                   </div>
 
@@ -470,7 +470,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
                       value={gmailName}
                       onChange={(e) => setGmailName(e.target.value)}
                       placeholder={isRtl ? 'الاسم الكريم (اختياري)' : 'Your Name (Optional)'}
-                      className="w-full px-3 py-2 text-xs bg-white dark:bg-[#1a1722] border border-blue-200 dark:border-[#2a2538] rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
+                      className="w-full px-3 py-2 text-xs bg-white dark:bg-[#1a1722] border border-[#DDE3E8] dark:border-[#3A0F34]/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3A0F34] font-medium"
                     />
                   </div>
 
@@ -498,10 +498,10 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
                   type="button"
                   onClick={handleGoogleSignInPopup}
                   disabled={googleLoading}
-                  className="w-full flex items-center justify-center gap-3 py-3 px-5 border border-neutral-300 dark:border-[#2f2742] rounded-full bg-white dark:bg-[#1a1626] hover:bg-neutral-50 dark:hover:bg-[#251f35] text-neutral-800 dark:text-neutral-100 font-bold text-xs transition-all shadow-xs active:scale-[0.99] cursor-pointer"
+                  className="w-full flex items-center justify-center gap-3 py-3 px-5 border border-neutral-300 dark:border-[#3A0F34]/50 rounded-full bg-white dark:bg-[#1A0919] hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] text-neutral-800 dark:text-neutral-100 font-bold text-xs transition-all shadow-xs active:scale-[0.99] cursor-pointer"
                 >
                   {googleLoading ? (
-                    <div className="w-4 h-4 border-2 border-[#8B5CF6] border-t-transparent rounded-full animate-spin shrink-0" />
+                    <div className="w-4 h-4 border-2 border-[#3A0F34] dark:border-[#DDE3E8] border-t-transparent rounded-full animate-spin shrink-0" />
                   ) : (
                     <svg className="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24">
                       <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
@@ -531,10 +531,10 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
 
             <div className="relative my-4">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-neutral-200 dark:border-[#2a2538]" />
+                <div className="w-full border-t border-[#DDE3E8] dark:border-[#3A0F34]/50" />
               </div>
               <div className="relative flex justify-center text-[10px] uppercase tracking-wider">
-                <span className="bg-white dark:bg-[#14101e] px-3 text-neutral-400 font-bold">
+                <span className="bg-white dark:bg-[#1A0919] px-3 text-neutral-400 font-bold">
                   {isRtl ? 'أو تسجيل الدخول بالإيميل' : 'Or Email Login'}
                 </span>
               </div>
@@ -572,7 +572,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={isRtl ? 'أحمد جمال' : 'Sara Ahmed'}
-                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200/80 dark:border-[#2f2742] rounded-xl focus:bg-white dark:focus:bg-[#201a2e] focus:outline-none focus:ring-2 focus:ring-purple-600 ${
+                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
                     isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                   }`}
                 />
@@ -592,7 +592,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200/80 dark:border-[#2f2742] rounded-xl focus:bg-white dark:focus:bg-[#201a2e] focus:outline-none focus:ring-2 focus:ring-purple-600 ${
+                className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
                   isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                 }`}
               />
@@ -611,7 +611,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="010XXXXXXXX"
-                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200/80 dark:border-[#2f2742] rounded-xl focus:bg-white dark:focus:bg-[#201a2e] focus:outline-none focus:ring-2 focus:ring-purple-600 font-mono ${
+                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-mono ${
                     isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                   }`}
                 />
@@ -631,7 +631,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200/80 dark:border-[#2f2742] rounded-xl focus:bg-white dark:focus:bg-[#201a2e] focus:outline-none focus:ring-2 focus:ring-rose-500 ${
+                className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] ${
                   isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                 }`}
               />
@@ -643,7 +643,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
             whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={formLoading}
-            className="w-full mt-2 py-3.5 bg-gradient-to-r from-rose-600 via-pink-600 to-amber-500 hover:from-rose-500 hover:to-amber-400 disabled:opacity-50 text-white rounded-xl text-xs font-black shadow-lg shadow-rose-500/25 transition-all cursor-pointer flex items-center justify-center gap-2"
+            className="w-full mt-2 py-3.5 bg-[#3A0F34] hover:bg-[#4E1646] disabled:opacity-50 text-white rounded-xl text-xs font-black shadow-lg shadow-[#3A0F34]/25 transition-all cursor-pointer flex items-center justify-center gap-2 border border-[#DDE3E8]/30"
           >
             {formLoading ? (
               <>
@@ -659,7 +659,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
         </form>
 
         {/* Toggle between Sign In / Sign Up */}
-        <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-[#241e33] text-center text-xs text-neutral-500 dark:text-neutral-400">
+        <div className="mt-4 pt-3 border-t border-[#DDE3E8]/80 dark:border-[#2C102A] text-center text-xs text-neutral-500 dark:text-[#9BAAB6]">
           {mode === 'signin' ? (
             <p>
               {isRtl ? 'ليس لديكِ حساب؟ ' : "Don't have an account? "}
@@ -669,7 +669,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
                   setMode('signup');
                   setError(null);
                 }}
-                className="font-bold text-rose-600 hover:text-rose-700 dark:text-rose-400 cursor-pointer underline"
+                className="font-bold text-[#3A0F34] hover:text-[#5C1D53] dark:text-[#DDE3E8] cursor-pointer underline"
               >
                 {isRtl ? 'إنشاء حساب جديد' : 'Sign up now'}
               </button>
@@ -683,7 +683,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
                   setMode('signin');
                   setError(null);
                 }}
-                className="font-bold text-rose-600 hover:text-rose-700 dark:text-rose-400 cursor-pointer underline"
+                className="font-bold text-[#3A0F34] hover:text-[#5C1D53] dark:text-[#DDE3E8] cursor-pointer underline"
               >
                 {isRtl ? 'تسجيل الدخول' : 'Sign in'}
               </button>
@@ -693,13 +693,13 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
 
         {/* Guest Continue Option */}
         {onGuestContinue && (
-          <div className="mt-5 pt-3 border-t border-dashed border-rose-200/60 dark:border-rose-950 text-center">
+          <div className="mt-5 pt-3 border-t border-dashed border-[#DDE3E8] dark:border-[#3A0F34] text-center">
             <button
               type="button"
               onClick={onGuestContinue}
-              className="w-full py-3 px-4 rounded-2xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/40 dark:hover:bg-rose-900/50 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900/60 font-black text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-[0.98]"
+              className="w-full py-3 px-4 rounded-2xl bg-[#EBF0F4] hover:bg-[#DDE3E8] dark:bg-[#240E23] dark:hover:bg-[#321330] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34] font-black text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-[0.98]"
             >
-              <ShoppingBag className="w-4 h-4 text-rose-500" />
+              <ShoppingBag className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
               <span>{isRtl ? 'استكشاف الموقع وتجربة استخراج سلة شي إن كضيفة 🛍️✨' : 'Explore & Extract SHEIN Cart as Guest 🛍️'}</span>
               {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
             </button>

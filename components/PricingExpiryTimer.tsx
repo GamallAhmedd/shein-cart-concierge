@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useThemeLang } from '@/lib/theme-lang-context';
@@ -102,7 +102,7 @@ export function PricingExpiryTimer({
             ? 'bg-rose-100 dark:bg-rose-950/70 text-rose-800 dark:text-rose-200 border-rose-300 dark:border-rose-800 animate-pulse'
             : isUrgent
             ? 'bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-200 border-amber-300 dark:border-amber-800'
-            : 'bg-purple-100 dark:bg-purple-950/70 text-[#7C3AED] dark:text-purple-300 border-purple-200 dark:border-purple-800'
+            : 'bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border-[#DDE3E8] dark:border-[#3A0F34]'
         }`}
       >
         <Clock className="w-3.5 h-3.5 shrink-0" />
@@ -138,7 +138,7 @@ export function PricingExpiryTimer({
           ? 'bg-rose-50/90 dark:bg-rose-950/50 border-rose-300 dark:border-rose-800 text-rose-950 dark:text-rose-200 shadow-sm'
           : isUrgent
           ? 'bg-amber-50/90 dark:bg-amber-950/50 border-amber-300 dark:border-amber-800 text-amber-950 dark:text-amber-200 shadow-sm'
-          : 'bg-purple-50/80 dark:bg-purple-950/40 border-purple-200 dark:border-purple-800 text-purple-950 dark:text-purple-200'
+          : 'bg-[#EBF0F4]/80 dark:bg-[#240E23]/60 border-[#DDE3E8] dark:border-[#3A0F34]/50 text-[#3A0F34] dark:text-[#DDE3E8]'
       }`}
     >
       <div className="flex items-center gap-3 text-start min-w-0">
@@ -148,7 +148,7 @@ export function PricingExpiryTimer({
               ? 'bg-rose-200/80 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300 animate-pulse'
               : isUrgent
               ? 'bg-amber-200/80 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300'
-              : 'bg-purple-200/80 dark:bg-purple-900/60 text-[#7C3AED] dark:text-purple-300'
+              : 'bg-[#DDE3E8] dark:bg-[#321330] text-[#3A0F34] dark:text-[#DDE3E8]'
           }`}
         >
           <Clock className="w-5 h-5" />
@@ -172,7 +172,7 @@ export function PricingExpiryTimer({
               ? 'bg-rose-600 text-white border-rose-700 animate-pulse'
               : isUrgent
               ? 'bg-amber-600 text-white border-amber-700'
-              : 'bg-purple-700 text-white border-purple-800'
+              : 'bg-[#3A0F34] text-white border-[#3A0F34]'
           }`}
           dir="ltr"
         >
