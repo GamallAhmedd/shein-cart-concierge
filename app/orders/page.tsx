@@ -181,7 +181,7 @@ export default function UserOrdersPage() {
         );
       case 'APPROVED_PENDING_PAYMENT':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34]">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] border border-[#EDE9FE] dark:border-[#7C3AED]">
             <CreditCard className="w-3.5 h-3.5" />
             {t.statusApproved}
           </span>
@@ -242,7 +242,7 @@ export default function UserOrdersPage() {
   return (
     <div className="min-h-screen bg-[#F4F6F8] dark:bg-[#130712] text-neutral-900 dark:text-white pb-32 md:pb-24 transition-colors relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-80 bg-gradient-to-b from-[#3A0F34]/10 via-[#DDE3E8]/20 to-transparent dark:from-[#3A0F34]/20 dark:to-transparent pointer-events-none blur-3xl -z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-80 bg-gradient-to-b from-[#7C3AED]/10 via-[#EDE9FE]/20 to-transparent dark:from-[#7C3AED]/20 dark:to-transparent pointer-events-none blur-3xl -z-10" />
 
       <Navbar onOpenAuth={() => setAuthOpen(true)} />
 
@@ -271,7 +271,7 @@ export default function UserOrdersPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => fetchOrders(false)}
-              className="p-3 bg-white/90 dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 text-[#3A0F34] dark:text-[#DDE3E8] rounded-2xl hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] transition-colors shadow-xs cursor-pointer"
+              className="p-3 bg-white/90 dark:bg-[#1A0919] border border-[#EDE9FE] dark:border-[#7C3AED]/50 text-[#7C3AED] dark:text-[#EDE9FE] rounded-2xl hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] transition-colors shadow-xs cursor-pointer"
               title={t.refresh}
             >
               <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -280,7 +280,7 @@ export default function UserOrdersPage() {
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
                 href="/"
-                className="px-5 py-3 bg-[#3A0F34] hover:bg-[#4E1646] text-white font-black text-xs rounded-2xl shadow-sm transition-all inline-flex items-center gap-2 border border-[#DDE3E8]/30"
+                className="px-5 py-3 bg-[#7C3AED] hover:bg-[#4E1646] text-white font-black text-xs rounded-2xl shadow-sm transition-all inline-flex items-center gap-2 border border-[#EDE9FE]/30"
               >
                 <ShoppingBag className="w-4 h-4" />
                 <span>{t.extractNewCart}</span>
@@ -296,13 +296,13 @@ export default function UserOrdersPage() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.35 }}
-              className="bg-white/90 dark:bg-[#1A0919]/90 backdrop-blur-2xl rounded-[32px] p-10 sm:p-14 text-center border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs space-y-6 max-w-lg mx-auto"
+              className="bg-white/90 dark:bg-[#1A0919]/90 backdrop-blur-2xl rounded-[32px] p-10 sm:p-14 text-center border border-[#EDE9FE] dark:border-[#7C3AED]/50 shadow-xs space-y-6 max-w-lg mx-auto"
             >
-              <div className="w-18 h-18 rounded-3xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center mx-auto shadow-xs border border-[#DDE3E8]">
+              <div className="w-18 h-18 rounded-3xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] flex items-center justify-center mx-auto shadow-xs border border-[#EDE9FE]">
                 <Lock className="w-9 h-9" />
               </div>
               <div className="space-y-2">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-black uppercase tracking-wider border border-[#DDE3E8]">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] text-[11px] font-black uppercase tracking-wider border border-[#EDE9FE]">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>{t.privacyBadge}</span>
                 </div>
@@ -318,22 +318,22 @@ export default function UserOrdersPage() {
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.96 }}
                   onClick={() => setAuthOpen(true)}
-                  className="w-full sm:w-auto px-7 py-3.5 bg-[#3A0F34] hover:bg-[#4E1646] text-white rounded-2xl text-xs font-black shadow-lg shadow-[#3A0F34]/25 transition-all cursor-pointer inline-flex items-center justify-center gap-2 border border-[#DDE3E8]/30"
+                  className="w-full sm:w-auto px-7 py-3.5 bg-[#7C3AED] hover:bg-[#4E1646] text-white rounded-2xl text-xs font-black shadow-lg shadow-[#7C3AED]/25 transition-all cursor-pointer inline-flex items-center justify-center gap-2 border border-[#EDE9FE]/30"
                 >
                   <User className="w-4 h-4" />
                   <span>{t.signInOrRegister}</span>
                 </motion.button>
                 <Link
                   href="/"
-                  className="w-full sm:w-auto px-6 py-3.5 bg-[#EBF0F4] dark:bg-[#240E23] hover:bg-[#DDE3E8] text-[#3A0F34] dark:text-[#DDE3E8] rounded-2xl text-xs font-bold transition-all text-center border border-[#DDE3E8]"
+                  className="w-full sm:w-auto px-6 py-3.5 bg-[#EBF0F4] dark:bg-[#240E23] hover:bg-[#EDE9FE] text-[#7C3AED] dark:text-[#EDE9FE] rounded-2xl text-xs font-bold transition-all text-center border border-[#EDE9FE]"
                 >
                   {t.homeBtn}
                 </Link>
               </div>
             </motion.div>
           ) : loading ? (
-            <div className="bg-white/90 dark:bg-[#1A0919]/90 backdrop-blur-md rounded-[32px] p-14 text-center border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs text-neutral-500 dark:text-neutral-400">
-              <div className="w-8 h-8 border-3 border-[#3A0F34] dark:border-[#DDE3E8] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+            <div className="bg-white/90 dark:bg-[#1A0919]/90 backdrop-blur-md rounded-[32px] p-14 text-center border border-[#EDE9FE] dark:border-[#7C3AED]/50 shadow-xs text-neutral-500 dark:text-neutral-400">
+              <div className="w-8 h-8 border-3 border-[#7C3AED] dark:border-[#EDE9FE] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
               <p className="text-xs font-bold uppercase tracking-wider text-neutral-400 dark:text-[#9BAAB6]">
                 {t.loadingOrders}
               </p>
@@ -342,9 +342,9 @@ export default function UserOrdersPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-white/90 dark:bg-[#1A0919]/90 backdrop-blur-md rounded-[32px] p-14 text-center border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs space-y-5"
+              className="bg-white/90 dark:bg-[#1A0919]/90 backdrop-blur-md rounded-[32px] p-14 text-center border border-[#EDE9FE] dark:border-[#7C3AED]/50 shadow-xs space-y-5"
             >
-              <div className="w-16 h-16 rounded-3xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center mx-auto border border-[#DDE3E8]">
+              <div className="w-16 h-16 rounded-3xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] flex items-center justify-center mx-auto border border-[#EDE9FE]">
                 <ShoppingBag className="w-8 h-8" />
               </div>
               <div className="space-y-1">
@@ -358,7 +358,7 @@ export default function UserOrdersPage() {
               <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="inline-block">
                 <Link
                   href="/"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#3A0F34] hover:bg-[#4E1646] text-white rounded-2xl text-xs font-black shadow-md shadow-[#3A0F34]/20 transition-all border border-[#DDE3E8]/30"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#7C3AED] hover:bg-[#4E1646] text-white rounded-2xl text-xs font-black shadow-md shadow-[#7C3AED]/20 transition-all border border-[#EDE9FE]/30"
                 >
                   <span>{t.extractNowBtn}</span>
                   {dir === 'rtl' ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
@@ -382,13 +382,13 @@ export default function UserOrdersPage() {
                     onClick={() => setStatusFilter(tab.key)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all shrink-0 cursor-pointer inline-flex items-center gap-1.5 ${
                       statusFilter === tab.key
-                        ? 'bg-[#3A0F34] text-white shadow-xs border border-[#3A0F34]'
-                        : 'bg-white/80 dark:bg-[#1A0919] text-[#3A0F34] dark:text-[#DDE3E8] hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34]/50'
+                        ? 'bg-[#7C3AED] text-white shadow-xs border border-[#7C3AED]'
+                        : 'bg-white/80 dark:bg-[#1A0919] text-[#7C3AED] dark:text-[#EDE9FE] hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] border border-[#EDE9FE] dark:border-[#7C3AED]/50'
                     }`}
                   >
                     <span>{tab.label}</span>
                     <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-black ${
-                      statusFilter === tab.key ? 'bg-white/20 text-white' : 'bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8]'
+                      statusFilter === tab.key ? 'bg-white/20 text-white' : 'bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE]'
                     }`}>
                       {tab.count}
                     </span>
@@ -424,7 +424,7 @@ export default function UserOrdersPage() {
                 >
                   <Link
                     href={`/orders/${order.id}`}
-                    className="block bg-white/90 dark:bg-[#1A0919]/90 backdrop-blur-md rounded-3xl p-5 sm:p-6 border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs hover:border-[#3A0F34] dark:hover:border-[#DDE3E8] transition-colors group"
+                    className="block bg-white/90 dark:bg-[#1A0919]/90 backdrop-blur-md rounded-3xl p-5 sm:p-6 border border-[#EDE9FE] dark:border-[#7C3AED]/50 shadow-xs hover:border-[#7C3AED] dark:hover:border-[#EDE9FE] transition-colors group"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="flex items-center gap-4">
@@ -433,7 +433,7 @@ export default function UserOrdersPage() {
                           {order.items.slice(0, 3).map((it, idx) => (
                             <div
                               key={idx}
-                              className="h-16 w-14 rounded-2xl overflow-hidden ring-2 ring-white dark:ring-[#1A0919] shadow-xs bg-[#EBF0F4] dark:bg-[#240E23] shrink-0 border border-[#DDE3E8]/40"
+                              className="h-16 w-14 rounded-2xl overflow-hidden ring-2 ring-white dark:ring-[#1A0919] shadow-xs bg-[#EBF0F4] dark:bg-[#240E23] shrink-0 border border-[#EDE9FE]/40"
                             >
                               <SafeImage
                                 src={it.image}
@@ -446,7 +446,7 @@ export default function UserOrdersPage() {
 
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
-                            <span className="font-mono font-black text-base sm:text-lg text-neutral-950 dark:text-white group-hover:text-[#3A0F34] dark:group-hover:text-[#DDE3E8] transition-colors">
+                            <span className="font-mono font-black text-base sm:text-lg text-neutral-950 dark:text-white group-hover:text-[#7C3AED] dark:group-hover:text-[#EDE9FE] transition-colors">
                               {order.id}
                             </span>
                             <span className="text-xs text-neutral-400 dark:text-[#9BAAB6] font-medium">
@@ -470,20 +470,20 @@ export default function UserOrdersPage() {
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between sm:justify-end gap-5 pt-3 sm:pt-0 border-t sm:border-t-0 border-[#DDE3E8] dark:border-[#3A0F34]/40">
+                      <div className="flex items-center justify-between sm:justify-end gap-5 pt-3 sm:pt-0 border-t sm:border-t-0 border-[#EDE9FE] dark:border-[#7C3AED]/40">
                         <div className="text-start sm:text-end">
                           <span className="text-[11px] text-neutral-400 dark:text-[#9BAAB6] block">
                             {t.totalCashLabel}
                           </span>
                           <div className="font-black text-lg sm:text-xl text-neutral-950 dark:text-white font-mono">
                             {order.totalCash.toLocaleString()}{' '}
-                            <span className="text-xs font-black text-[#3A0F34] dark:text-[#DDE3E8]">EGP</span>
+                            <span className="text-xs font-black text-[#7C3AED] dark:text-[#EDE9FE]">EGP</span>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-3">
                           {getStatusBadge(order.status)}
-                          <div className="text-neutral-400 group-hover:text-[#3A0F34] dark:group-hover:text-[#DDE3E8] group-hover:translate-x-1 transition-all">
+                          <div className="text-neutral-400 group-hover:text-[#7C3AED] dark:group-hover:text-[#EDE9FE] group-hover:translate-x-1 transition-all">
                             {dir === 'rtl' ? (
                               <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1" />
                             ) : (

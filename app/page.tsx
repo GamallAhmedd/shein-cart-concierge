@@ -125,9 +125,9 @@ export default function HomePage() {
   const bottomSections = settings?.customSections?.filter((s) => s.enabled && s.position === 'bottom') || [];
 
   return (
-    <div className="min-h-screen bg-[#F4F6F8] dark:bg-[#130712] text-neutral-900 dark:text-white pb-32 md:pb-24 transition-colors relative overflow-hidden">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 pb-32 md:pb-24 transition-colors relative overflow-hidden">
       {/* Background ambient lighting - Deep Aubergine & Ice Silver */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-[#3A0F34]/10 via-[#DDE3E8]/20 to-transparent dark:from-[#3A0F34]/25 dark:via-[#1A0919]/40 dark:to-transparent pointer-events-none blur-3xl -z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-[#7C3AED]/10 via-[#8B5CF6]/5 to-transparent pointer-events-none blur-3xl -z-10" />
 
       {/* Optional Top Announcement Bar Configured by Admin */}
       {settings?.announcementEnabled !== false && settings?.announcementText && (
@@ -154,14 +154,14 @@ export default function HomePage() {
           <div className="space-y-10">
             {/* Header Title: Fashion Editorial Hierarchy */}
             <motion.div {...heroEntrance} className="text-center sm:text-start space-y-3 pt-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 dark:bg-[#240E23] border border-[#3A0F34]/20 text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-black tracking-wide shadow-2xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8] animate-sparkle-twinkle" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-50 border border-violet-200 text-[#7C3AED] text-[11px] font-black tracking-wide shadow-2xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#7C3AED]" />
                 <span>{settings?.heroBadge || (dir === 'rtl' ? 'خدمة التسوق والاستخراج الأولى للبنات في مصر 🛍️✨' : t.heroBadge)}</span>
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#3A0F34] dark:text-white tracking-tight leading-tight text-balance">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-tight text-balance">
                 {settings?.heroTitle || (dir === 'rtl' ? 'اختياراتك من SHEIN، لحد باب بيتك.' : t.heroTitle)}
               </h1>
-              <p className="text-xs sm:text-sm text-[#3A0F34]/80 dark:text-[#DDE3E8] max-w-xl font-medium leading-relaxed text-balance">
+              <p className="text-xs sm:text-sm text-slate-600 max-w-xl font-medium leading-relaxed text-balance">
                 {settings?.heroSubtitle || (dir === 'rtl' ? 'الصقي رابط سلتك، اعرفي التكلفة بالجنيه المصري، وكمّلي طلبك بالدفع المحلي.' : t.heroSubtitle)}
               </p>
             </motion.div>
@@ -173,12 +173,7 @@ export default function HomePage() {
               </motion.div>
             ))}
 
-            {/* Live Shipment Batch Nudge: Urgency & Scarcity */}
-            <motion.div {...heroEntrance}>
-              <ShipmentBatchLiveNudge />
-            </motion.div>
-
-            {/* Main Extractor Card: Hero Entrance */}
+            {/* Main Cart Extractor Card */}
             <motion.div {...heroEntrance}>
               <CartExtractorCard
                 onExtracted={(result) => setExtractedData(result)}
@@ -186,62 +181,12 @@ export default function HomePage() {
               />
             </motion.div>
 
-            {/* Trust Metrics Bar: Solid Opaque Surfaces (Anti-Slop) */}
-            {settings?.trustMetricsEnabled !== false && (
-              <motion.div
-                {...scrollReveal}
-                className="grid grid-cols-2 md:grid-cols-4 gap-3 py-2"
-              >
-                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs flex items-center gap-3 cursor-pointer">
-                  <div className="flex items-center -space-x-1.5 shrink-0">
-                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#240E23] p-1 border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center overflow-hidden">
-                      <img src="/images/instapay.png" alt="InstaPay" className="w-full h-full object-contain" />
-                    </div>
-                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#240E23] p-0.5 border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center overflow-hidden">
-                      <img src="/images/vodafone-cash.png" alt="Vodafone Cash" className="w-full h-full object-contain" />
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-black text-neutral-900 dark:text-white leading-tight">
-                      {settings?.enableInstapay ? (dir === 'rtl' ? 'إنستاباي وفودافون كاش' : 'InstaPay & Vodafone') : 'Mobile Wallets'}
-                    </h4>
-                    <p className="text-[10px] text-neutral-400 dark:text-[#9BAAB6]">{dir === 'rtl' ? 'دفع فوري بالجنيه المصري' : 'Instant EGP Transfer'}</p>
-                  </div>
-                </motion.div>
+            {/* Live Shipment Batch Nudge: Displayed AFTER cart input */}
+            <motion.div {...heroEntrance}>
+              <ShipmentBatchLiveNudge />
+            </motion.div>
 
-                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs flex items-center gap-3 cursor-pointer">
-                  <div className="w-9 h-9 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center shrink-0">
-                    <ShieldCheck className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-black text-neutral-900 dark:text-white leading-tight">{dir === 'rtl' ? 'فحص ومراجعة دقيقة' : 'Supervisor Verified'}</h4>
-                    <p className="text-[10px] text-neutral-400 dark:text-[#9BAAB6]">{dir === 'rtl' ? 'ضمان توافر المقاسات' : 'Inventory & size check'}</p>
-                  </div>
-                </motion.div>
-
-                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs flex items-center gap-3 cursor-pointer">
-                  <div className="w-9 h-9 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center shrink-0">
-                    <Truck className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-black text-neutral-900 dark:text-white leading-tight">{dir === 'rtl' ? 'توصيل لباب بيتك' : 'Doorstep Delivery'}</h4>
-                    <p className="text-[10px] text-neutral-400 dark:text-[#9BAAB6]">{dir === 'rtl' ? 'كل محافظات مصر' : 'Across all Egypt'}</p>
-                  </div>
-                </motion.div>
-
-                <motion.div {...interactiveFeedback} className="p-4.5 rounded-2xl bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs flex items-center gap-3 cursor-pointer">
-                  <div className="w-9 h-9 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center shrink-0">
-                    <Lock className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-black text-neutral-900 dark:text-white leading-tight">{dir === 'rtl' ? 'خصوصية كاملة' : '100% Privacy'}</h4>
-                    <p className="text-[10px] text-neutral-400 dark:text-[#9BAAB6]">{dir === 'rtl' ? 'طلباتك محمية وموثقة' : 'Strict user data security'}</p>
-                  </div>
-                </motion.div>
-              </motion.div>
-            )}
-
-            {/* Risk Reversal & Trust Guarantees */}
+            {/* Reassurance & Guarantees: Unified Section */}
             <motion.div {...scrollReveal}>
               <TrustAndGuarantees />
             </motion.div>

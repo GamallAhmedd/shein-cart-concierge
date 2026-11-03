@@ -123,9 +123,9 @@ export function SupportModal({
         className="relative w-full max-w-md bg-white dark:bg-[#14121a] text-neutral-900 dark:text-white rounded-[32px] shadow-2xl border border-neutral-100 dark:border-[#2a2538] overflow-hidden transition-colors"
       >
         {/* Header */}
-        <div className="p-6 bg-[#EBF0F4] dark:bg-[#1A0919] border-b border-[#DDE3E8] dark:border-[#3A0F34]/60 flex items-center justify-between">
+        <div className="p-6 bg-[#EBF0F4] dark:bg-[#1A0919] border-b border-[#EDE9FE] dark:border-[#7C3AED]/60 flex items-center justify-between">
           <div className="space-y-1 text-start">
-            <span className="text-[11px] font-bold text-[#3A0F34] dark:text-[#DDE3E8] uppercase tracking-wider block">
+            <span className="text-[11px] font-bold text-[#7C3AED] dark:text-[#EDE9FE] uppercase tracking-wider block">
               SHEIN Concierge
             </span>
             <h3 className="text-xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
@@ -171,7 +171,7 @@ export function SupportModal({
           {/* Direct Phone Call */}
           <div className="p-4 rounded-2xl border border-neutral-100 dark:border-[#2a2538] bg-neutral-50 dark:bg-[#1a1722] flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#3A0F34] text-white flex items-center justify-center shrink-0 shadow-sm border border-[#DDE3E8]/30">
+              <div className="w-10 h-10 rounded-2xl bg-[#7C3AED] text-white flex items-center justify-center shrink-0 shadow-sm border border-[#EDE9FE]/30">
                 <Phone className="w-4 h-4" />
               </div>
               <div className="text-start">
@@ -244,21 +244,21 @@ export function SupportModal({
 
           {/* Payment Accounts Quick Reference (Only shown if enabled by admin!) */}
           {showPaymentInSupport && (enableInstapay || enableVodafoneCash || secondaryWallet) && (
-            <div className="p-4 rounded-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/50 bg-[#EBF0F4]/60 dark:bg-[#240E23]/40 space-y-2.5">
+            <div className="p-4 rounded-2xl border border-[#EDE9FE] dark:border-[#7C3AED]/50 bg-[#EBF0F4]/60 dark:bg-[#240E23]/40 space-y-2.5">
               <div className="flex items-center justify-between">
-                <span className="font-extrabold text-[#3A0F34] dark:text-[#DDE3E8] text-xs block text-start font-black">
+                <span className="font-extrabold text-[#7C3AED] dark:text-[#EDE9FE] text-xs block text-start font-black">
                   {dir === 'rtl' ? 'بيانات التحويل المعتمدة في مصر:' : 'Official Payment Targets (Egypt):'}
                 </span>
-                <span className="text-[10px] bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] px-2 py-0.5 rounded-full font-bold">
+                <span className="text-[10px] bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] px-2 py-0.5 rounded-full font-bold">
                   {dir === 'rtl' ? 'معتمد' : 'Verified'}
                 </span>
               </div>
 
               {enableInstapay && (
-                <div className="flex items-center justify-between text-[11px] bg-white dark:bg-[#180817] p-2.5 rounded-xl border border-[#DDE3E8] dark:border-[#3A0F34]/50">
+                <div className="flex items-center justify-between text-[11px] bg-white dark:bg-[#180817] p-2.5 rounded-xl border border-[#EDE9FE] dark:border-[#7C3AED]/50">
                   <div className="text-start">
                     <span className="text-neutral-400 dark:text-neutral-500 block font-medium flex items-center gap-1">
-                      <CreditCard className="w-3 h-3 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                      <CreditCard className="w-3 h-3 text-[#7C3AED] dark:text-[#EDE9FE]" />
                       {t.instapayTitle}
                     </span>
                     <span className="font-mono font-bold text-neutral-900 dark:text-white" dir="ltr">
@@ -271,7 +271,7 @@ export function SupportModal({
                         href={instapayPaymentUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-2 py-1 rounded-lg bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] font-bold text-[10px] hover:bg-[#DDE3E8] transition-colors flex items-center gap-1"
+                        className="px-2 py-1 rounded-lg bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] font-bold text-[10px] hover:bg-[#EDE9FE] transition-colors flex items-center gap-1"
                       >
                         <span>{dir === 'rtl' ? 'إرسال نقود' : 'Send'}</span>
                         <ExternalLink className="w-2.5 h-2.5" />
@@ -280,7 +280,7 @@ export function SupportModal({
                     <button
                       type="button"
                       onClick={() => handleCopy(instapayAddress, 'instapay')}
-                      className="text-[11px] font-bold text-[#3A0F34] dark:text-[#DDE3E8] hover:underline flex items-center gap-1 cursor-pointer"
+                      className="text-[11px] font-bold text-[#7C3AED] dark:text-[#EDE9FE] hover:underline flex items-center gap-1 cursor-pointer"
                     >
                       {copiedField === 'instapay' ? 'تم النسخ ✓' : (dir === 'rtl' ? 'نسخ' : 'Copy')}
                     </button>
@@ -289,7 +289,7 @@ export function SupportModal({
               )}
 
               {enableVodafoneCash && (
-                <div className="flex items-center justify-between text-[11px] bg-white dark:bg-[#180817] p-2.5 rounded-xl border border-[#DDE3E8] dark:border-[#3A0F34]/50">
+                <div className="flex items-center justify-between text-[11px] bg-white dark:bg-[#180817] p-2.5 rounded-xl border border-[#EDE9FE] dark:border-[#7C3AED]/50">
                   <div className="text-start">
                     <span className="text-neutral-400 dark:text-neutral-500 block font-medium flex items-center gap-1">
                       <Wallet className="w-3 h-3 text-rose-500" />
@@ -302,7 +302,7 @@ export function SupportModal({
                   <button
                     type="button"
                     onClick={() => handleCopy(vodafoneNumber, 'vodafone')}
-                    className="text-[11px] font-bold text-[#3A0F34] dark:text-[#DDE3E8] hover:underline flex items-center gap-1 cursor-pointer shrink-0"
+                    className="text-[11px] font-bold text-[#7C3AED] dark:text-[#EDE9FE] hover:underline flex items-center gap-1 cursor-pointer shrink-0"
                   >
                     {copiedField === 'vodafone' ? 'تم النسخ ✓' : (dir === 'rtl' ? 'نسخ' : 'Copy')}
                   </button>
@@ -310,7 +310,7 @@ export function SupportModal({
               )}
 
               {secondaryWallet && (
-                <div className="flex items-center justify-between text-[11px] bg-white dark:bg-[#180817] p-2.5 rounded-xl border border-[#DDE3E8] dark:border-[#3A0F34]/50">
+                <div className="flex items-center justify-between text-[11px] bg-white dark:bg-[#180817] p-2.5 rounded-xl border border-[#EDE9FE] dark:border-[#7C3AED]/50">
                   <div className="text-start">
                     <span className="text-neutral-400 dark:text-neutral-500 block font-medium flex items-center gap-1">
                       <Wallet className="w-3 h-3 text-amber-500" />
@@ -323,7 +323,7 @@ export function SupportModal({
                   <button
                     type="button"
                     onClick={() => handleCopy(secondaryWallet, 'secondaryWallet')}
-                    className="text-[11px] font-bold text-[#3A0F34] dark:text-[#DDE3E8] hover:underline flex items-center gap-1 cursor-pointer shrink-0"
+                    className="text-[11px] font-bold text-[#7C3AED] dark:text-[#EDE9FE] hover:underline flex items-center gap-1 cursor-pointer shrink-0"
                   >
                     {copiedField === 'secondaryWallet' ? 'تم النسخ ✓' : (dir === 'rtl' ? 'نسخ' : 'Copy')}
                   </button>

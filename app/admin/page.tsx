@@ -1111,7 +1111,7 @@ export default function AdminDashboardPage() {
             </p>
             <button
               onClick={() => setAuthOpen(true)}
-              className="w-full py-3 bg-neutral-950 dark:bg-[#3A0F34] hover:bg-neutral-800 text-white font-extrabold rounded-2xl transition-colors cursor-pointer"
+              className="w-full py-3 bg-neutral-950 dark:bg-[#7C3AED] hover:bg-neutral-800 text-white font-extrabold rounded-2xl transition-colors cursor-pointer"
             >
               Sign In as Admin
             </button>
@@ -1144,7 +1144,7 @@ export default function AdminDashboardPage() {
   return (
     <div className="min-h-screen bg-[#FBFBFC] dark:bg-[#0c0a0f] text-neutral-900 dark:text-white pb-32 md:pb-24 transition-colors relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-[#3A0F34]/10 via-[#DDE3E8]/5 to-transparent dark:from-[#3A0F34]/20 dark:via-[#3A0F34]/10 dark:to-transparent pointer-events-none blur-3xl -z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-[#7C3AED]/10 via-[#EDE9FE]/5 to-transparent dark:from-[#7C3AED]/20 dark:via-[#7C3AED]/10 dark:to-transparent pointer-events-none blur-3xl -z-10" />
 
       <Navbar onOpenAuth={() => setAuthOpen(true)} />
 
@@ -1177,15 +1177,15 @@ export default function AdminDashboardPage() {
               href="/admin/analytics"
               className="px-4 py-2.5 bg-white dark:bg-[#14111d] hover:bg-neutral-50 dark:hover:bg-[#1f1a2c] text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-[#2a243a] rounded-2xl text-xs font-black transition-all flex items-center gap-2 shadow-xs cursor-pointer active:scale-95"
             >
-              <TrendingUp className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
+              <TrendingUp className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE]" />
               التحليلات والأرباح (Analytics)
             </Link>
 
             <button
               onClick={() => setSettingsOpen(true)}
-              className="px-4 py-2.5 bg-gradient-to-r bg-[#3A0F34] hover:bg-[#4E1646] text-white rounded-2xl text-xs font-black transition-all flex items-center gap-2 shadow-md shadow-[#3A0F34]/20 border border-[#DDE3E8]/30 cursor-pointer active:scale-95"
+              className="px-4 py-2.5 bg-gradient-to-r bg-[#7C3AED] hover:bg-[#4E1646] text-white rounded-2xl text-xs font-black transition-all flex items-center gap-2 shadow-md shadow-[#7C3AED]/20 border border-[#EDE9FE]/30 cursor-pointer active:scale-95"
             >
-              <Settings className="w-4 h-4 text-[#DDE3E8]" />
+              <Settings className="w-4 h-4 text-[#EDE9FE]" />
               إعدادات الموقع والمحافظ والسكاشن (Site CMS)
             </button>
 
@@ -1206,7 +1206,7 @@ export default function AdminDashboardPage() {
             onClick={() => setAdminView('orders')}
             className={`px-5 py-2.5 rounded-2xl text-xs font-black transition-all flex items-center gap-2 cursor-pointer ${
               adminView === 'orders'
-                ? 'bg-neutral-950 dark:bg-[#3A0F34] text-white shadow-md'
+                ? 'bg-neutral-950 dark:bg-[#7C3AED] text-white shadow-md'
                 : 'bg-white dark:bg-[#14111d] text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-[#2a243a] hover:bg-neutral-100 dark:hover:bg-[#1f1a2c]'
             }`}
           >
@@ -1222,13 +1222,13 @@ export default function AdminDashboardPage() {
             onClick={() => setAdminView('shipments')}
             className={`px-5 py-2.5 rounded-2xl text-xs font-black transition-all flex items-center gap-2 cursor-pointer ${
               adminView === 'shipments'
-                ? 'bg-neutral-950 dark:bg-[#3A0F34] text-white shadow-md'
+                ? 'bg-neutral-950 dark:bg-[#7C3AED] text-white shadow-md'
                 : 'bg-white dark:bg-[#14111d] text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-[#2a243a] hover:bg-neutral-100 dark:hover:bg-[#1f1a2c]'
             }`}
           >
             <Package className="w-4 h-4 text-purple-400" />
             <span>إدارة الشحنات ودفعات الشحن (Shipments)</span>
-            <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-[#EBF0F4] text-[#3A0F34] dark:bg-[#240E23] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34] font-bold">
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-[#EBF0F4] text-[#7C3AED] dark:bg-[#240E23] dark:text-[#EDE9FE] border border-[#EDE9FE] dark:border-[#7C3AED] font-bold">
               {shipments.length}
             </span>
           </button>
@@ -1275,13 +1275,13 @@ export default function AdminDashboardPage() {
                 <div className="text-[11px] text-blue-500 dark:text-blue-400 mt-1">User has payment info</div>
               </div>
 
-              <div className="bg-gradient-to-br from-[#EBF0F4] to-[#EBF0F4]/60 dark:from-[#240E23] dark:to-[#1A0919] p-5 rounded-3xl border-2 border-[#DDE3E8] dark:border-[#3A0F34]/60 shadow-sm">
-                <div className="flex items-center justify-between text-[#3A0F34] dark:text-[#DDE3E8] text-xs font-bold mb-2">
+              <div className="bg-gradient-to-br from-[#EBF0F4] to-[#EBF0F4]/60 dark:from-[#240E23] dark:to-[#1A0919] p-5 rounded-3xl border-2 border-[#EDE9FE] dark:border-[#7C3AED]/60 shadow-sm">
+                <div className="flex items-center justify-between text-[#7C3AED] dark:text-[#EDE9FE] text-xs font-bold mb-2">
                   <span className="font-extrabold">Payment Review</span>
-                  <FileCheck className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                  <FileCheck className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE]" />
                 </div>
-                <div className="text-3xl font-black text-[#3A0F34] dark:text-[#DDE3E8]">{paymentReviewCount}</div>
-                <div className="text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold mt-1">Receipts Uploaded</div>
+                <div className="text-3xl font-black text-[#7C3AED] dark:text-[#EDE9FE]">{paymentReviewCount}</div>
+                <div className="text-[11px] text-[#7C3AED] dark:text-[#EDE9FE] font-bold mt-1">Receipts Uploaded</div>
               </div>
 
               <div className="bg-white dark:bg-[#14111d] p-5 rounded-3xl border border-emerald-200 dark:border-emerald-900/50 shadow-xs hover:shadow-md transition-shadow">
@@ -1300,7 +1300,7 @@ export default function AdminDashboardPage() {
             <div className="bg-white dark:bg-[#14111d] p-4 rounded-3xl border border-neutral-200/80 dark:border-[#2a243a] shadow-xs space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-2 text-xs font-bold text-neutral-700 dark:text-neutral-300">
-                  <Calendar className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                  <Calendar className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE]" />
                   <span>تصفية حسب التاريخ:</span>
                 </div>
 
@@ -1320,7 +1320,7 @@ export default function AdminDashboardPage() {
                       onClick={() => setDateRange(p.key as any)}
                       className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                         dateRange === p.key
-                          ? 'bg-[#3A0F34] text-white shadow-xs'
+                          ? 'bg-[#7C3AED] text-white shadow-xs'
                           : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-[#201a2e]'
                       }`}
                     >
@@ -1332,7 +1332,7 @@ export default function AdminDashboardPage() {
 
               {/* Custom Date Range Picker */}
               {dateRange === 'CUSTOM' && (
-                <div className="p-3 bg-neutral-50 dark:bg-[#181423] rounded-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 flex flex-wrap items-center gap-3 text-xs animate-in fade-in">
+                <div className="p-3 bg-neutral-50 dark:bg-[#181423] rounded-2xl border border-[#EDE9FE] dark:border-[#7C3AED]/60 flex flex-wrap items-center gap-3 text-xs animate-in fade-in">
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-neutral-600 dark:text-neutral-400">من تاريخ:</span>
                     <input
@@ -1377,7 +1377,7 @@ export default function AdminDashboardPage() {
                     onClick={() => setStatusFilter(tab.key)}
                     className={`px-3 py-2 rounded-2xl text-xs font-extrabold transition-all cursor-pointer inline-flex items-center gap-1.5 ${
                       statusFilter === tab.key
-                        ? 'bg-neutral-950 dark:bg-[#3A0F34] text-white shadow-xs'
+                        ? 'bg-neutral-950 dark:bg-[#7C3AED] text-white shadow-xs'
                         : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-[#201a2e]'
                     }`}
                   >
@@ -1399,7 +1399,7 @@ export default function AdminDashboardPage() {
                   <select
                     value={shipmentFilter}
                     onChange={(e) => setShipmentFilter(e.target.value)}
-                    className="px-3 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-bold text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] cursor-pointer"
+                    className="px-3 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-bold text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE] cursor-pointer"
                   >
                     <option value="ALL">📦 كل الشحنات (All)</option>
                     <option value="UNASSIGNED">⚪ طلبات غير مسندة لشحنة</option>
@@ -1419,7 +1419,7 @@ export default function AdminDashboardPage() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search order ID, customer, phone..."
-                    className="w-full pl-10 pr-3.5 py-2 text-xs bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] text-neutral-900 dark:text-white rounded-xl focus:bg-white dark:focus:bg-[#201a2e] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8]"
+                    className="w-full pl-10 pr-3.5 py-2 text-xs bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] text-neutral-900 dark:text-white rounded-xl focus:bg-white dark:focus:bg-[#201a2e] focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE]"
                   />
                 </div>
 
@@ -1502,7 +1502,7 @@ export default function AdminDashboardPage() {
                               setSelectedOrderIds([]);
                             }
                           }}
-                          className="w-4 h-4 rounded text-[#3A0F34] dark:text-[#DDE3E8] cursor-pointer"
+                          className="w-4 h-4 rounded text-[#7C3AED] dark:text-[#EDE9FE] cursor-pointer"
                         />
                       </th>
                       <th className="py-4 px-5">Order ID &amp; Date</th>
@@ -1550,7 +1550,7 @@ export default function AdminDashboardPage() {
                                     isSelected ? prev.filter((id) => id !== order.id) : [...prev, order.id]
                                   );
                                 }}
-                                className="w-4 h-4 rounded text-[#3A0F34] dark:text-[#DDE3E8] cursor-pointer"
+                                className="w-4 h-4 rounded text-[#7C3AED] dark:text-[#EDE9FE] cursor-pointer"
                               />
                             </td>
 
@@ -1587,7 +1587,7 @@ export default function AdminDashboardPage() {
                                 target="_blank"
                                 rel="noreferrer"
                                 onClick={(e) => e.stopPropagation()}
-                                className="text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] hover:underline font-mono truncate mt-1 flex items-center gap-1 max-w-[200px]"
+                                className="text-[11px] text-[#7C3AED] dark:text-[#EDE9FE] hover:underline font-mono truncate mt-1 flex items-center gap-1 max-w-[200px]"
                                 title="فتح الرابط في شي إن (m.shein)"
                               >
                                 <ExternalLink className="w-3 h-3 shrink-0" />
@@ -1611,15 +1611,15 @@ export default function AdminDashboardPage() {
                             {/* Shipment Batch Column */}
                             <td className="py-5 px-5" onClick={(e) => e.stopPropagation()}>
                               {order.shipmentCode ? (
-                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 text-[11px] font-bold text-[#3A0F34] dark:text-[#DDE3E8]">
-                                  <Package className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 text-[11px] font-bold text-[#7C3AED] dark:text-[#EDE9FE]">
+                                  <Package className="w-3.5 h-3.5 text-[#7C3AED] dark:text-[#EDE9FE]" />
                                   <span className="truncate max-w-[130px]">{order.shipmentCode}</span>
                                 </span>
                               ) : (
                                 <button
                                   type="button"
                                   onClick={() => openReviewModal(order)}
-                                  className="text-[11px] font-bold text-neutral-400 hover:text-[#3A0F34] dark:text-[#DDE3E8] border border-dashed border-neutral-300 dark:border-[#2f2742] px-2 py-0.5 rounded-lg"
+                                  className="text-[11px] font-bold text-neutral-400 hover:text-[#7C3AED] dark:text-[#EDE9FE] border border-dashed border-neutral-300 dark:border-[#2f2742] px-2 py-0.5 rounded-lg"
                                 >
                                   + إسناد لشحنة
                                 </button>
@@ -1636,7 +1636,7 @@ export default function AdminDashboardPage() {
                                   e.stopPropagation();
                                   openReviewModal(order);
                                 }}
-                                className="px-4 py-2 bg-neutral-950 dark:bg-[#3A0F34] hover:bg-purple-700 text-white font-extrabold rounded-2xl text-xs transition-colors shadow-xs inline-flex items-center gap-1.5 cursor-pointer active:scale-95"
+                                className="px-4 py-2 bg-neutral-950 dark:bg-[#7C3AED] hover:bg-purple-700 text-white font-extrabold rounded-2xl text-xs transition-colors shadow-xs inline-flex items-center gap-1.5 cursor-pointer active:scale-95"
                               >
                                 <Eye className="w-3.5 h-3.5" />
                                 {order.status === 'PENDING_APPROVAL' ? 'Review & Approve' : 'Open Review'}
@@ -1779,7 +1779,7 @@ export default function AdminDashboardPage() {
 
               {selectedOrder.status === 'PAYMENT_UNDER_REVIEW' && (
                 <div className="p-4 rounded-2xl bg-purple-50/90 border border-purple-200 text-purple-950 text-xs flex items-center gap-3">
-                  <ShieldCheck className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8] shrink-0" />
+                  <ShieldCheck className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE] shrink-0" />
                   <div className="space-y-0.5 text-start">
                     <p className="font-black text-[#6D28D9]">
                       العميل أرسل إيصال تحويل بمبلغ {selectedOrder.totalCash.toLocaleString()} EGP وهو قيد المطابقة
@@ -1873,7 +1873,7 @@ export default function AdminDashboardPage() {
               {/* Shipment Batch Assignment Box */}
               <div className="p-4 bg-purple-50/70 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-purple-100 dark:bg-purple-900/60 text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center font-bold shrink-0">
+                  <div className="w-8 h-8 rounded-xl bg-purple-100 dark:bg-purple-900/60 text-[#7C3AED] dark:text-[#EDE9FE] flex items-center justify-center font-bold shrink-0">
                     <Package className="w-4 h-4" />
                   </div>
                   <div>
@@ -1896,7 +1896,7 @@ export default function AdminDashboardPage() {
                       const targetShipment = shipments.find((s) => s.id === newShpId);
                       await handleAssignSingleOrderShipment(selectedOrder.id, newShpId, targetShipment?.code);
                     }}
-                    className="px-3.5 py-2 bg-white dark:bg-[#1a1626] border border-purple-200 dark:border-[#2f2742] rounded-xl text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] cursor-pointer"
+                    className="px-3.5 py-2 bg-white dark:bg-[#1a1626] border border-purple-200 dark:border-[#2f2742] rounded-xl text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE] cursor-pointer"
                   >
                     <option value="">-- غير مسند لشحنة (Unassigned) --</option>
                     {shipments.map((s) => (
@@ -2383,7 +2383,7 @@ export default function AdminDashboardPage() {
                 <div className="p-4 rounded-2xl bg-neutral-100/90 border border-neutral-200/90 space-y-2 text-start">
                   <div className="flex items-center justify-between">
                     <h5 className="font-black text-xs text-neutral-800 flex items-center gap-1.5">
-                      <History className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                      <History className="w-3.5 h-3.5 text-[#7C3AED] dark:text-[#EDE9FE]" />
                       <span>سجل حالات وعمليات الطلب (Audit Trail & History)</span>
                     </h5>
                     <span className="text-[10px] text-neutral-500 font-mono">
@@ -2552,7 +2552,7 @@ export default function AdminDashboardPage() {
             <div className="p-6 bg-gradient-to-r from-neutral-50 via-purple-50/40 to-white border-b border-neutral-200 flex items-center justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-purple-100 text-[#3A0F34] dark:text-[#DDE3E8] text-[10px] font-black uppercase tracking-wider">
+                  <span className="px-2.5 py-0.5 rounded-full bg-purple-100 text-[#7C3AED] dark:text-[#EDE9FE] text-[10px] font-black uppercase tracking-wider">
                     Site Customizer &amp; CMS
                   </span>
                   <span className="text-[10px] font-bold text-neutral-400">تحكم فوري مباشر</span>
@@ -2583,7 +2583,7 @@ export default function AdminDashboardPage() {
                     : 'text-neutral-600 hover:bg-white/60'
                 }`}
               >
-                <CreditCard className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                <CreditCard className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE]" />
                 <span>طرق الدفع والمحافظ</span>
               </button>
 
@@ -2596,7 +2596,7 @@ export default function AdminDashboardPage() {
                     : 'text-neutral-600 hover:bg-white/60'
                 }`}
               >
-                <Phone className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                <Phone className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE]" />
                 <span>أرقام الدعم والتواصل</span>
               </button>
 
@@ -2609,7 +2609,7 @@ export default function AdminDashboardPage() {
                     : 'text-neutral-600 hover:bg-white/60'
                 }`}
               >
-                <Layout className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                <Layout className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE]" />
                 <span>تعديل السكاشن الحالية</span>
               </button>
 
@@ -2622,7 +2622,7 @@ export default function AdminDashboardPage() {
                     : 'text-neutral-600 hover:bg-white/60'
                 }`}
               >
-                <Layers className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                <Layers className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE]" />
                 <span>السكاشن المخصصة ({editCustomSections.length})</span>
               </button>
             </div>
@@ -2665,7 +2665,7 @@ export default function AdminDashboardPage() {
                             required
                             value={editSarToEgpRate}
                             onChange={(e) => setEditSarToEgpRate(Number(e.target.value))}
-                            className="w-full pl-20 pr-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-black text-sm"
+                            className="w-full pl-20 pr-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE] font-black text-sm"
                           />
                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-neutral-400">
                             ج.م / ريال
@@ -2687,7 +2687,7 @@ export default function AdminDashboardPage() {
                             required
                             value={editProfitMarginPercent}
                             onChange={(e) => setEditProfitMarginPercent(Number(e.target.value))}
-                            className="w-full pl-10 pr-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-black text-sm"
+                            className="w-full pl-10 pr-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE] font-black text-sm"
                           />
                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-neutral-400">
                             %
@@ -2741,7 +2741,7 @@ export default function AdminDashboardPage() {
                           required
                           value={editFeePercent}
                           onChange={(e) => setEditFeePercent(Number(e.target.value))}
-                          className="w-full pl-10 pr-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-black text-sm"
+                          className="w-full pl-10 pr-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE] font-black text-sm"
                         />
                       </div>
                       <p className="text-[11px] text-neutral-500 mt-1">النسبة الموحدة المعتمدة على مستوى النظام لكافة الطلبات الجديدة والطلبات قيد المراجعة (تحسب كنسبة من مجموع المنتجات).</p>
@@ -2758,7 +2758,7 @@ export default function AdminDashboardPage() {
                           min={0}
                           value={editFlatShippingFee}
                           onChange={(e) => setEditFlatShippingFee(Number(e.target.value))}
-                          className="w-full pl-10 pr-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-black text-sm"
+                          className="w-full pl-10 pr-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE] font-black text-sm"
                         />
                       </div>
                       <p className="text-[11px] text-neutral-500 mt-1">اجعلها 0 لو الشحن مجاني داخل مصر.</p>
@@ -2795,7 +2795,7 @@ export default function AdminDashboardPage() {
                   <div className="p-5 rounded-2xl border border-neutral-200 space-y-4">
                     <div className="flex items-center justify-between pb-3 border-b border-neutral-100">
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-xl bg-purple-100 text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center font-bold">
+                        <div className="w-8 h-8 rounded-xl bg-purple-100 text-[#7C3AED] dark:text-[#EDE9FE] flex items-center justify-center font-bold">
                           <CreditCard className="w-4 h-4" />
                         </div>
                         <div>
@@ -2925,7 +2925,7 @@ export default function AdminDashboardPage() {
                           value={editSecondaryWalletName}
                           onChange={(e) => setEditSecondaryWalletName(e.target.value)}
                           placeholder="اتصالات كاش / أورنج كاش"
-                          className="w-full px-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8]"
+                          className="w-full px-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE]"
                         />
                       </div>
                       <div>
@@ -2937,7 +2937,7 @@ export default function AdminDashboardPage() {
                           value={editSecondaryWalletNumber}
                           onChange={(e) => setEditSecondaryWalletNumber(e.target.value)}
                           placeholder="012XXXXXXXX"
-                          className="w-full px-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-mono font-bold"
+                          className="w-full px-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE] font-mono font-bold"
                         />
                       </div>
                     </div>
@@ -3262,7 +3262,7 @@ export default function AdminDashboardPage() {
                           className="p-4 bg-white rounded-2xl border border-neutral-200 shadow-xs flex items-center justify-between gap-4"
                         >
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-purple-100 text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center font-black text-sm">
+                            <div className="w-10 h-10 rounded-xl bg-purple-100 text-[#7C3AED] dark:text-[#EDE9FE] flex items-center justify-center font-black text-sm">
                               {idx + 1}
                             </div>
                             <div className="text-start">
@@ -3573,7 +3573,7 @@ function StatusBadge({ status }: { status: OrderStatus }) {
     PAYMENT_UNDER_REVIEW: {
       label: 'Verify Receipt',
       className: 'bg-purple-100 text-purple-900 border-purple-300',
-      icon: <FileCheck className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />,
+      icon: <FileCheck className="w-3.5 h-3.5 text-[#7C3AED] dark:text-[#EDE9FE]" />,
     },
     PAID: {
       label: 'Paid & Processing',

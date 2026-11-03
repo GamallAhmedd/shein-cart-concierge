@@ -149,16 +149,16 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
   return (
     <div
       id="cart-extractor-card"
-      className="relative rounded-3xl p-6 sm:p-8 bg-[#FFFFFF] border border-[#C7CCD2] shadow-sm space-y-6 transition-colors text-start"
+      className="relative rounded-3xl p-6 sm:p-8 bg-[#FFFFFF] border border-slate-200 shadow-sm space-y-6 transition-colors text-start"
     >
       <form onSubmit={handleExtract} className="space-y-4">
         {/* Input Bar Header: Clear, accessible label + Paste & Clear buttons */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <label
             htmlFor="shein-cart-input"
-            className="text-sm font-semibold text-[#3A0F34] flex items-center gap-2"
+            className="text-sm font-semibold text-slate-900 flex items-center gap-2"
           >
-            <Link2 className="w-4 h-4 text-[#682E60]" />
+            <Link2 className="w-4 h-4 text-[#7C3AED]" />
             <span>{isRtl ? 'الصقي رابط سلتكِ أو رسالة المشاركة من SHEIN' : 'Paste your SHEIN link or share message'}</span>
           </label>
 
@@ -170,7 +170,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs ${
                 pasteSuccess
                   ? 'bg-emerald-700 text-white'
-                  : 'bg-[#F8F9FA] hover:bg-[#DDE3E8]/60 text-[#3A0F34] border border-[#C7CCD2]'
+                  : 'bg-slate-50/50 hover:bg-[#DDE3E8]/60 text-slate-900 border border-slate-200'
               }`}
               title={isRtl ? 'لصق سريع من الحافظة' : 'Quick Paste'}
             >
@@ -181,7 +181,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
                 </>
               ) : (
                 <>
-                  <ClipboardPaste className="w-3.5 h-3.5 text-[#682E60]" />
+                  <ClipboardPaste className="w-3.5 h-3.5 text-[#7C3AED]" />
                   <span>{isRtl ? 'لصق سريع من الحافظة' : 'Quick Paste'}</span>
                 </>
               )}
@@ -191,7 +191,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
               <button
                 type="button"
                 onClick={handleClear}
-                className="p-1.5 rounded-xl text-[#66596A] hover:text-[#3A0F34] hover:bg-[#F8F9FA] transition-colors cursor-pointer border border-[#C7CCD2]"
+                className="p-1.5 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-50/50 transition-colors cursor-pointer border border-slate-200"
                 title={isRtl ? 'مسح النص' : 'Clear'}
                 aria-label={isRtl ? 'مسح الرابط' : 'Clear input'}
               >
@@ -202,7 +202,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
         </div>
 
         {/* Input Box Container (16px minimum font size to avoid mobile Safari zoom) */}
-        <div className="relative rounded-2xl border border-[#918797] focus-within:border-[#3A0F34] focus-within:ring-2 focus-within:ring-[#3A0F34]/20 transition-all bg-[#F8F9FA] overflow-hidden shadow-xs">
+        <div className="relative rounded-2xl border border-slate-300 focus-within:border-[#7C3AED] focus-within:ring-2 focus-within:ring-[#7C3AED]/20 transition-all bg-slate-50/50 overflow-hidden shadow-xs">
           <textarea
             id="shein-cart-input"
             name="shein_cart_link"
@@ -216,13 +216,13 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
                 : 'Paste your SHEIN cart link (https://onelink.shein.com/...) or share text here...'
             }
             aria-describedby={error ? 'shein-cart-error' : undefined}
-            className="w-full px-4 py-3 text-[16px] sm:text-sm text-[#3A0F34] bg-transparent focus:outline-none placeholder:text-[#66596A]/60 font-sans resize-y leading-relaxed"
+            className="w-full px-4 py-3 text-[16px] sm:text-sm text-slate-900 bg-transparent focus:outline-none placeholder:text-slate-500/60 font-sans resize-y leading-relaxed"
           />
 
           {/* Sub-bar inside input with char count and helper */}
-          <div className="px-4 py-2 bg-[#DDE3E8]/30 border-t border-[#C7CCD2] flex items-center justify-between text-xs text-[#66596A]">
+          <div className="px-4 py-2 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
             <div className="flex items-center gap-1.5 text-[11px]">
-              <Shirt className="w-3 h-3 text-[#682E60]" />
+              <Shirt className="w-3 h-3 text-[#7C3AED]" />
               <span>{isRtl ? 'يقبل رابط السلة كاملة أو رابط قطعة مفردة' : 'Accepts full cart link or single item'}</span>
             </div>
             {inputText.length > 0 && (
@@ -238,7 +238,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
           <button
             type="button"
             onClick={() => setShowGuide(!showGuide)}
-            className="inline-flex items-center gap-1.5 text-xs text-[#682E60] hover:text-[#3A0F34] font-medium transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs text-[#7C3AED] hover:text-slate-900 font-medium transition-colors cursor-pointer"
           >
             <HelpCircle className="w-3.5 h-3.5" />
             <span>{isRtl ? 'مش عارفة تجيبي الرابط من تطبيق SHEIN؟ شوفي الخطوات' : 'How to copy the cart link from SHEIN app'}</span>
@@ -303,20 +303,20 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
         </AnimatePresence>
 
         {/* Action Row: Payment logos once & Primary submit button */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-3 border-t border-[#C7CCD2]/60">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-3 border-t border-slate-200/60">
           {/* Compact payment logos displayed once */}
           <div className="flex items-center gap-2">
-            <span className="text-xs text-[#66596A]">
+            <span className="text-xs text-slate-500">
               {isRtl ? 'الدفع بالجنيه عبر:' : 'Payment via:'}
             </span>
             <div className="flex items-center gap-1.5">
-              <div className="h-6 px-2 py-0.5 rounded-lg bg-[#F8F9FA] border border-[#C7CCD2] flex items-center gap-1.5 shadow-2xs">
+              <div className="h-6 px-2 py-0.5 rounded-lg bg-slate-50/50 border border-slate-200 flex items-center gap-1.5 shadow-2xs">
                 <img src="/images/instapay.png" alt="InstaPay" className="h-3.5 object-contain" />
-                <span className="text-[10px] font-semibold text-[#3A0F34]">InstaPay</span>
+                <span className="text-[10px] font-semibold text-slate-900">InstaPay</span>
               </div>
-              <div className="h-6 px-2 py-0.5 rounded-lg bg-[#F8F9FA] border border-[#C7CCD2] flex items-center gap-1.5 shadow-2xs">
+              <div className="h-6 px-2 py-0.5 rounded-lg bg-slate-50/50 border border-slate-200 flex items-center gap-1.5 shadow-2xs">
                 <img src="/images/vodafone-cash.png" alt="Vodafone Cash" className="h-3.5 object-contain" />
-                <span className="text-[10px] font-semibold text-[#3A0F34]">Vodafone</span>
+                <span className="text-[10px] font-semibold text-slate-900">Vodafone</span>
               </div>
             </div>
           </div>
@@ -324,7 +324,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-3 bg-[#3A0F34] hover:bg-[#682E60] active:scale-[0.99] text-white font-semibold text-sm rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer select-none disabled:opacity-50"
+            className="px-6 py-3 bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] hover:from-[#6D28D9] hover:to-[#7C3AED] shadow-md shadow-[#7C3AED]/25 active:scale-[0.99] text-white font-semibold text-sm rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer select-none disabled:opacity-50"
           >
             {loading ? (
               <>

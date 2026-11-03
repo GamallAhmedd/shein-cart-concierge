@@ -61,9 +61,9 @@ export function CustomSectionRenderer({ section, dir = 'rtl' }: CustomSectionRen
   // Theme styling
   const themeClasses = {
     purple: {
-      container: 'bg-[#EBF0F4]/70 dark:bg-[#1A0919]/80 border-[#DDE3E8] dark:border-[#3A0F34]/50',
-      badge: 'bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8]',
-      iconBox: 'bg-[#3A0F34] text-white border border-[#DDE3E8]/30',
+      container: 'bg-[#EBF0F4]/70 dark:bg-[#1A0919]/80 border-[#EDE9FE] dark:border-[#7C3AED]/50',
+      badge: 'bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE]',
+      iconBox: 'bg-[#7C3AED] text-white border border-[#EDE9FE]/30',
     },
     amber: {
       container: 'bg-gradient-to-br from-amber-50/70 via-white to-amber-100/40 dark:from-amber-950/20 dark:via-[#14101e] dark:to-amber-950/10 border-amber-200/60 dark:border-amber-800/40',
@@ -77,13 +77,13 @@ export function CustomSectionRenderer({ section, dir = 'rtl' }: CustomSectionRen
     },
     dark: {
       container: 'bg-[#0f0c18] border-[#29223a] text-white',
-      badge: 'bg-[#240E23] text-[#DDE3E8]',
-      iconBox: 'bg-[#3A0F34] text-white',
+      badge: 'bg-[#240E23] text-[#EDE9FE]',
+      iconBox: 'bg-[#7C3AED] text-white',
     },
     glass: {
       container: 'bg-white/80 dark:bg-[#14101e]/80 backdrop-blur-xl border-neutral-200/70 dark:border-[#2f2742]',
-      badge: 'bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8]',
-      iconBox: 'bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8]',
+      badge: 'bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE]',
+      iconBox: 'bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE]',
     },
   }[section.theme || 'purple'];
 
@@ -163,7 +163,7 @@ export function CustomSectionRenderer({ section, dir = 'rtl' }: CustomSectionRen
               >
                 <summary className="font-extrabold text-sm text-neutral-900 dark:text-white flex items-center justify-between list-none">
                   <span className="flex items-center gap-2">
-                    <HelpCircle className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8] shrink-0" />
+                    <HelpCircle className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE] shrink-0" />
                     <span>{q.replace(/^[Q:\-?# ]+/, '')}</span>
                   </span>
                   <ChevronDown className="w-4 h-4 text-neutral-400 group-open:rotate-180 transition-transform shrink-0" />

@@ -57,7 +57,7 @@ export const SHIPMENT_STATUS_MAP: Record<
   },
   IN_TRANSIT: {
     label: 'في الشحن الدولي لمصر',
-    color: 'text-[#3A0F34] dark:text-[#DDE3E8]',
+    color: 'text-[#7C3AED] dark:text-[#EDE9FE]',
     bg: 'bg-purple-100 dark:bg-purple-950/60',
     border: 'border-purple-300 dark:border-purple-800',
     icon: Truck,
@@ -388,16 +388,16 @@ export function ShipmentsManager({
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-[#EBF0F4] to-[#EBF0F4]/60 dark:from-[#240E23] dark:to-[#1A0919] p-5 rounded-3xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 shadow-xs">
-          <div className="flex items-center justify-between text-[#3A0F34] dark:text-[#DDE3E8] text-xs font-bold mb-2">
+        <div className="bg-gradient-to-br from-[#EBF0F4] to-[#EBF0F4]/60 dark:from-[#240E23] dark:to-[#1A0919] p-5 rounded-3xl border border-[#EDE9FE] dark:border-[#7C3AED]/60 shadow-xs">
+          <div className="flex items-center justify-between text-[#7C3AED] dark:text-[#EDE9FE] text-xs font-bold mb-2">
             <span>القطع في الشحن</span>
-            <Boxes className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
+            <Boxes className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE]" />
           </div>
-          <div className="text-3xl font-black text-[#3A0F34] dark:text-[#DDE3E8]">
+          <div className="text-3xl font-black text-[#7C3AED] dark:text-[#EDE9FE]">
             {totalItemsInShipments}{' '}
             <span className="text-xs font-bold text-neutral-500 dark:text-neutral-400">قطعة</span>
           </div>
-          <div className="text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold mt-1">
+          <div className="text-[11px] text-[#7C3AED] dark:text-[#EDE9FE] font-bold mt-1">
             موزعة على دفعات
           </div>
         </div>
@@ -416,15 +416,15 @@ export function ShipmentsManager({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#14111d] p-5 rounded-3xl border border-[#DDE3E8] dark:border-[#3A0F34]/50 shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-[#3A0F34] dark:text-[#DDE3E8] text-xs font-bold mb-2">
+        <div className="bg-white dark:bg-[#14111d] p-5 rounded-3xl border border-[#EDE9FE] dark:border-[#7C3AED]/50 shadow-xs flex flex-col justify-between">
+          <div className="flex items-center justify-between text-[#7C3AED] dark:text-[#EDE9FE] text-xs font-bold mb-2">
             <span>طلبات مدفوعة غير مسندة</span>
-            <AlertCircle className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
+            <AlertCircle className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE]" />
           </div>
-          <div className="text-3xl font-black text-[#3A0F34] dark:text-[#DDE3E8]">
+          <div className="text-3xl font-black text-[#7C3AED] dark:text-[#EDE9FE]">
             {unassignedPaidOrders.length}
           </div>
-          <div className="text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] mt-1">
+          <div className="text-[11px] text-[#7C3AED] dark:text-[#EDE9FE] mt-1">
             جاهزة للتوزيع والإسناد للشحن
           </div>
         </div>
@@ -435,13 +435,13 @@ export function ShipmentsManager({
         {/* Row 1: Dedicated Search Bar with instant search by Shipment Number/Code */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="relative w-full sm:max-w-md">
-            <Search className="w-4 h-4 absolute right-3.5 top-1/2 -translate-y-1/2 text-[#3A0F34] dark:text-[#DDE3E8]" />
+            <Search className="w-4 h-4 absolute right-3.5 top-1/2 -translate-y-1/2 text-[#7C3AED] dark:text-[#EDE9FE]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="🔍 ابحث برقم الشحنة (مثال: SHP-...) أو الكود أو رقم الطلب..."
-              className="w-full pr-10 pl-9 py-2.5 text-xs font-medium bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] text-neutral-900 dark:text-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] focus:border-transparent transition-all shadow-inner"
+              className="w-full pr-10 pl-9 py-2.5 text-xs font-medium bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] text-neutral-900 dark:text-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE] focus:border-transparent transition-all shadow-inner"
             />
             {searchQuery && (
               <button
@@ -457,7 +457,7 @@ export function ShipmentsManager({
 
           <div className="flex items-center gap-2.5 w-full sm:w-auto justify-between sm:justify-end">
             <span className="text-xs font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-[#1f192c] px-3 py-1.5 rounded-xl border border-neutral-200/60 dark:border-[#2a243a]">
-              عرض <strong className="text-[#3A0F34] dark:text-[#DDE3E8]">{filteredShipments.length}</strong> شحنة
+              عرض <strong className="text-[#7C3AED] dark:text-[#EDE9FE]">{filteredShipments.length}</strong> شحنة
             </span>
 
             <button
@@ -596,7 +596,7 @@ export function ShipmentsManager({
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-1.5">
-                        <span className="font-mono text-[10px] text-[#3A0F34] dark:text-[#DDE3E8] bg-purple-50 dark:bg-purple-950/60 border border-purple-200/60 dark:border-purple-800/60 px-2 py-0.5 rounded-md font-bold">
+                        <span className="font-mono text-[10px] text-[#7C3AED] dark:text-[#EDE9FE] bg-purple-50 dark:bg-purple-950/60 border border-purple-200/60 dark:border-purple-800/60 px-2 py-0.5 rounded-md font-bold">
                           {shipment.id}
                         </span>
 
@@ -683,7 +683,7 @@ export function ShipmentsManager({
                         الناقل: <strong>{shipment.carrier || 'غير محدد'}</strong>
                       </span>
                       {shipment.trackingNumber && (
-                        <span className="font-mono text-[#3A0F34] dark:text-[#DDE3E8] font-bold">
+                        <span className="font-mono text-[#7C3AED] dark:text-[#EDE9FE] font-bold">
                           {shipment.trackingNumber}
                         </span>
                       )}
@@ -712,7 +712,7 @@ export function ShipmentsManager({
                     <button
                       type="button"
                       onClick={() => onExportManifest(shipment)}
-                      className="p-1.5 rounded-xl bg-white dark:bg-[#201a2e] border border-neutral-200 dark:border-[#2f2742] text-neutral-700 dark:text-neutral-300 hover:text-[#3A0F34] dark:text-[#DDE3E8] transition-colors cursor-pointer"
+                      className="p-1.5 rounded-xl bg-white dark:bg-[#201a2e] border border-neutral-200 dark:border-[#2f2742] text-neutral-700 dark:text-neutral-300 hover:text-[#7C3AED] dark:text-[#EDE9FE] transition-colors cursor-pointer"
                       title="تصدير بيان الشحنة CSV"
                     >
                       <FileSpreadsheet className="w-3.5 h-3.5" />
@@ -721,7 +721,7 @@ export function ShipmentsManager({
                     <button
                       type="button"
                       onClick={() => setSelectedShipmentForAddOrders(shipment)}
-                      className="px-2.5 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 text-[#3A0F34] dark:text-[#DDE3E8] text-xs font-bold hover:bg-purple-100 transition-colors cursor-pointer"
+                      className="px-2.5 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 text-[#7C3AED] dark:text-[#EDE9FE] text-xs font-bold hover:bg-purple-100 transition-colors cursor-pointer"
                     >
                       <span>+ إضافة طلبات</span>
                     </button>
@@ -758,7 +758,7 @@ export function ShipmentsManager({
           <div className="relative w-full max-w-lg bg-white dark:bg-[#14111d] rounded-3xl shadow-2xl border border-neutral-200 dark:border-[#2a243a] p-6 space-y-5 text-right">
             <div className="flex items-center justify-between pb-3 border-b border-neutral-100 dark:border-[#241e33]">
               <div className="flex items-center gap-2">
-                <Package className="w-5 h-5 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                <Package className="w-5 h-5 text-[#7C3AED] dark:text-[#EDE9FE]" />
                 <h3 className="font-black text-lg text-neutral-950 dark:text-white">
                   إنشاء دفعة شحن جديدة (New Shipment)
                 </h3>
@@ -782,7 +782,7 @@ export function ShipmentsManager({
                   value={newCode}
                   onChange={(e) => setNewCode(e.target.value)}
                   placeholder="مثال: شحنة الرياض رقم 12 أو SHP-NOV-01"
-                  className="w-full px-3.5 py-2.5 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8]"
+                  className="w-full px-3.5 py-2.5 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE]"
                 />
               </div>
 
@@ -797,7 +797,7 @@ export function ShipmentsManager({
                     max="500"
                     value={newMaxItems}
                     onChange={(e) => setNewMaxItems(Number(e.target.value))}
-                    className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-mono font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8]"
+                    className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-mono font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE]"
                   />
                   <span className="text-[10px] text-neutral-400 mt-0.5 block">
                     يمنع تجاوز السعة المحددة
@@ -814,7 +814,7 @@ export function ShipmentsManager({
                     max="100"
                     value={newMaxOrders}
                     onChange={(e) => setNewMaxOrders(Number(e.target.value))}
-                    className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-mono font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8]"
+                    className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-mono font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE]"
                   />
                 </div>
               </div>
@@ -829,7 +829,7 @@ export function ShipmentsManager({
                     value={newCarrier}
                     onChange={(e) => setNewCarrier(e.target.value)}
                     placeholder="مثال: Aramex / SMSA / DHL"
-                    className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8]"
+                    className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE]"
                   />
                 </div>
 
@@ -842,7 +842,7 @@ export function ShipmentsManager({
                     value={newTracking}
                     onChange={(e) => setNewTracking(e.target.value)}
                     placeholder="AWB / Tracking Number"
-                    className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-mono text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8]"
+                    className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-mono text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE]"
                   />
                 </div>
               </div>
@@ -855,7 +855,7 @@ export function ShipmentsManager({
                   type="date"
                   value={newEstimatedArrival}
                   onChange={(e) => setNewEstimatedArrival(e.target.value)}
-                  className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8]"
+                  className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE]"
                 />
               </div>
 
@@ -868,7 +868,7 @@ export function ShipmentsManager({
                   value={newNotes}
                   onChange={(e) => setNewNotes(e.target.value)}
                   placeholder="أي تفاصيل خاصة بالجمارك أو الشحن الجوي..."
-                  className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8]"
+                  className="w-full px-3.5 py-2 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE]"
                 />
               </div>
 
@@ -901,7 +901,7 @@ export function ShipmentsManager({
             <div className="p-6 bg-neutral-50 dark:bg-[#181423] border-b border-neutral-200 dark:border-[#2a243a] flex items-center justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs bg-purple-100 dark:bg-purple-950/60 text-[#3A0F34] dark:text-[#DDE3E8] font-bold px-2 py-0.5 rounded-md">
+                  <span className="font-mono text-xs bg-purple-100 dark:bg-purple-950/60 text-[#7C3AED] dark:text-[#EDE9FE] font-bold px-2 py-0.5 rounded-md">
                     {selectedShipmentForDetail.id}
                   </span>
                   <h3 className="text-xl font-black text-neutral-950 dark:text-white">
@@ -910,7 +910,7 @@ export function ShipmentsManager({
                 </div>
                 <p className="text-xs text-neutral-500 mt-1">
                   شركة الشحن: <strong>{selectedShipmentForDetail.carrier || 'غير محدد'}</strong> • كود التتبع:{' '}
-                  <span className="font-mono text-[#3A0F34] dark:text-[#DDE3E8]">
+                  <span className="font-mono text-[#7C3AED] dark:text-[#EDE9FE]">
                     {selectedShipmentForDetail.trackingNumber || 'غير متوفر'}
                   </span>
                 </p>
@@ -1011,7 +1011,7 @@ export function ShipmentsManager({
                                   href={toUsableSheinUrl(ord.extractedLink, { shc: ord.cartShareCode, groupId: ord.cartGroupId })}
                                   target="_blank"
                                   rel="noreferrer"
-                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900/60 border border-purple-200 dark:border-purple-800 text-[11px] font-black text-[#3A0F34] dark:text-[#DDE3E8] transition-colors shadow-xs"
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900/60 border border-purple-200 dark:border-purple-800 text-[11px] font-black text-[#7C3AED] dark:text-[#EDE9FE] transition-colors shadow-xs"
                                   title="فتح سلة شي إن الكاملة للطلب في تبويب جديد (m.shein)"
                                 >
                                   <ExternalLink className="w-3.5 h-3.5" />
@@ -1047,13 +1047,13 @@ export function ShipmentsManager({
                                       />
                                     </div>
                                     <div className="text-[11px] text-start max-w-[150px] truncate">
-                                      <p className="font-bold text-neutral-900 dark:text-neutral-100 truncate group-hover/item:text-[#3A0F34] dark:text-[#DDE3E8] transition-colors">
+                                      <p className="font-bold text-neutral-900 dark:text-neutral-100 truncate group-hover/item:text-[#7C3AED] dark:text-[#EDE9FE] transition-colors">
                                         {it.name}
                                       </p>
                                       <div className="text-[10px] text-neutral-400 flex items-center gap-1.5 mt-0.5">
                                         {it.size && <span>{it.size}</span>}
                                         {it.size && <span>•</span>}
-                                        <span className="text-[#3A0F34] dark:text-[#DDE3E8] font-mono font-bold">m.shein ↗</span>
+                                        <span className="text-[#7C3AED] dark:text-[#EDE9FE] font-mono font-bold">m.shein ↗</span>
                                       </div>
                                     </div>
                                   </a>
@@ -1152,7 +1152,7 @@ export function ShipmentsManager({
                           type="checkbox"
                           checked={isSelected}
                           onChange={() => {}}
-                          className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8] rounded cursor-pointer"
+                          className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE] rounded cursor-pointer"
                         />
                         <div>
                           <div className="flex items-center gap-2">
@@ -1250,7 +1250,7 @@ export function ShipmentsManager({
                       status: e.target.value as ShipmentStatus,
                     })
                   }
-                  className="w-full px-3.5 py-2.5 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] cursor-pointer"
+                  className="w-full px-3.5 py-2.5 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE] cursor-pointer"
                 >
                   <option value="PREPARING">🟡 قيد التجهيز والتجميع</option>
                   <option value="PURCHASED">🔵 تم الشراء من شي إن</option>
@@ -1274,7 +1274,7 @@ export function ShipmentsManager({
                       paymentStatus: e.target.value as 'PAID' | 'UNPAID',
                     })
                   }
-                  className="w-full px-3.5 py-2.5 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] cursor-pointer"
+                  className="w-full px-3.5 py-2.5 bg-neutral-50 dark:bg-[#1a1626] border border-neutral-200 dark:border-[#2f2742] rounded-xl text-xs font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#7C3AED] dark:focus:ring-[#EDE9FE] cursor-pointer"
                 >
                   <option value="PAID">🟢 مدفوعة بالكامل (Paid)</option>
                   <option value="UNPAID">🟠 غير مدفوعة (Unpaid)</option>

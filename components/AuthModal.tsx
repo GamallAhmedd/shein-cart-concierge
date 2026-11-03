@@ -374,14 +374,14 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
         initial={{ opacity: 0, scale: 0.95, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        role="dialog" aria-modal="true" aria-labelledby="auth-modal-title" className="relative w-full max-w-md bg-white dark:bg-[#1A0919] text-neutral-900 dark:text-white rounded-3xl shadow-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 overflow-hidden transition-colors"
+        role="dialog" aria-modal="true" aria-labelledby="auth-modal-title" className="relative w-full max-w-md bg-white dark:bg-[#1A0919] text-neutral-900 dark:text-white rounded-3xl shadow-2xl border border-slate-200 dark:border-[#3A0F34]/60 overflow-hidden transition-colors"
       >
         {/* Header */}
-        <div className="p-6 bg-[#EBF0F4] dark:bg-[#200D1F] border-b border-[#DDE3E8] dark:border-[#3A0F34]/60 flex items-center justify-between">
+        <div className="p-6 bg-violet-50 dark:bg-[#200D1F] border-b border-slate-200 dark:border-[#3A0F34]/60 flex items-center justify-between">
           <div className="text-start">
-            <div className="flex items-center gap-1.5 text-[#3A0F34] dark:text-[#DDE3E8] text-[10px] font-black uppercase tracking-wider mb-0.5">
-              <Sparkles className="w-3 h-3" />
-              <span>SHEIN Concierge</span>
+            <div dir="ltr" className="flex items-center gap-1.5 text-xs font-bold text-slate-900 mb-0.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#7C3AED]" />
+              <span>SHEIN <strong className="text-[#7C3AED]">Concierge</strong></span>
             </div>
             <h3 id="auth-modal-title" className="text-xl font-black text-neutral-950 dark:text-white tracking-tight">
               {mode === 'signin'
@@ -402,130 +402,40 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
         <div className="p-6">
           {/* Google Sign In for Customer */}
           {defaultRole !== 'admin' && mode === 'signin' && (
-            <div className="mb-5">
-              {showGmailInput ? (
-                <div className="p-4 bg-gradient-to-br from-blue-50/80 via-white to-[#EBF0F4] dark:from-[#240E23]/60 dark:via-[#1A0919] dark:to-[#240E23]/40 rounded-2xl border border-blue-200 dark:border-blue-900/60 space-y-3 shadow-xs animate-in fade-in duration-200">
-                  <div className="flex items-center justify-between pb-1 border-b border-blue-100 dark:border-blue-900/40">
-                    <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
-                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
-                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
-                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
-                      </svg>
-                      <span className="text-xs font-black text-neutral-800 dark:text-neutral-200">
-                        {isRtl ? 'الدخول السريع ببريد Gmail' : 'Sign in with Gmail Address'}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setShowGmailInput(false)}
-                      className="text-[11px] font-bold text-neutral-400 hover:text-neutral-700 dark:hover:text-white cursor-pointer"
-                    >
-                      {isRtl ? 'إلغاء' : 'Cancel'}
-                    </button>
-                  </div>
+            <div className="mb-4 space-y-3">
+              <button
+                type="button"
+                onClick={handleGoogleSignIn}
+                disabled={googleLoading}
+                className="w-full flex items-center justify-center gap-3 py-2.5 px-4 border border-slate-300 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs transition-all shadow-xs cursor-pointer"
+              >
+                {googleLoading ? (
+                  <div className="w-4 h-4 border-2 border-[#7C3AED] border-t-transparent rounded-full animate-spin shrink-0" />
+                ) : (
+                  <svg className="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                  </svg>
+                )}
+                <span>
+                  {googleLoading
+                    ? (isRtl ? 'جاري الاتصال بـ Google...' : 'Connecting to Google...')
+                    : (isRtl ? 'المتابعة باستخدام حساب Google' : 'Continue with Google')}
+                </span>
+              </button>
 
-                  <div className="space-y-2">
-                    <div className="text-start">
-                      <label className="block text-[11px] font-bold text-neutral-600 dark:text-neutral-400 mb-1">
-                        {isRtl ? 'بريدك الإلكتروني في Gmail' : 'Your Gmail Address'}
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={gmailEmail}
-                        onChange={(e) => setGmailEmail(e.target.value)}
-                        placeholder="yourname@gmail.com"
-                        className="w-full px-3 py-2 text-xs bg-white dark:bg-[#1a1722] border border-blue-200 dark:border-[#2a2538] rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
-                      />
-                    </div>
-
-                    <div className="text-start">
-                      <label className="block text-[11px] font-bold text-neutral-600 dark:text-neutral-400 mb-1">
-                        {isRtl ? 'الاسم الكريم (اختياري)' : 'Your Name (Optional)'}
-                      </label>
-                      <input
-                        type="text"
-                        value={gmailName}
-                        onChange={(e) => setGmailName(e.target.value)}
-                        placeholder={isRtl ? 'e.g. أحمد جمال' : 'e.g. Sara Ahmed'}
-                        className="w-full px-3 py-2 text-xs bg-white dark:bg-[#1a1722] border border-blue-200 dark:border-[#2a2538] rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
-                      />
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={handleGmailSubmit}
-                      disabled={googleLoading || !gmailEmail.trim()}
-                      className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-xl text-xs font-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2"
-                    >
-                      {googleLoading ? (
-                        <>
-                          <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          <span>{isRtl ? 'جاري تسجيل الدخول...' : 'Signing in...'}</span>
-                        </>
-                      ) : (
-                        <span>{isRtl ? 'دخول بحساب Gmail الآن' : 'Sign in with Gmail'}</span>
-                      )}
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {/* Responsive Google Capsule Button - Generous padding, perfectly centered */}
-                  <button
-                    type="button"
-                    onClick={handleGoogleSignIn}
-                    disabled={googleLoading}
-                    className="w-full flex items-center justify-center gap-3 py-3 px-5 border border-neutral-300 dark:border-[#2f2742] rounded-full bg-white dark:bg-[#1a1626] hover:bg-neutral-50 dark:hover:bg-[#251f35] text-neutral-800 dark:text-neutral-100 font-bold text-xs transition-all shadow-xs active:scale-[0.99] cursor-pointer"
-                  >
-                    {googleLoading ? (
-                      <div className="w-4 h-4 border-2 border-[#3A0F34] dark:border-[#DDE3E8] border-t-transparent rounded-full animate-spin shrink-0" />
-                    ) : (
-                      <svg className="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
-                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
-                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
-                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
-                      </svg>
-                    )}
-                    <span>
-                      {googleLoading
-                        ? (isRtl ? 'جاري الاتصال بـ Google...' : 'Connecting to Google...')
-                        : (isRtl ? 'المتابعة باستخدام حساب Google' : 'Continue with Google')}
-                    </span>
-                  </button>
-
-                  <div className="text-center">
-                    <button
-                      type="button"
-                      onClick={() => setShowGmailInput(true)}
-                      className="text-[11px] text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 underline font-medium cursor-pointer"
-                    >
-                      {isRtl ? 'أو الدخول بكتابة إيميل Gmail يدوياً' : 'Or type Gmail address manually'}
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              <div className="relative my-4">
+              <div className="relative my-3">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-neutral-200 dark:border-[#2a2538]" />
+                  <div className="w-full border-t border-slate-200" />
                 </div>
                 <div className="relative flex justify-center text-[10px] uppercase tracking-wider">
-                  <span className="bg-white dark:bg-[#14121a] px-3 text-neutral-400 font-bold">
-                    {isRtl ? 'أو تسجيل الدخول بالإيميل' : 'Or Email Login'}
+                  <span className="bg-white px-3 text-slate-400 font-bold">
+                    {isRtl ? 'أو بالبريد الإلكتروني' : 'Or Email Login'}
                   </span>
                 </div>
               </div>
-            </div>
-          )}
-
-          {error && (
-            <div id="auth-modal-error" role="alert" aria-live="polite" className="mb-4 p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs font-semibold flex items-center gap-2.5">
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
-              <span>{error}</span>
             </div>
           )}
 
@@ -547,7 +457,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder={isRtl ? 'مثال: سارة أحمد' : 'e.g. Sara Ahmed'}
-                    className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
+                    className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-slate-200 dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/20 focus:border-[#7C3AED] dark:focus:ring-[#DDE3E8] ${
                       isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                     }`}
                   />
@@ -570,7 +480,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
-                  className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
+                  className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-slate-200 dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/20 focus:border-[#7C3AED] dark:focus:ring-[#DDE3E8] ${
                     isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                   }`}
                 />
@@ -592,7 +502,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="010XXXXXXXX"
-                    className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-mono ${
+                    className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-slate-200 dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/20 focus:border-[#7C3AED] dark:focus:ring-[#DDE3E8] font-mono ${
                       isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                     }`}
                   />
@@ -615,7 +525,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] ${
+                  className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-slate-200 dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/20 focus:border-[#7C3AED] ${
                     isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                   }`}
                 />
@@ -625,7 +535,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
             <button
               type="submit"
               disabled={formLoading}
-              className="w-full mt-2 py-3 bg-[#3A0F34] hover:bg-[#4E1646] disabled:opacity-50 text-white rounded-xl text-xs font-black shadow-md shadow-[#3A0F34]/25 transition-all cursor-pointer flex items-center justify-center gap-2 border border-[#DDE3E8]/30"
+              className="w-full mt-2 py-3 bg-[#7C3AED] hover:bg-[#6D28D9] disabled:opacity-50 text-white rounded-xl text-xs font-black shadow-md shadow-[#3A0F34]/25 transition-all cursor-pointer flex items-center justify-center gap-2 border border-slate-200/30"
             >
               {formLoading ? (
                 <>
@@ -652,7 +562,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                       setMode('signup');
                       setError(null);
                     }}
-                    className="font-bold text-[#3A0F34] hover:text-[#5C1D53] dark:text-[#DDE3E8] cursor-pointer underline"
+                    className="font-bold text-[#7C3AED] hover:text-[#5C1D53] dark:text-[#DDE3E8] cursor-pointer underline"
                   >
                     {isRtl ? 'إنشاء حساب جديد' : 'Sign up now'}
                   </button>
@@ -666,7 +576,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
                       setMode('signin');
                       setError(null);
                     }}
-                    className="font-bold text-[#3A0F34] hover:text-[#5C1D53] dark:text-[#DDE3E8] cursor-pointer underline"
+                    className="font-bold text-[#7C3AED] hover:text-[#5C1D53] dark:text-[#DDE3E8] cursor-pointer underline"
                   >
                     {isRtl ? 'تسجيل الدخول' : 'Sign in'}
                   </button>

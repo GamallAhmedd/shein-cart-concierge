@@ -78,20 +78,20 @@ export function ShipmentBatchLiveNudge() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       aria-label={isRtl ? 'معلومات دفعة الشحن الحالية' : 'Current Shipment Batch Information'}
-      className="rounded-2xl border border-[#C7CCD2] bg-[#F8F9FA] p-4 text-[#3A0F34] shadow-xs"
+      className="rounded-2xl border border-[#E2E8F0] bg-[#F8F9FA] p-4 text-[#7C3AED] shadow-xs"
     >
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-3 w-full sm:w-auto">
-          <div className="w-9 h-9 rounded-xl bg-[#3A0F34] text-[#DDE3E8] flex items-center justify-center shrink-0 border border-[#C7CCD2]/40">
+          <div className="w-9 h-9 rounded-xl bg-[#7C3AED] text-[#EDE9FE] flex items-center justify-center shrink-0 border border-[#E2E8F0]/40">
             <Plane className="w-4 h-4" />
           </div>
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs font-semibold text-[#3A0F34]">
+              <span className="text-xs font-semibold text-[#7C3AED]">
                 {shipmentInfo.code}
               </span>
               {shipmentInfo.remainingSlots !== undefined && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#DDE3E8] text-[#3A0F34] border border-[#C7CCD2]">
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#EDE9FE] text-[#7C3AED] border border-[#E2E8F0]">
                   <Calendar className="w-3 h-3" />
                   {isRtl
                     ? `متاح ${shipmentInfo.remainingSlots} طلبات قبل اكتمال الشحنة`
@@ -99,7 +99,7 @@ export function ShipmentBatchLiveNudge() {
                 </span>
               )}
             </div>
-            <p className="text-xs text-[#66596A] mt-0.5">
+            <p className="text-xs text-[#64748B] mt-0.5">
               {isRtl
                 ? 'تجميع وشحن جوي مباشر لمطار القاهرة ثم تسليم منزلي لجميع المحافظات'
                 : 'Direct air consolidation to Cairo airport with nationwide home delivery'}
@@ -110,16 +110,16 @@ export function ShipmentBatchLiveNudge() {
         {/* Real capacity meter if maxOrders is configured */}
         {shipmentInfo.percent !== undefined && (
           <div className="w-full sm:w-44 space-y-1 shrink-0">
-            <div className="flex items-center justify-between text-[11px] font-medium text-[#66596A]">
+            <div className="flex items-center justify-between text-[11px] font-medium text-[#64748B]">
               <span>{isRtl ? 'امتلاء الدفعة:' : 'Capacity:'}</span>
-              <span className="font-mono tabular-nums text-[#3A0F34] font-semibold">
+              <span className="font-mono tabular-nums text-[#7C3AED] font-semibold">
                 {shipmentInfo.percent}%
               </span>
             </div>
-            <div className="w-full h-1.5 rounded-full bg-[#DDE3E8] overflow-hidden">
+            <div className="w-full h-1.5 rounded-full bg-[#EDE9FE] overflow-hidden">
               <div
                 style={{ width: `${shipmentInfo.percent}%` }}
-                className="h-full bg-[#3A0F34] rounded-full transition-all duration-500"
+                className="h-full bg-[#7C3AED] rounded-full transition-all duration-500"
               />
             </div>
           </div>

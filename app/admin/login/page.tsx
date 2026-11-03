@@ -64,24 +64,24 @@ export default function AdminLoginPage() {
       <div className="absolute inset-0 bg-gradient-to-tr from-black via-[#0c0914]/95 to-[#1c0e29]/90 pointer-events-none" />
 
       {/* Atmospheric Ambient Glows */}
-      <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#3A0F34]/25 blur-3xl pointer-events-none animate-pulse" />
-      <div className="absolute bottom-1/3 right-1/3 translate-x-1/2 translate-y-1/2 w-96 h-96 rounded-full bg-[#DDE3E8]/15 blur-3xl pointer-events-none animate-pulse" />
+      <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#7C3AED]/25 blur-3xl pointer-events-none animate-pulse" />
+      <div className="absolute bottom-1/3 right-1/3 translate-x-1/2 translate-y-1/2 w-96 h-96 rounded-full bg-[#EDE9FE]/15 blur-3xl pointer-events-none animate-pulse" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 w-full max-w-md bg-white/95 dark:bg-[#1A0919]/90 backdrop-blur-3xl rounded-[32px] shadow-[0_30px_90px_rgba(0,0,0,0.65)] border border-[#DDE3E8] dark:border-[#3A0F34]/50 p-7 sm:p-9 text-neutral-900 dark:text-white"
+        className="relative z-10 w-full max-w-md bg-white/95 dark:bg-[#1A0919]/90 backdrop-blur-3xl rounded-[32px] shadow-[0_30px_90px_rgba(0,0,0,0.65)] border border-[#EDE9FE] dark:border-[#7C3AED]/50 p-7 sm:p-9 text-neutral-900 dark:text-white"
       >
         {/* Brand Header */}
         <div className="flex items-center justify-between pb-5 border-b border-neutral-100 dark:border-[#262035]">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-2xl bg-[#3A0F34] text-white flex items-center justify-center font-black text-lg shadow-md shadow-[#3A0F34]/30 border border-[#DDE3E8]/40">
+            <div className="w-10 h-10 rounded-2xl bg-[#7C3AED] text-white flex items-center justify-center font-black text-lg shadow-md shadow-[#7C3AED]/30 border border-[#EDE9FE]/40">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
               <div className="font-extrabold text-neutral-950 dark:text-white text-sm tracking-tight leading-none">
-                SHEIN <span className="text-[#3A0F34] dark:text-[#DDE3E8]">Concierge</span>
+                SHEIN <span className="text-[#7C3AED] dark:text-[#EDE9FE]">Concierge</span>
               </div>
               <p className="text-[10px] text-neutral-400 dark:text-neutral-500 font-medium mt-0.5">
                 {isRtl ? 'بوابة إدارة المنصة والمشرفين' : 'Admin & Staff Management'}
@@ -166,7 +166,7 @@ export default function AdminLoginPage() {
             whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={loading}
-            className="w-full mt-2 py-3.5 bg-[#3A0F34] hover:bg-[#4E1646] disabled:opacity-50 text-white rounded-xl text-xs font-black shadow-lg shadow-[#3A0F34]/25 transition-all cursor-pointer flex items-center justify-center gap-2 border border-[#DDE3E8]/30"
+            className="w-full mt-2 py-3.5 bg-[#7C3AED] hover:bg-[#4E1646] disabled:opacity-50 text-white rounded-xl text-xs font-black shadow-lg shadow-[#7C3AED]/25 transition-all cursor-pointer flex items-center justify-center gap-2 border border-[#EDE9FE]/30"
           >
             {loading ? (
               <>

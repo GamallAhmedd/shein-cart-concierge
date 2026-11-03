@@ -229,7 +229,7 @@ export function ExtractedGoodsView({
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             onClick={handleBack}
-            className="px-4 py-2.5 bg-white dark:bg-[#1A0919] hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] text-neutral-800 dark:text-[#DDE3E8] font-extrabold text-xs rounded-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 shadow-xs cursor-pointer flex items-center gap-1.5 transition-colors"
+            className="px-4 py-2.5 bg-white dark:bg-[#1A0919] hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] text-neutral-800 dark:text-[#EDE9FE] font-extrabold text-xs rounded-2xl border border-[#EDE9FE] dark:border-[#7C3AED]/60 shadow-xs cursor-pointer flex items-center gap-1.5 transition-colors"
           >
             {isRtl ? <ArrowRight className="w-3.5 h-3.5" /> : <ArrowLeft className="w-3.5 h-3.5" />}
             <span>{isRtl ? 'استخراج سلة ثانية' : 'Another Cart'}</span>
@@ -241,7 +241,7 @@ export function ExtractedGoodsView({
             href={data.landingUrl || data.extractedLink}
             target="_blank"
             rel="noreferrer"
-            className="px-4 py-2.5 bg-[#EBF0F4] hover:bg-[#DDE3E8] dark:bg-[#240E23] dark:hover:bg-[#321330] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34] font-extrabold text-xs rounded-2xl shadow-xs flex items-center gap-1.5 cursor-pointer"
+            className="px-4 py-2.5 bg-[#EBF0F4] hover:bg-[#EDE9FE] dark:bg-[#240E23] dark:hover:bg-[#321330] text-[#7C3AED] dark:text-[#EDE9FE] border border-[#EDE9FE] dark:border-[#7C3AED] font-extrabold text-xs rounded-2xl shadow-xs flex items-center gap-1.5 cursor-pointer"
           >
             <span>{isRtl ? 'مشاهدة في SHEIN' : 'SHEIN Link'}</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -255,7 +255,7 @@ export function ExtractedGoodsView({
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center justify-between px-1">
             <h3 className="font-black text-neutral-950 dark:text-white text-lg flex items-center gap-2">
-              <ShoppingBag className="w-5 h-5 text-[#3A0F34] dark:text-[#DDE3E8]" />
+              <ShoppingBag className="w-5 h-5 text-[#7C3AED] dark:text-[#EDE9FE]" />
               <span>{isRtl ? `منتجات السلة (${items.length} قطع)` : `Items in Cart (${items.length})`}</span>
             </h3>
             <span className="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800/60 font-bold flex items-center gap-1">
@@ -278,11 +278,11 @@ export function ExtractedGoodsView({
                   exit={{ opacity: 0, x: -30, height: 0, marginBottom: 0 }}
                   whileHover={{ y: -2, scale: 1.005 }}
                   transition={{ duration: 0.2 }}
-                  className="bg-white/95 dark:bg-[#1A0919]/95 backdrop-blur-md rounded-[28px] p-5 border border-[#DDE3E8] dark:border-[#3A0F34]/60 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-5 hover:border-[#3A0F34] dark:hover:border-[#DDE3E8] transition-all group"
+                  className="bg-white/95 dark:bg-[#1A0919]/95 backdrop-blur-md rounded-[28px] p-5 border border-[#EDE9FE] dark:border-[#7C3AED]/60 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-5 hover:border-[#7C3AED] dark:hover:border-[#EDE9FE] transition-all group"
                 >
                   <div className="flex items-center gap-4 w-full sm:w-auto">
                     {/* Lookbook Product Image with subtle zoom */}
-                    <div className="w-20 h-24 sm:w-22 sm:h-28 rounded-2xl overflow-hidden bg-[#EBF0F4] dark:bg-[#200D1F] shrink-0 border border-[#DDE3E8] dark:border-[#3A0F34] relative">
+                    <div className="w-20 h-24 sm:w-22 sm:h-28 rounded-2xl overflow-hidden bg-[#EBF0F4] dark:bg-[#200D1F] shrink-0 border border-[#EDE9FE] dark:border-[#7C3AED] relative">
                       <SafeImage
                         src={item.image}
                         alt={item.name}
@@ -298,12 +298,12 @@ export function ExtractedGoodsView({
                       {/* Fashion Tag Chips (Color, Size, SKU) */}
                       <div className="flex flex-wrap gap-1.5 text-[11px]">
                         {item.color && (
-                          <span className="bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] px-2.5 py-0.5 rounded-full border border-[#DDE3E8] dark:border-[#3A0F34] font-bold">
+                          <span className="bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] px-2.5 py-0.5 rounded-full border border-[#EDE9FE] dark:border-[#7C3AED] font-bold">
                             {item.color}
                           </span>
                         )}
                         {item.size && (
-                          <span className="bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] px-2.5 py-0.5 rounded-full border border-[#DDE3E8] dark:border-[#3A0F34] font-bold">
+                          <span className="bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] px-2.5 py-0.5 rounded-full border border-[#EDE9FE] dark:border-[#7C3AED] font-bold">
                             {isRtl ? `المقاس: ${item.size}` : `Size: ${item.size}`}
                           </span>
                         )}
@@ -317,7 +317,7 @@ export function ExtractedGoodsView({
                       <div className="pt-1.5 flex flex-wrap items-center gap-2.5">
                         <div className="flex flex-wrap items-center gap-2">
                           {/* Current Price in EGP */}
-                          <span className="text-sm sm:text-base font-black text-[#3A0F34] dark:text-[#DDE3E8] font-mono">
+                          <span className="text-sm sm:text-base font-black text-[#7C3AED] dark:text-[#EDE9FE] font-mono">
                             {item.originalPrice.toLocaleString()} EGP
                           </span>
 
@@ -342,7 +342,7 @@ export function ExtractedGoodsView({
                             href={item.originalUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-[11px] font-bold text-[#3A0F34] hover:text-[#5C1D53] dark:text-[#DDE3E8] flex items-center gap-0.5 transition-colors ms-auto sm:ms-0"
+                            className="text-[11px] font-bold text-[#7C3AED] hover:text-[#5C1D53] dark:text-[#EDE9FE] flex items-center gap-0.5 transition-colors ms-auto sm:ms-0"
                           >
                             <span>{isRtl ? 'عرض القطعة في شي إن' : 'View on SHEIN'}</span>
                             <ExternalLink className="w-2.5 h-2.5" />
@@ -353,13 +353,13 @@ export function ExtractedGoodsView({
                   </div>
 
                   {/* Right: Quantity Stepper & Subtotal */}
-                  <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-[#DDE3E8] dark:border-[#3A0F34]/50">
-                    <div className="flex items-center border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl bg-[#F9FBFC] dark:bg-[#180817] p-0.5 shadow-2xs">
+                  <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-[#EDE9FE] dark:border-[#7C3AED]/50">
+                    <div className="flex items-center border border-[#EDE9FE] dark:border-[#7C3AED] rounded-xl bg-[#F9FBFC] dark:bg-[#180817] p-0.5 shadow-2xs">
                       <motion.button
                         whileTap={{ scale: 0.88 }}
                         type="button"
                         onClick={() => handleQuantityChange(item.id, -1)}
-                        className="w-7 h-7 flex items-center justify-center text-neutral-600 dark:text-[#DDE3E8] hover:bg-white dark:hover:bg-[#251024] rounded-lg transition-colors cursor-pointer"
+                        className="w-7 h-7 flex items-center justify-center text-neutral-600 dark:text-[#EDE9FE] hover:bg-white dark:hover:bg-[#251024] rounded-lg transition-colors cursor-pointer"
                         title={isRtl ? 'تقليل الكمية' : 'Decrease'}
                       >
                         <Minus className="w-3 h-3" />
@@ -371,7 +371,7 @@ export function ExtractedGoodsView({
                         whileTap={{ scale: 0.88 }}
                         type="button"
                         onClick={() => handleQuantityChange(item.id, 1)}
-                        className="w-7 h-7 flex items-center justify-center text-neutral-600 dark:text-[#DDE3E8] hover:bg-white dark:hover:bg-[#251024] rounded-lg transition-colors cursor-pointer"
+                        className="w-7 h-7 flex items-center justify-center text-neutral-600 dark:text-[#EDE9FE] hover:bg-white dark:hover:bg-[#251024] rounded-lg transition-colors cursor-pointer"
                         title={isRtl ? 'زيادة الكمية' : 'Increase'}
                       >
                         <Plus className="w-3 h-3" />
@@ -415,13 +415,13 @@ export function ExtractedGoodsView({
 
         {/* Right: Boutique Cost Summary Card */}
         <div className="space-y-4">
-          <div className="bg-white/95 dark:bg-[#1A0919]/95 backdrop-blur-md rounded-[32px] p-6 border border-[#DDE3E8] dark:border-[#3A0F34]/80 shadow-[0_15px_40px_-15px_rgba(58,15,52,0.08)] space-y-6 sticky top-24">
-            <div className="flex items-center justify-between pb-3 border-b border-[#DDE3E8] dark:border-[#3A0F34]/60">
+          <div className="bg-white/95 dark:bg-[#1A0919]/95 backdrop-blur-md rounded-[32px] p-6 border border-[#EDE9FE] dark:border-[#7C3AED]/80 shadow-[0_15px_40px_-15px_rgba(58,15,52,0.08)] space-y-6 sticky top-24">
+            <div className="flex items-center justify-between pb-3 border-b border-[#EDE9FE] dark:border-[#7C3AED]/60">
               <h3 className="font-black text-neutral-950 dark:text-white text-lg flex items-center gap-2">
-                <Receipt className="w-4.5 h-4.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                <Receipt className="w-4.5 h-4.5 text-[#7C3AED] dark:text-[#EDE9FE]" />
                 <span>{isRtl ? 'ملخص الشنطة والدفع' : 'Payment Summary'}</span>
               </h3>
-              <span className="text-[11px] font-bold text-[#3A0F34] dark:text-[#DDE3E8] bg-[#EBF0F4] dark:bg-[#240E23] px-2.5 py-0.5 rounded-full border border-[#DDE3E8]">
+              <span className="text-[11px] font-bold text-[#7C3AED] dark:text-[#EDE9FE] bg-[#EBF0F4] dark:bg-[#240E23] px-2.5 py-0.5 rounded-full border border-[#EDE9FE]">
                 {items.length} {isRtl ? 'قطع' : 'items'}
               </span>
             </div>
@@ -450,7 +450,7 @@ export function ExtractedGoodsView({
               {(data.dynamicFeePercent || 0) > 0 && dynamicFeeAmount > 0 && (
                 <div className="flex items-center justify-between text-neutral-600 dark:text-neutral-300">
                   <span className="flex items-center gap-1.5">
-                    <Percent className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8] shrink-0" />
+                    <Percent className="w-3.5 h-3.5 text-[#7C3AED] dark:text-[#EDE9FE] shrink-0" />
                     <span className="flex flex-col text-start">
                       <span className="font-bold">{isRtl ? `رسوم الخدمة والتوصيل (${data.dynamicFeePercent}%)` : `Service & Delivery Fee (${data.dynamicFeePercent}%)`}</span>
                       <span className="text-[10px] text-neutral-400 dark:text-neutral-500 font-normal">
@@ -458,18 +458,18 @@ export function ExtractedGoodsView({
                       </span>
                     </span>
                   </span>
-                  <span className="font-black text-[#3A0F34] dark:text-[#DDE3E8] font-mono">
+                  <span className="font-black text-[#7C3AED] dark:text-[#EDE9FE] font-mono">
                     +{dynamicFeeAmount.toLocaleString()} EGP
                   </span>
                 </div>
               )}
 
-              <div className="pt-3 border-t border-[#DDE3E8] dark:border-[#3A0F34]/60 flex items-center justify-between">
+              <div className="pt-3 border-t border-[#EDE9FE] dark:border-[#7C3AED]/60 flex items-center justify-between">
                 <div>
                   <span className="text-xs text-neutral-400 dark:text-neutral-500 block font-bold">
                     {isRtl ? 'المبلغ الإجمالي بالجنيه المصري:' : 'Total Cash Required:'}
                   </span>
-                  <span className="text-2xl font-black text-[#3A0F34] dark:text-[#DDE3E8]">
+                  <span className="text-2xl font-black text-[#7C3AED] dark:text-[#EDE9FE]">
                     {totalCash > 0 ? (
                       <>
                         {totalCash.toLocaleString()}{' '}
@@ -486,35 +486,35 @@ export function ExtractedGoodsView({
             </div>
 
             {/* Payment Methods Available with Official Logos */}
-            <div className="p-3.5 bg-[#F9FBFC] dark:bg-[#180817] rounded-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 space-y-2">
+            <div className="p-3.5 bg-[#F9FBFC] dark:bg-[#180817] rounded-2xl border border-[#EDE9FE] dark:border-[#7C3AED]/60 space-y-2">
               <span className="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider block">
                 {isRtl ? 'طرق الدفع بالجنيه المصري فور تأكيد الطلب:' : 'Supported EGP Payment Methods:'}
               </span>
               <div className="grid grid-cols-2 gap-2">
-                <div className="p-2 rounded-xl bg-white dark:bg-[#200D1F] border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center gap-2 shadow-2xs">
-                  <div className="w-6 h-6 rounded-md bg-white p-0.5 border border-[#DDE3E8] shrink-0">
+                <div className="p-2 rounded-xl bg-white dark:bg-[#200D1F] border border-[#EDE9FE] dark:border-[#7C3AED] flex items-center gap-2 shadow-2xs">
+                  <div className="w-6 h-6 rounded-md bg-white p-0.5 border border-[#EDE9FE] shrink-0">
                     <img src="/images/instapay.png" alt="InstaPay" className="w-full h-full object-contain" />
                   </div>
                   <div className="min-w-0">
                     <h5 className="font-black text-[11px] text-neutral-900 dark:text-white leading-tight truncate">InstaPay</h5>
-                    <p className="text-[9px] text-[#3A0F34] dark:text-[#DDE3E8] truncate">{isRtl ? 'تحويل فوري' : 'Instant EBC'}</p>
+                    <p className="text-[9px] text-[#7C3AED] dark:text-[#EDE9FE] truncate">{isRtl ? 'تحويل فوري' : 'Instant EBC'}</p>
                   </div>
                 </div>
 
-                <div className="p-2 rounded-xl bg-white dark:bg-[#200D1F] border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center gap-2 shadow-2xs">
-                  <div className="w-6 h-6 rounded-md bg-white p-0.5 border border-[#DDE3E8] shrink-0">
+                <div className="p-2 rounded-xl bg-white dark:bg-[#200D1F] border border-[#EDE9FE] dark:border-[#7C3AED] flex items-center gap-2 shadow-2xs">
+                  <div className="w-6 h-6 rounded-md bg-white p-0.5 border border-[#EDE9FE] shrink-0">
                     <img src="/images/vodafone-cash.png" alt="Vodafone Cash" className="w-full h-full object-contain" />
                   </div>
                   <div className="min-w-0">
                     <h5 className="font-black text-[11px] text-neutral-900 dark:text-white leading-tight truncate">VF Cash</h5>
-                    <p className="text-[9px] text-[#3A0F34] dark:text-[#DDE3E8] truncate">{isRtl ? 'محفظة كاش' : 'Mobile Wallet'}</p>
+                    <p className="text-[9px] text-[#7C3AED] dark:text-[#EDE9FE] truncate">{isRtl ? 'محفظة كاش' : 'Mobile Wallet'}</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Workflow steps badge */}
-            <div className="p-3.5 bg-[#F9FBFC] dark:bg-[#180817] rounded-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 space-y-2 text-xs">
+            <div className="p-3.5 bg-[#F9FBFC] dark:bg-[#180817] rounded-2xl border border-[#EDE9FE] dark:border-[#7C3AED]/60 space-y-2 text-xs">
               <div className="flex items-center gap-2 font-black text-neutral-800 dark:text-neutral-200">
                 <Clock className="w-4 h-4 text-amber-500" />
                 <span>{isRtl ? 'الخطوة التالية: مراجعة سريعة للمقاسات' : 'Next: Size & Availability Check'}</span>
@@ -537,7 +537,7 @@ export function ExtractedGoodsView({
                   setShowCheckoutModal(true);
                 }
               }}
-              className="w-full py-4 bg-[#3A0F34] hover:bg-[#4E1646] text-white font-black text-sm rounded-2xl shadow-lg shadow-[#3A0F34]/25 transition-all flex items-center justify-center gap-2 cursor-pointer border border-[#DDE3E8]/30"
+              className="w-full py-4 bg-[#7C3AED] hover:bg-[#4E1646] text-white font-black text-sm rounded-2xl shadow-lg shadow-[#7C3AED]/25 transition-all flex items-center justify-center gap-2 cursor-pointer border border-[#EDE9FE]/30"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>{isRtl ? 'تأكيد الطلب وبدء الشراء لمصر 🛍️' : 'Submit Order for Admin Review'}</span>
@@ -556,9 +556,9 @@ export function ExtractedGoodsView({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-md bg-white dark:bg-[#1A0919] rounded-3xl shadow-2xl border border-[#DDE3E8] dark:border-[#3A0F34] overflow-hidden"
+              className="relative w-full max-w-md bg-white dark:bg-[#1A0919] rounded-3xl shadow-2xl border border-[#EDE9FE] dark:border-[#7C3AED] overflow-hidden"
             >
-              <div className="p-6 bg-[#EBF0F4] dark:bg-[#200D1F] border-b border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-between">
+              <div className="p-6 bg-[#EBF0F4] dark:bg-[#200D1F] border-b border-[#EDE9FE] dark:border-[#7C3AED] flex items-center justify-between">
                 <div>
                   <h3 className="font-black text-neutral-950 dark:text-white text-lg">
                     {isRtl ? 'بيانات التوصيل والاستلام' : 'Delivery Details'}
@@ -586,9 +586,9 @@ export function ExtractedGoodsView({
                 )}
 
                 {user && (customerPhone || shippingAddress) && (
-                  <div className="p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#200D1F] border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-between text-xs text-[#3A0F34] dark:text-[#DDE3E8]">
+                  <div className="p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#200D1F] border border-[#EDE9FE] dark:border-[#7C3AED] flex items-center justify-between text-xs text-[#7C3AED] dark:text-[#EDE9FE]">
                     <span className="flex items-center gap-1.5 font-bold">
-                      <Sparkles className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                      <Sparkles className="w-3.5 h-3.5 text-[#7C3AED] dark:text-[#EDE9FE]" />
                       {isRtl ? 'تم ملء بياناتك تلقائياً من حسابك' : 'Auto-filled from your profile'}
                     </span>
                     <span className="text-[10px] text-neutral-500 dark:text-neutral-400">
@@ -602,7 +602,7 @@ export function ExtractedGoodsView({
                     <label htmlFor="checkout-name" className="block font-black text-neutral-700 dark:text-neutral-300">
                       {isRtl ? 'الاسم بالكامل (ثنائي أو ثلاثي)' : 'Full Recipient Name'}
                     </label>
-                    <span className="text-[10px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold bg-[#EBF0F4] dark:bg-[#200D1F] px-2 py-0.5 rounded-md border border-[#DDE3E8] dark:border-[#3A0F34]">
+                    <span className="text-[10px] text-[#7C3AED] dark:text-[#EDE9FE] font-bold bg-[#EBF0F4] dark:bg-[#200D1F] px-2 py-0.5 rounded-md border border-[#EDE9FE] dark:border-[#7C3AED]">
                       {isRtl ? '* إجباري للبوليصة' : '* Required for shipping'}
                     </span>
                   </div>
@@ -617,7 +617,7 @@ export function ExtractedGoodsView({
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
                       placeholder={isRtl ? 'مثال: سارة أحمد محمود' : 'Full Name'}
-                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] text-neutral-900 dark:text-white ${
+                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#EDE9FE] dark:border-[#7C3AED] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#7C3AED] text-neutral-900 dark:text-white ${
                         isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                       }`}
                     />
@@ -631,7 +631,7 @@ export function ExtractedGoodsView({
                         ? 'رقم الموبايل في مصر (InstaPay أو Vodafone Cash)'
                         : 'Egyptian Mobile (InstaPay / Vodafone Cash)'}
                     </label>
-                    <span className="text-[10px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold bg-[#EBF0F4] dark:bg-[#200D1F] px-2 py-0.5 rounded-md border border-[#DDE3E8] dark:border-[#3A0F34]">
+                    <span className="text-[10px] text-[#7C3AED] dark:text-[#EDE9FE] font-bold bg-[#EBF0F4] dark:bg-[#200D1F] px-2 py-0.5 rounded-md border border-[#EDE9FE] dark:border-[#7C3AED]">
                       {isRtl ? '* إجباري' : '* Required'}
                     </span>
                   </div>
@@ -646,7 +646,7 @@ export function ExtractedGoodsView({
                       value={customerPhone}
                       onChange={(e) => setCustomerPhone(e.target.value)}
                       placeholder="010XXXXXXXX"
-                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] font-mono text-neutral-900 dark:text-white ${
+                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#EDE9FE] dark:border-[#7C3AED] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#7C3AED] font-mono text-neutral-900 dark:text-white ${
                         isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                       }`}
                     />
@@ -658,7 +658,7 @@ export function ExtractedGoodsView({
                     <label htmlFor="checkout-address" className="block font-black text-neutral-700 dark:text-neutral-300">
                       {isRtl ? 'عنوان التوصيل بالتفصيل في مصر' : 'Delivery Address in Egypt'}
                     </label>
-                    <span className="text-[10px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold bg-[#EBF0F4] dark:bg-[#200D1F] px-2 py-0.5 rounded-md border border-[#DDE3E8] dark:border-[#3A0F34]">
+                    <span className="text-[10px] text-[#7C3AED] dark:text-[#EDE9FE] font-bold bg-[#EBF0F4] dark:bg-[#200D1F] px-2 py-0.5 rounded-md border border-[#EDE9FE] dark:border-[#7C3AED]">
                       {isRtl ? '* إجباري للتوصيل' : '* Required'}
                     </span>
                   </div>
@@ -673,7 +673,7 @@ export function ExtractedGoodsView({
                       value={shippingAddress}
                       onChange={(e) => setShippingAddress(e.target.value)}
                       placeholder={isRtl ? 'مثال: عمارة 12، شارع النصر، المعادي، القاهرة' : 'e.g. Building 12, Nasr Street, Maadi, Cairo'}
-                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] text-neutral-900 dark:text-white ${
+                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#EDE9FE] dark:border-[#7C3AED] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#7C3AED] text-neutral-900 dark:text-white ${
                         isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                       }`}
                     />
@@ -685,7 +685,7 @@ export function ExtractedGoodsView({
                     <label htmlFor="checkout-notes" className="block font-black text-neutral-700 dark:text-neutral-300">
                       {isRtl ? 'ملاحظات إضافية على الطلب' : 'Additional Order Notes'}
                     </label>
-                    <span className="text-[10px] text-neutral-400 font-bold bg-neutral-100 dark:bg-[#1f192b] px-2 py-0.5 rounded-md border border-[#DDE3E8] dark:border-[#3A0F34]/50">
+                    <span className="text-[10px] text-neutral-400 font-bold bg-neutral-100 dark:bg-[#1f192b] px-2 py-0.5 rounded-md border border-[#EDE9FE] dark:border-[#7C3AED]/50">
                       {isRtl ? 'اختياري' : 'Optional'}
                     </span>
                   </div>
@@ -702,19 +702,19 @@ export function ExtractedGoodsView({
                           ? 'أي تعليمات أو مقاسات بديلة أو أوقات تسليم مفضلة...'
                           : 'Any instructions, sizing notes, or preferred delivery timing...'
                       }
-                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] text-neutral-900 dark:text-white text-xs ${
+                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#EDE9FE] dark:border-[#7C3AED] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#7C3AED] text-neutral-900 dark:text-white text-xs ${
                         isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                       }`}
                     />
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#DDE3E8] dark:border-[#3A0F34]/60 flex items-center justify-between">
+                <div className="pt-3 border-t border-[#EDE9FE] dark:border-[#7C3AED]/60 flex items-center justify-between">
                   <div>
                     <span className="text-[11px] text-neutral-400 dark:text-neutral-500 block">
                       {isRtl ? 'المجموع المستحق' : 'Total Due'}
                     </span>
-                    <span className="font-black text-lg text-[#3A0F34] dark:text-[#DDE3E8] font-mono">
+                    <span className="font-black text-lg text-[#7C3AED] dark:text-[#EDE9FE] font-mono">
                       {totalCash.toLocaleString()} EGP
                     </span>
                   </div>
@@ -724,7 +724,7 @@ export function ExtractedGoodsView({
                     whileTap={{ scale: 0.96 }}
                     type="submit"
                     disabled={submitting}
-                    className="px-7 py-3.5 bg-[#3A0F34] hover:bg-[#4E1646] disabled:opacity-50 text-white font-black text-xs rounded-xl shadow-md shadow-[#3A0F34]/25 transition-all flex items-center gap-2 cursor-pointer border border-[#DDE3E8]/30"
+                    className="px-7 py-3.5 bg-[#7C3AED] hover:bg-[#4E1646] disabled:opacity-50 text-white font-black text-xs rounded-xl shadow-md shadow-[#7C3AED]/25 transition-all flex items-center gap-2 cursor-pointer border border-[#EDE9FE]/30"
                   >
                     {submitting ? (
                       <>

@@ -136,7 +136,7 @@ export default function OrderDetailsPage() {
     return (
       <div className="min-h-screen bg-[#FBFBFC] dark:bg-[#0c0a0f] flex items-center justify-center transition-colors">
         <div className="text-center space-y-3">
-          <div className="w-9 h-9 border-3 border-[#3A0F34] dark:border-[#DDE3E8] border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="w-9 h-9 border-3 border-[#7C3AED] dark:border-[#EDE9FE] border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-xs font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
             {isRtl ? `جاري تحميل تفاصيل الطلب #${id}...` : `Loading SHEIN Order #${id}...`}
           </p>
@@ -150,7 +150,7 @@ export default function OrderDetailsPage() {
       <div className="min-h-screen bg-[#FBFBFC] dark:bg-[#0c0a0f] flex flex-col text-neutral-900 dark:text-white transition-colors">
         <Navbar onOpenAuth={() => setAuthOpen(true)} />
         <div className="max-w-md mx-auto px-4 py-24 text-center space-y-4">
-          <div className="w-16 h-16 rounded-3xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34] flex items-center justify-center mx-auto">
+          <div className="w-16 h-16 rounded-3xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] border border-[#EDE9FE] dark:border-[#7C3AED] flex items-center justify-center mx-auto">
             <ShoppingBag className="w-8 h-8" />
           </div>
           <h2 className="text-2xl font-black text-neutral-950 dark:text-white">
@@ -163,7 +163,7 @@ export default function OrderDetailsPage() {
           </p>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#3A0F34] hover:bg-[#4E1646] text-white rounded-2xl text-xs font-black shadow-md shadow-[#3A0F34]/20 border border-[#DDE3E8]/30"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#7C3AED] hover:bg-[#4E1646] text-white rounded-2xl text-xs font-black shadow-md shadow-[#7C3AED]/20 border border-[#EDE9FE]/30"
           >
             {isRtl ? 'استخراج سلة جديدة' : 'Extract a New Cart'}
           </Link>
@@ -191,7 +191,7 @@ export default function OrderDetailsPage() {
   return (
     <div className="min-h-screen bg-[#FBFBFC] dark:bg-[#0c0a0f] text-neutral-900 dark:text-white pb-32 md:pb-24 transition-colors relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-80 bg-gradient-to-b from-[#3A0F34]/10 to-transparent dark:from-[#3A0F34]/20 dark:to-transparent pointer-events-none blur-3xl -z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-80 bg-gradient-to-b from-[#7C3AED]/10 to-transparent dark:from-[#7C3AED]/20 dark:to-transparent pointer-events-none blur-3xl -z-10" />
 
       <Navbar onOpenAuth={() => setAuthOpen(true)} />
 
@@ -239,7 +239,7 @@ export default function OrderDetailsPage() {
                   </span>
                 )}
                 {order.status === 'APPROVED_PENDING_PAYMENT' && (
-                  <span className="px-3.5 py-1 rounded-full text-xs font-black bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8]">
+                  <span className="px-3.5 py-1 rounded-full text-xs font-black bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] border border-[#EDE9FE]">
                     {t.statusApproved}
                   </span>
                 )}
@@ -307,7 +307,7 @@ export default function OrderDetailsPage() {
                 {order.totalCash > 0 ? (
                   <>
                     {order.totalCash.toLocaleString()}{' '}
-                    <span className="text-xs font-black text-[#3A0F34] dark:text-[#DDE3E8]">EGP</span>
+                    <span className="text-xs font-black text-[#7C3AED] dark:text-[#EDE9FE]">EGP</span>
                   </>
                 ) : (
                   <span className="text-sm font-bold text-amber-600 dark:text-amber-400">
@@ -365,10 +365,10 @@ export default function OrderDetailsPage() {
           )}
 
           {order.status === 'PAYMENT_UNDER_REVIEW' && (
-            <div className="p-4 rounded-2xl bg-[#EBF0F4] dark:bg-[#200D1F] border border-[#DDE3E8] dark:border-[#3A0F34] text-neutral-900 dark:text-white text-xs flex items-start gap-3">
-              <ShieldCheck className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8] shrink-0 mt-0.5" />
+            <div className="p-4 rounded-2xl bg-[#EBF0F4] dark:bg-[#200D1F] border border-[#EDE9FE] dark:border-[#7C3AED] text-neutral-900 dark:text-white text-xs flex items-start gap-3">
+              <ShieldCheck className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE] shrink-0 mt-0.5" />
               <div className="space-y-0.5 text-start">
-                <p className="font-black text-xs text-[#3A0F34] dark:text-[#DDE3E8]">
+                <p className="font-black text-xs text-[#7C3AED] dark:text-[#EDE9FE]">
                   {isRtl ? 'تم استلام إيصال الدفع بنجاح — قيد المطابقة' : 'Payment Receipt Received — Under Verification'}
                 </p>
                 <p className="text-[11px] text-neutral-600 dark:text-[#9BAAB6] leading-relaxed font-normal">
@@ -428,7 +428,7 @@ export default function OrderDetailsPage() {
               <div className="pt-2">
                 <Link
                   href="/"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#3A0F34] hover:bg-[#4E1646] text-white font-black text-xs shadow-sm transition-colors border border-[#DDE3E8]/30"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#7C3AED] hover:bg-[#4E1646] text-white font-black text-xs shadow-sm transition-colors border border-[#EDE9FE]/30"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>{isRtl ? 'استخراج سلة جديدة بأسعار محدثة' : 'Extract a New Cart with Fresh Pricing'}</span>
@@ -439,9 +439,9 @@ export default function OrderDetailsPage() {
 
           {/* Admin Order Comment */}
           {order.adminComment && (
-            <div className="p-4 rounded-2xl bg-[#EBF0F4]/70 dark:bg-[#240E23]/60 border border-[#DDE3E8] dark:border-[#3A0F34]/50 text-xs text-neutral-900 dark:text-neutral-100 space-y-1 text-start">
-              <div className="flex items-center gap-1.5 font-black text-[#3A0F34] dark:text-[#DDE3E8] text-[11px]">
-                <MessageSquare className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
+            <div className="p-4 rounded-2xl bg-[#EBF0F4]/70 dark:bg-[#240E23]/60 border border-[#EDE9FE] dark:border-[#7C3AED]/50 text-xs text-neutral-900 dark:text-neutral-100 space-y-1 text-start">
+              <div className="flex items-center gap-1.5 font-black text-[#7C3AED] dark:text-[#EDE9FE] text-[11px]">
+                <MessageSquare className="w-3.5 h-3.5 text-[#7C3AED] dark:text-[#EDE9FE]" />
                 <span>{isRtl ? 'ملاحظة المشرف العامة:' : 'Admin Supervisor Note:'}</span>
               </div>
               <p className="text-xs text-neutral-700 dark:text-neutral-300 italic pl-5">
@@ -462,8 +462,8 @@ export default function OrderDetailsPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-neutral-100 dark:border-[#201a2d]">
             <div className="space-y-1">
               {order.status === 'APPROVED_PENDING_PAYMENT' ? (
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-black uppercase tracking-wider border border-[#DDE3E8] dark:border-[#3A0F34] mb-1">
-                  <ShoppingBag className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] text-[11px] font-black uppercase tracking-wider border border-[#EDE9FE] dark:border-[#7C3AED] mb-1">
+                  <ShoppingBag className="w-3.5 h-3.5 text-[#7C3AED] dark:text-[#EDE9FE]" />
                   <span>
                     {isRtl
                       ? 'الخطوة 1 من 2: مراجعة المنتجات والأسعار المعتمدة قبل السداد'
@@ -540,7 +540,7 @@ export default function OrderDetailsPage() {
                   className={`p-4 sm:p-5 rounded-2xl border transition-all flex flex-col gap-3.5 ${
                     isRejected
                       ? 'border-rose-200/90 dark:border-rose-900/40 bg-rose-50/40 dark:bg-rose-950/20'
-                      : 'border-neutral-200/80 dark:border-[#251f35] bg-[#FAFAFC] dark:bg-[#181423] hover:border-[#3A0F34] dark:hover:border-[#DDE3E8]'
+                      : 'border-neutral-200/80 dark:border-[#251f35] bg-[#FAFAFC] dark:bg-[#181423] hover:border-[#7C3AED] dark:hover:border-[#EDE9FE]'
                   }`}
                 >
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -595,7 +595,7 @@ export default function OrderDetailsPage() {
                               href={usableLink || itemUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 text-[11px] font-bold text-[#3A0F34] dark:text-[#DDE3E8] hover:text-[#5C1D53] hover:underline transition-colors"
+                              className="inline-flex items-center gap-1 text-[11px] font-bold text-[#7C3AED] dark:text-[#EDE9FE] hover:text-[#5C1D53] hover:underline transition-colors"
                             >
                               <span>{isRtl ? 'عرض المنتج على شي إن' : 'View on SHEIN'}</span>
                               <ExternalLink className="w-3 h-3" />
@@ -655,7 +655,7 @@ export default function OrderDetailsPage() {
                           </span>
                           <div className="font-black text-base sm:text-lg text-neutral-950 dark:text-white font-mono">
                             {item.subtotal.toLocaleString()}{' '}
-                            <span className="text-xs font-bold text-[#3A0F34] dark:text-[#DDE3E8]">EGP</span>
+                            <span className="text-xs font-bold text-[#7C3AED] dark:text-[#EDE9FE]">EGP</span>
                           </div>
                           <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold block">
                             {isRtl ? 'السعر المعتمد النهائي' : 'Approved Unit Price'}
@@ -684,10 +684,10 @@ export default function OrderDetailsPage() {
 
                   {/* Admin Note for Accepted Item */}
                   {!isRejected && item.adminComment && (
-                    <div className="mt-1 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-xs flex items-start gap-2">
-                      <MessageSquare className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8] shrink-0 mt-0.5" />
+                    <div className="mt-1 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] border border-[#EDE9FE] dark:border-[#7C3AED]/60 text-xs flex items-start gap-2">
+                      <MessageSquare className="w-3.5 h-3.5 text-[#7C3AED] dark:text-[#EDE9FE] shrink-0 mt-0.5" />
                       <div className="text-[11px] text-neutral-800 dark:text-neutral-200">
-                        <span className="font-bold text-[#3A0F34] dark:text-[#DDE3E8]">
+                        <span className="font-bold text-[#7C3AED] dark:text-[#EDE9FE]">
                           {isRtl ? 'ملاحظة المشرف:' : 'Supervisor Note:'}
                         </span>{' '}
                         {item.adminComment}
@@ -735,7 +735,7 @@ export default function OrderDetailsPage() {
                       : `Calculated as ${order.dynamicFeePercent || 0}% of accepted items`}
                   </span>
                 </div>
-                <span className="text-base font-black text-[#3A0F34] dark:text-[#DDE3E8] font-mono">
+                <span className="text-base font-black text-[#7C3AED] dark:text-[#EDE9FE] font-mono">
                   +{(order.dynamicFeeAmount || 0).toLocaleString()} EGP
                 </span>
               </div>
@@ -755,7 +755,7 @@ export default function OrderDetailsPage() {
             </div>
 
             {/* Grand Total Highlight */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-[#3A0F34]/10 border-2 border-emerald-500/40 dark:border-emerald-500/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-[#7C3AED]/10 border-2 border-emerald-500/40 dark:border-emerald-500/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <span className="text-xs uppercase font-black text-emerald-800 dark:text-emerald-300 tracking-wider block">
                   {isRtl ? 'المبلغ النهائي المطلوب سداده' : 'Final Approved Total Cash Due'}
@@ -773,8 +773,8 @@ export default function OrderDetailsPage() {
             </div>
 
             {order.status === 'APPROVED_PENDING_PAYMENT' && (
-              <div className="p-3 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-xs text-[#3A0F34] dark:text-[#DDE3E8] font-bold flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8] shrink-0" />
+              <div className="p-3 rounded-xl bg-[#EBF0F4] dark:bg-[#240E23] border border-[#EDE9FE] dark:border-[#7C3AED]/60 text-xs text-[#7C3AED] dark:text-[#EDE9FE] font-bold flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-[#7C3AED] dark:text-[#EDE9FE] shrink-0" />
                 <span>
                   {isRtl
                     ? '👇 الآن بعد مراجعة تفاصيل طلبك أعلاه، يرجى النزول أدناه لاختيار طريقة الدفع وإتمام التحويل.'
@@ -800,12 +800,12 @@ export default function OrderDetailsPage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="p-6 sm:p-8 rounded-[32px] bg-white/95 dark:bg-[#13101c]/95 border-2 border-[#DDE3E8] dark:border-[#3A0F34] shadow-xl shadow-[#3A0F34]/5 space-y-6 text-start"
+            className="p-6 sm:p-8 rounded-[32px] bg-white/95 dark:bg-[#13101c]/95 border-2 border-[#EDE9FE] dark:border-[#7C3AED] shadow-xl shadow-[#7C3AED]/5 space-y-6 text-start"
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-neutral-100 dark:border-[#221c30]">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-2xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center shrink-0 border border-[#DDE3E8] dark:border-[#3A0F34]">
-                  <Lock className="w-6 h-6 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                <div className="w-12 h-12 rounded-2xl bg-[#EBF0F4] dark:bg-[#240E23] text-[#7C3AED] dark:text-[#EDE9FE] flex items-center justify-center shrink-0 border border-[#EDE9FE] dark:border-[#7C3AED]">
+                  <Lock className="w-6 h-6 text-[#7C3AED] dark:text-[#EDE9FE]" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
@@ -824,7 +824,7 @@ export default function OrderDetailsPage() {
                 <span className="text-xs font-bold text-neutral-400">
                   {isRtl ? 'المبلغ المحول:' : 'Amount Paid:'}
                 </span>
-                <span className="font-mono text-xl font-black text-[#3A0F34] dark:text-[#DDE3E8]">
+                <span className="font-mono text-xl font-black text-[#7C3AED] dark:text-[#EDE9FE]">
                   {order.totalCash.toLocaleString()} EGP
                 </span>
               </div>
@@ -865,13 +865,13 @@ export default function OrderDetailsPage() {
                 <span className="text-neutral-400 text-[11px] block font-bold mb-1">
                   {isRtl ? 'الرقم المرجعي / كود العملية' : 'Transaction Ref'}
                 </span>
-                <span className="font-mono font-black text-sm text-[#3A0F34] dark:text-[#DDE3E8]">
+                <span className="font-mono font-black text-sm text-[#7C3AED] dark:text-[#EDE9FE]">
                   {order.payment?.transactionReference || (isRtl ? 'قيد المطابقة' : 'Verifying')}
                 </span>
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-[#EBF0F4]/70 dark:bg-[#240E23]/60 border border-[#DDE3E8] dark:border-[#3A0F34]/50 text-xs text-[#3A0F34] dark:text-[#DDE3E8] leading-relaxed font-medium">
+            <div className="p-4 rounded-2xl bg-[#EBF0F4]/70 dark:bg-[#240E23]/60 border border-[#EDE9FE] dark:border-[#7C3AED]/50 text-xs text-[#7C3AED] dark:text-[#EDE9FE] leading-relaxed font-medium">
               {isRtl
                 ? '🔒 تم قفل شاشة الدفع مؤقتاً لحين انتهاء المشرف من مطابقة التحويل. فور التأكيد، ستتحول الصفحة تلقائياً إلى صفحة تتبع الطلب (Tracking) ومتابعة خط سير الشحنة.'
                 : '🔒 Payment screen is locked while our admin matches your transfer. Once verified, live tracking dashboard will automatically unlock here.'}
