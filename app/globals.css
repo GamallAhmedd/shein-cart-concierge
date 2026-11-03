@@ -59,6 +59,8 @@
 
 /* Editorial Canvas & Paper Atmosphere (Ice Silver Base) */
 body {
+  background-color: #DDE3E8 !important;
+  color: #3A0F34 !important;
   background-image: 
     radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.55) 0%, rgba(221, 227, 232, 0.95) 70%, #D4DCE2 100%);
   background-attachment: fixed;

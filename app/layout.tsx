@@ -33,6 +33,13 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{document.documentElement.classList.remove('dark');localStorage.removeItem('shein_app_theme_v1');localStorage.setItem('shein_app_theme_v3_ice','light');}catch(e){}",
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-[#DDE3E8] text-[#3A0F34]">
         <Providers>
           {children}

@@ -321,7 +321,7 @@ export function MobileAccountSheet({
                 {isRtl ? 'المظهر واللغة' : 'Appearance & Language'}
               </span>
 
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 gap-2">
                 {/* Language Switch */}
                 <button
                   onClick={toggleLang}
@@ -337,28 +337,7 @@ export function MobileAccountSheet({
                 </button>
 
                 {/* Theme Switch */}
-                <button
-                  onClick={toggleTheme}
-                  className="flex items-center justify-between p-3 rounded-xl bg-neutral-100/80 dark:bg-[#1a1528] border border-neutral-200/60 dark:border-[#2a243a] text-xs font-bold text-neutral-800 dark:text-neutral-200 transition-colors cursor-pointer"
-                >
-                  <div className="flex items-center gap-2">
-                    {theme === 'dark' ? (
-                      <Sun className="w-4 h-4 text-amber-400" />
-                    ) : (
-                      <Moon className="w-4 h-4 text-neutral-700" />
-                    )}
-                    <span>{isRtl ? 'المظهر' : 'Theme'}</span>
-                  </div>
-                  <span className="text-[11px] font-medium text-neutral-500">
-                    {theme === 'dark'
-                      ? isRtl
-                        ? 'داكن'
-                        : 'Dark'
-                      : isRtl
-                      ? 'فاتح'
-                      : 'Light'}
-                  </span>
-                </button>
+                {/* Theme toggle temporarily disabled */}
               </div>
             </div>
 

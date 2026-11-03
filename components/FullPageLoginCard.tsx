@@ -398,13 +398,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
               <span>{lang === 'ar' ? 'En' : 'عربي'}</span>
             </button>
 
-            <button
-              onClick={toggleTheme}
-              className="w-7 h-7 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] hover:bg-[#DDE3E8] dark:hover:bg-[#321330] flex items-center justify-center transition-colors cursor-pointer border border-[#DDE3E8] dark:border-[#3A0F34]/60"
-              title={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-            >
-              {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-[#DDE3E8]" /> : <Moon className="w-3.5 h-3.5 text-[#3A0F34]" />}
-            </button>
+{/* Theme toggle temporarily hidden */}
           </div>
         </div>
 

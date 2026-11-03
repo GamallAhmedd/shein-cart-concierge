@@ -181,20 +181,7 @@ export function Navbar({ onOpenAuth }: { onOpenAuth?: () => void }) {
               <span className="text-[11px] sm:text-xs">{lang === 'ar' ? 'English' : 'عربي'}</span>
             </motion.button>
 
-            {/* Dark / Light Mode Switcher */}
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
-              onClick={toggleTheme}
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#EBF0F4] dark:bg-[#1E0C1D] hover:bg-[#DDE3E8] dark:hover:bg-[#2A1028] text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center transition-colors cursor-pointer border border-[#DDE3E8] dark:border-[#3A0F34]/50"
-              title={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#DDE3E8]" />
-              ) : (
-                <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#3A0F34]" />
-              )}
-            </motion.button>
+{/* Dark mode toggle temporarily hidden */}
 
             {/* New Order Button (Hidden for Admins, visible on md+) */}
             {user?.role !== 'admin' && (

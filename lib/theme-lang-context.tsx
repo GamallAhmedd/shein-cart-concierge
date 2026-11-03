@@ -355,16 +355,13 @@ export function ThemeLangProvider({ children }: { children: React.ReactNode }) {
       document.documentElement.lang = initialLang;
       document.documentElement.dir = initialLang === 'ar' ? 'rtl' : 'ltr';
 
-      // 2. Theme
-      const storedTheme = localStorage.getItem(THEME_KEY) as Theme | null;
-      let initialTheme: Theme = 'light';
-      if (storedTheme === 'dark' || storedTheme === 'light') {
-        initialTheme = storedTheme;
-      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        initialTheme = 'dark';
-      }
-      setThemeState(initialTheme);
-      document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+      // 2. Dark mode disabled temporarily: Enforce Ice Silver Light Mode
+      document.documentElement.classList.remove('dark');
+      localStorage.removeItem('shein_app_theme_v1');
+      localStorage.removeItem('shein_app_theme_v2');
+      localStorage.removeItem('shein_app_theme_v3_ice');
+      localStorage.setItem(THEME_KEY, 'light');
+      setThemeState('light');
     } catch (err) {
       console.warn('Theme/Lang init error:', err);
     }
@@ -383,16 +380,12 @@ export function ThemeLangProvider({ children }: { children: React.ReactNode }) {
     setLang(lang === 'ar' ? 'en' : 'ar');
   };
 
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-    try {
-      localStorage.setItem(THEME_KEY, newTheme);
-      document.documentElement.classList.toggle('dark', newTheme === 'dark');
-    } catch {}
+  const setTheme = (_newTheme: Theme) => {
+    document.documentElement.classList.remove('dark');
   };
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    document.documentElement.classList.remove('dark');
   };
 
   const dir = lang === 'ar' ? 'rtl' : 'ltr';
