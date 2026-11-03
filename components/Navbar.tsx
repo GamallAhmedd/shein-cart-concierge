@@ -89,7 +89,7 @@ export function Navbar({ onOpenAuth }: { onOpenAuth?: () => void }) {
                   className={`relative px-4 py-1.5 rounded-full text-xs font-bold transition-colors flex items-center gap-1.5 ${
                     pathname === '/admin'
                       ? 'text-white'
-                      : 'text-neutral-600 dark:text-[#DDE3E8] hover:text-[#3A0F34] dark:hover:text-white'
+                      : 'text-[#3A0F34]/80 dark:text-[#DDE3E8] hover:text-[#3A0F34] dark:hover:text-white'
                   }`}
                 >
                   {pathname === '/admin' && (
@@ -110,7 +110,7 @@ export function Navbar({ onOpenAuth }: { onOpenAuth?: () => void }) {
                   className={`relative px-4 py-1.5 rounded-full text-xs font-bold transition-colors flex items-center gap-1.5 ${
                     pathname.startsWith('/admin/analytics')
                       ? 'text-white'
-                      : 'text-neutral-600 dark:text-[#DDE3E8] hover:text-[#3A0F34] dark:hover:text-white'
+                      : 'text-[#3A0F34]/80 dark:text-[#DDE3E8] hover:text-[#3A0F34] dark:hover:text-white'
                   }`}
                 >
                   {pathname.startsWith('/admin/analytics') && (
@@ -133,7 +133,7 @@ export function Navbar({ onOpenAuth }: { onOpenAuth?: () => void }) {
                   className={`relative px-4 py-1.5 rounded-full text-xs font-bold transition-colors ${
                     pathname === '/'
                       ? 'text-white'
-                      : 'text-neutral-600 dark:text-[#DDE3E8] hover:text-[#3A0F34] dark:hover:text-white'
+                      : 'text-[#3A0F34]/80 dark:text-[#DDE3E8] hover:text-[#3A0F34] dark:hover:text-white'
                   }`}
                 >
                   {pathname === '/' && (
@@ -151,7 +151,7 @@ export function Navbar({ onOpenAuth }: { onOpenAuth?: () => void }) {
                   className={`relative px-4 py-1.5 rounded-full text-xs font-bold transition-colors ${
                     pathname.startsWith('/orders')
                       ? 'text-white'
-                      : 'text-neutral-600 dark:text-[#DDE3E8] hover:text-[#3A0F34] dark:hover:text-white'
+                      : 'text-[#3A0F34]/80 dark:text-[#DDE3E8] hover:text-[#3A0F34] dark:hover:text-white'
                   }`}
                 >
                   {pathname.startsWith('/orders') && (
@@ -262,7 +262,7 @@ export function Navbar({ onOpenAuth }: { onOpenAuth?: () => void }) {
                 whileHover={{ scale: 1.04, boxShadow: '0 8px 20px -4px rgba(58, 15, 52, 0.35)' }}
                 whileTap={{ scale: 0.96 }}
                 onClick={onOpenAuth}
-                className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-extrabold bg-[#3A0F34] hover:bg-[#4E1646] text-white transition-all shadow-sm shadow-[#3A0F34]/20 cursor-pointer flex items-center gap-1.5 border border-[#DDE3E8]/30"
+                className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-extrabold bg-[#3A0F34] hover:bg-[#4E1646] text-[#DDE3E8] transition-all shadow-sm shadow-[#3A0F34]/20 cursor-pointer flex items-center gap-1.5 border border-[#DDE3E8]/30"
               >
                 <LogIn className="w-3.5 h-3.5" />
                 <span>{t.signIn}</span>

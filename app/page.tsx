@@ -154,14 +154,14 @@ export default function HomePage() {
           <div className="space-y-10">
             {/* Header Title: Fashion Editorial Hierarchy */}
             <motion.div {...heroEntrance} className="text-center sm:text-start space-y-3 pt-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-black tracking-wide shadow-2xs">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 dark:bg-[#240E23] border border-[#3A0F34]/20 text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-black tracking-wide shadow-2xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8] animate-sparkle-twinkle" />
                 <span>{settings?.heroBadge || (dir === 'rtl' ? 'خدمة التسوق والاستخراج الأولى للبنات في مصر 🛍️✨' : t.heroBadge)}</span>
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white tracking-tight leading-tight text-balance">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#3A0F34] dark:text-white tracking-tight leading-tight text-balance">
                 {settings?.heroTitle || (dir === 'rtl' ? 'كل سلات وفساتين شي إن.. بالجنيه المصري لباب بيتكِ' : t.heroTitle)}
               </h1>
-              <p className="text-xs sm:text-sm text-neutral-600 dark:text-[#9BAAB6] max-w-xl leading-relaxed text-balance">
+              <p className="text-xs sm:text-sm text-[#3A0F34]/80 dark:text-[#DDE3E8] max-w-xl font-medium leading-relaxed text-balance">
                 {settings?.heroSubtitle || (dir === 'rtl' ? 'وداعاً لمشاكل الدفع بالدولار وبطاقات البنوك! الصقي رابط سلتك، واحسبي إجمالي طلبك بالجنيه فوراً، وادفعي عبر إنستاباي أو فودافون كاش واستلمي شحنتك أينما كنتِ في مصر.' : t.heroSubtitle)}
               </p>
             </motion.div>

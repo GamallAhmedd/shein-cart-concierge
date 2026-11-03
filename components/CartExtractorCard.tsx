@@ -162,7 +162,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       id="cart-extractor-card"
-      className="relative rounded-[36px] p-6 sm:p-10 bg-white/95 dark:bg-[#1A0919]/95 border border-[#DDE3E8] dark:border-[#3A0F34]/60 shadow-[0_20px_60px_-15px_rgba(58,15,52,0.08)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] space-y-7 transition-colors overflow-hidden"
+      className="relative rounded-[36px] p-6 sm:p-10 bg-[#EDF2F6]/95 dark:bg-[#1A0919]/95 border-2 border-[#3A0F34]/20 dark:border-[#DDE3E8]/20 shadow-[0_20px_60px_-15px_rgba(58,15,52,0.08)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] space-y-7 transition-colors overflow-hidden"
     >
       {/* Delicate Atmospheric Ambient Vignette */}
       <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-gradient-to-bl from-[#3A0F34]/10 via-[#DDE3E8]/20 to-transparent dark:from-[#3A0F34]/25 dark:via-[#1A0919]/40 pointer-events-none blur-3xl -z-10" />
@@ -183,10 +183,10 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
             )}
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-950 dark:text-white tracking-tight text-balance leading-snug">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#3A0F34] dark:text-white tracking-tight text-balance leading-snug">
             {isRtl ? 'معاكي سلة أو دريس عاجبك من شي إن؟ 🛍️✨' : t.extractorTitle}
           </h2>
-          <p className="text-xs sm:text-sm text-neutral-600 dark:text-[#DDE3E8] max-w-xl leading-relaxed font-medium text-balance">
+          <p className="text-xs sm:text-sm text-[#3A0F34]/80 dark:text-[#DDE3E8] max-w-xl leading-relaxed font-medium text-balance">
             {isRtl
               ? 'الصقي الرابط في الصندوق السحري بالأسفل، وسنقوم بحساب الإجمالي بالجنيه المصري فوراً ومراجعة مقاساتك والشراء والتوصيل لباب بيتكِ في أي محافظة بمصر!'
               : t.extractorDesc}
@@ -387,15 +387,15 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
 
         {/* 3 Step Chic Flow Ribbon */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 py-1">
-          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-neutral-700 dark:text-[#DDE3E8]">
+          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold">
             <span className="w-5 h-5 rounded-full bg-[#3A0F34] text-white font-black text-[10px] flex items-center justify-center shrink-0">1</span>
             <span className="truncate">{isRtl ? 'انسخي الرابط من تطبيق SHEIN' : 'Copy link from SHEIN'}</span>
           </div>
-          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-neutral-700 dark:text-[#DDE3E8]">
+          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold">
             <span className="w-5 h-5 rounded-full bg-[#3A0F34] text-white font-black text-[10px] flex items-center justify-center shrink-0">2</span>
             <span className="truncate">{isRtl ? 'اضغطي استخراج وشوفي السعر' : 'Extract & see EGP total'}</span>
           </div>
-          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-neutral-700 dark:text-[#DDE3E8]">
+          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold">
             <span className="w-5 h-5 rounded-full bg-[#3A0F34] text-white font-black text-[10px] flex items-center justify-center shrink-0">3</span>
             <span className="truncate">{isRtl ? 'ادفعي بالمصري واستلمي بالبيت' : 'Pay in EGP & receive at home'}</span>
           </div>
@@ -426,7 +426,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
             transition={{ duration: 0.15 }}
             type="submit"
             disabled={loading}
-            className="w-full sm:w-auto px-8 py-3.5 bg-[#3A0F34] hover:bg-[#4E1646] text-white font-black text-xs sm:text-sm rounded-2xl shadow-lg shadow-[#3A0F34]/25 transition-all flex items-center justify-center gap-2.5 cursor-pointer select-none disabled:opacity-50 border border-[#DDE3E8]/30"
+            className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#3A0F34] via-[#5C1E52] to-[#3A0F34] hover:opacity-95 text-[#DDE3E8] font-black text-xs sm:text-sm rounded-2xl shadow-lg shadow-[#3A0F34]/25 transition-all flex items-center justify-center gap-2.5 cursor-pointer select-none disabled:opacity-50 border border-[#DDE3E8]/40"
           >
             {loading ? (
               <>
