@@ -347,7 +347,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4 sm:p-6 overflow-hidden bg-[#F4F6F8] dark:bg-[#130712]">
+    <div className="min-h-screen relative flex items-center justify-center p-4 sm:p-6 overflow-hidden bg-[#DDE3E8] dark:bg-[#150614]">
       {/* High-Fashion Editorial Background Image ("وراها BACKGROUND كده") */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-luminosity scale-105 pointer-events-none transition-all duration-1000"
@@ -357,7 +357,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
       />
 
       {/* Atmospheric Dark Luxury Vignette & Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-black via-[#0d040c]/90 to-[#220920]/80 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#DDE3E8]/90 via-[#E4EAEF]/60 to-[#D0D8DF]/80 dark:from-black dark:via-[#130712]/95 dark:to-[#220920]/90 pointer-events-none" />
 
       {/* Ambient Breathing Glow Orbs (Deep Aubergine & Ice Silver) */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#3A0F34]/35 blur-3xl pointer-events-none animate-pulse" />
@@ -368,7 +368,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
         initial={{ opacity: 0, scale: 0.94, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 w-full max-w-md bg-white/95 dark:bg-[#1A0919]/90 backdrop-blur-3xl rounded-[36px] shadow-[0_30px_90px_rgba(0,0,0,0.65)] border border-[#DDE3E8] dark:border-[#3A0F34]/50 p-7 sm:p-9 text-neutral-900 dark:text-white transition-colors"
+        className="relative z-10 w-full max-w-md bg-white/95 dark:bg-[#1C0B1B]/95 backdrop-blur-3xl rounded-[36px] shadow-[0_30px_90px_rgba(58,15,52,0.14)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.7)] border-2 border-[#3A0F34]/25 dark:border-[#DDE3E8]/35 p-7 sm:p-9 text-[#3A0F34] dark:text-white transition-colors"
       >
         {/* Top Floating Controls inside the card */}
         <div className="flex items-center justify-between pb-5 border-b border-[#DDE3E8]/80 dark:border-[#2C102A]">
@@ -643,7 +643,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
             whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={formLoading}
-            className="w-full mt-2 py-3.5 bg-[#3A0F34] hover:bg-[#4E1646] disabled:opacity-50 text-white rounded-xl text-xs font-black shadow-lg shadow-[#3A0F34]/25 transition-all cursor-pointer flex items-center justify-center gap-2 border border-[#DDE3E8]/30"
+            className="w-full mt-2 py-3.5 bg-gradient-to-r from-[#3A0F34] via-[#52194A] to-[#3A0F34] hover:opacity-95 disabled:opacity-50 text-[#DDE3E8] rounded-xl text-xs font-black shadow-lg shadow-[#3A0F34]/25 transition-all cursor-pointer flex items-center justify-center gap-2 border border-[#DDE3E8]/40"
           >
             {formLoading ? (
               <>
@@ -697,7 +697,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
             <button
               type="button"
               onClick={onGuestContinue}
-              className="w-full py-3 px-4 rounded-2xl bg-[#EBF0F4] hover:bg-[#DDE3E8] dark:bg-[#240E23] dark:hover:bg-[#321330] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34] font-black text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-[0.98]"
+              className="w-full py-3 px-4 rounded-2xl bg-[#DDE3E8] hover:bg-[#D4DCE2] dark:bg-[#240E23] dark:hover:bg-[#321330] text-[#3A0F34] dark:text-[#DDE3E8] border-2 border-[#3A0F34]/30 dark:border-[#DDE3E8]/30 font-black text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-[0.98]"
             >
               <ShoppingBag className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
               <span>{isRtl ? 'استكشاف الموقع وتجربة استخراج سلة شي إن كضيفة 🛍️✨' : 'Explore & Extract SHEIN Cart as Guest 🛍️'}</span>

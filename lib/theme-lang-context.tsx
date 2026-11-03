@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
@@ -340,7 +340,7 @@ const ThemeLangContext = createContext<ThemeLangContextType>({
 });
 
 const LANG_KEY = 'shein_app_language_v1';
-const THEME_KEY = 'shein_app_theme_v1';
+const THEME_KEY = 'shein_app_theme_v3_ice';
 
 export function ThemeLangProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Language>('ar'); // Default to Arabic RTL as requested
