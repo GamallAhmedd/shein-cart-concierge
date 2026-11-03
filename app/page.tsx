@@ -54,7 +54,6 @@ export default function HomePage() {
     // 2. Fetch orders ONLY if logged in (strict privacy)
     if (!user) {
       setRecentOrders([]);
-      setGuestMode(false);
       setExtractedData(null);
       return;
     }
@@ -116,16 +115,14 @@ export default function HomePage() {
     );
   }
 
-  if (!user && !guestMode) {
-    return <FullPageLoginCard onGuestContinue={() => setGuestMode(true)} />;
-  }
+  // Service page is shown upfront before login
 
   const topSections = settings?.customSections?.filter((s) => s.enabled && s.position === 'top') || [];
   const middleSections = settings?.customSections?.filter((s) => s.enabled && s.position === 'middle') || [];
   const bottomSections = settings?.customSections?.filter((s) => s.enabled && s.position === 'bottom') || [];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 pb-32 md:pb-24 transition-colors relative overflow-hidden">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 pb-32 md:pb-24 transition-colors relative overflow-x-hidden">
       {/* Background ambient lighting - Deep Aubergine & Ice Silver */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-[#7C3AED]/10 via-[#8B5CF6]/5 to-transparent pointer-events-none blur-3xl -z-10" />
 
@@ -139,7 +136,7 @@ export default function HomePage() {
               ? 'bg-emerald-600 text-white'
               : settings?.announcementBg === 'rose'
               ? 'bg-rose-600 text-white'
-              : 'bg-[#3A0F34] text-white border-b border-[#DDE3E8]/30'
+              : 'bg-[#7C3AED] text-white border-b border-violet-700/30'
           }`}
         >
           <Sparkles className="w-3.5 h-3.5 shrink-0 opacity-90 animate-sparkle-twinkle" />
@@ -158,7 +155,7 @@ export default function HomePage() {
                 <Sparkles className="w-3.5 h-3.5 text-[#7C3AED]" />
                 <span>{settings?.heroBadge || (dir === 'rtl' ? 'خدمة التسوق والاستخراج الأولى للبنات في مصر 🛍️✨' : t.heroBadge)}</span>
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-tight text-balance">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-tight text-balance">
                 {settings?.heroTitle || (dir === 'rtl' ? 'اختياراتك من SHEIN، لحد باب بيتك.' : t.heroTitle)}
               </h1>
               <p className="text-xs sm:text-sm text-slate-600 max-w-xl font-medium leading-relaxed text-balance">

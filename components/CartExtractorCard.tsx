@@ -149,7 +149,7 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
   return (
     <div
       id="cart-extractor-card"
-      className="relative rounded-3xl p-6 sm:p-8 bg-[#FFFFFF] border border-slate-200 shadow-sm space-y-6 transition-colors text-start"
+      className="relative rounded-3xl p-4 sm:p-7 bg-white border border-slate-200/90 shadow-sm space-y-5 transition-colors text-start overflow-hidden"
     >
       <form onSubmit={handleExtract} className="space-y-4">
         {/* Input Bar Header: Clear, accessible label + Paste & Clear buttons */}

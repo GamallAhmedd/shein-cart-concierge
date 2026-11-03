@@ -565,7 +565,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
             whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={formLoading}
-            className="w-full mt-2 py-3.5 bg-gradient-to-r from-[#3A0F34] via-[#52194A] to-[#3A0F34] hover:opacity-95 disabled:opacity-50 text-[#DDE3E8] rounded-xl text-xs font-black shadow-lg shadow-[#3A0F34]/25 transition-all cursor-pointer flex items-center justify-center gap-2 border border-slate-200/40"
+            className="w-full mt-2 py-3.5 bg-gradient-to-r from-[#7C3AED] via-[#8B5CF6] to-[#7C3AED] hover:opacity-95 disabled:opacity-50 text-white rounded-xl text-xs font-bold shadow-md shadow-[#7C3AED]/25 transition-all cursor-pointer flex items-center justify-center gap-2"
           >
             {formLoading ? (
               <>
@@ -619,7 +619,7 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
             <button
               type="button"
               onClick={onGuestContinue}
-              className="w-full py-3 px-4 rounded-2xl bg-[#DDE3E8] hover:bg-[#D4DCE2] dark:bg-[#240E23] dark:hover:bg-[#321330] text-[#7C3AED] dark:text-[#DDE3E8] border-2 border-[#3A0F34]/30 dark:border-slate-200/30 font-black text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-[0.98]"
+              className="w-full py-3 px-4 rounded-xl bg-violet-50 hover:bg-violet-100 text-[#7C3AED] border border-violet-200 font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-[0.98]"
             >
               <ShoppingBag className="w-4 h-4 text-[#7C3AED] dark:text-[#DDE3E8]" />
               <span>{isRtl ? 'استكشاف الموقع وتجربة استخراج سلة شي إن كضيفة 🛍️✨' : 'Explore & Extract SHEIN Cart as Guest 🛍️'}</span>
