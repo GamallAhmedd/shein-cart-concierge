@@ -57,20 +57,20 @@ export function SheinLinkGuide() {
   ];
 
   return (
-    <div className="rounded-3xl border border-purple-200/80 dark:border-purple-900/60 bg-gradient-to-br from-purple-50/80 via-white/80 to-pink-50/50 dark:from-[#171322] dark:via-[#13101c] dark:to-[#1a1428] backdrop-blur-md shadow-sm overflow-hidden transition-all">
+    <div className="rounded-3xl border border-rose-200/80 dark:border-rose-950/70 bg-gradient-to-br from-rose-50/70 via-white/80 to-amber-50/40 dark:from-[#1c1424] dark:via-[#16111d] dark:to-[#1e1526] backdrop-blur-md shadow-xs overflow-hidden transition-all">
       {/* Header bar that toggles the guide */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-5 py-4 flex items-center justify-between gap-3 text-start hover:bg-purple-100/40 dark:hover:bg-purple-950/30 transition-colors cursor-pointer group"
+        className="w-full px-5 py-4 flex items-center justify-between gap-3 text-start hover:bg-rose-100/30 dark:hover:bg-rose-950/20 transition-colors cursor-pointer group"
       >
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-2xl bg-purple-600 dark:bg-purple-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-purple-500/30 group-hover:scale-105 transition-transform">
+          <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-rose-600 to-pink-600 text-white flex items-center justify-center shrink-0 shadow-sm shadow-rose-500/25 group-hover:scale-105 transition-transform">
             <HelpCircle className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-xs sm:text-sm font-black text-neutral-900 dark:text-white">
+              <h3 className="text-xs sm:text-sm font-black text-neutral-950 dark:text-white">
                 {isRtl
                   ? 'مش عارفة تجيبي الرابط من تطبيق SHEIN إزاي؟'
                   : 'Not sure how to get the link from the SHEIN app?'}
@@ -88,10 +88,10 @@ export function SheinLinkGuide() {
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
-          <span className="text-xs font-bold text-purple-700 dark:text-purple-300 hidden md:inline">
+          <span className="text-xs font-bold text-rose-700 dark:text-rose-300 hidden md:inline">
             {isOpen ? (isRtl ? 'إخفاء الشرح' : 'Hide Guide') : (isRtl ? 'شوفي الخطوات' : 'View Steps')}
           </span>
-          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#1f192f] border border-purple-200 dark:border-purple-800 flex items-center justify-center text-purple-600 dark:text-purple-400">
+          <div className="w-8 h-8 rounded-full bg-white dark:bg-[#201828] border border-rose-200 dark:border-rose-900 flex items-center justify-center text-rose-600 dark:text-rose-400">
             {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </div>
         </div>
@@ -105,7 +105,7 @@ export function SheinLinkGuide() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-purple-100 dark:border-purple-900/40"
+            className="overflow-hidden border-t border-rose-100 dark:border-rose-950/60"
           >
             <div className="p-5 sm:p-6 space-y-6">
               {/* Step cards grid */}
@@ -119,8 +119,8 @@ export function SheinLinkGuide() {
                       onClick={() => setActiveStep(s.num)}
                       className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between gap-3 ${
                         isActive
-                          ? 'bg-white dark:bg-[#1e182e] border-purple-400 dark:border-purple-600 shadow-md ring-2 ring-purple-500/20'
-                          : 'bg-white/60 dark:bg-[#161221] border-neutral-200/70 dark:border-neutral-800 hover:border-purple-300'
+                          ? 'bg-white dark:bg-[#1e1526] border-rose-400 dark:border-rose-600 shadow-md ring-2 ring-rose-500/20'
+                          : 'bg-white/60 dark:bg-[#16111d] border-neutral-200/70 dark:border-neutral-800 hover:border-rose-300'
                       }`}
                     >
                       <div className="flex items-center justify-between gap-2">

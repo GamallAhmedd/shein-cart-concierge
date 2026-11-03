@@ -126,8 +126,8 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#FBFBFC] dark:bg-[#0c0a0f] text-neutral-900 dark:text-white pb-32 md:pb-24 transition-colors relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-purple-400/8 via-pink-400/4 to-transparent dark:from-purple-600/10 dark:via-purple-900/5 dark:to-transparent pointer-events-none blur-3xl -z-10" />
+      {/* Background ambient lighting - Warm Rose Silk & Soft Champagne Honey */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-rose-300/15 via-pink-200/10 to-transparent dark:from-rose-950/25 dark:via-purple-950/15 dark:to-transparent pointer-events-none blur-3xl -z-10" />
 
       {/* Optional Top Announcement Bar Configured by Admin */}
       {settings?.announcementEnabled !== false && settings?.announcementText && (
@@ -139,10 +139,10 @@ export default function HomePage() {
               ? 'bg-emerald-600 text-white'
               : settings?.announcementBg === 'rose'
               ? 'bg-rose-600 text-white'
-              : 'bg-gradient-to-r from-purple-700 via-indigo-700 to-purple-800 text-white'
+              : 'bg-gradient-to-r from-rose-700 via-pink-700 to-amber-600 text-white'
           }`}
         >
-          <Sparkles className="w-3.5 h-3.5 shrink-0 opacity-90" />
+          <Sparkles className="w-3.5 h-3.5 shrink-0 opacity-90 animate-sparkle-twinkle" />
           <span>{settings.announcementText}</span>
         </div>
       )}
@@ -152,16 +152,17 @@ export default function HomePage() {
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-12">
         {!extractedData ? (
           <div className="space-y-10">
-            {/* Header Title: Taste-Skill Editorial Hierarchy */}
+            {/* Header Title: Fashion Editorial Hierarchy */}
             <motion.div {...heroEntrance} className="text-center sm:text-start space-y-3 pt-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-purple-100 dark:bg-purple-950/70 border border-purple-200 dark:border-purple-800 text-[#7C3AED] dark:text-purple-300 text-[11px] font-black tracking-wide">
-                <span>{settings?.heroBadge || t.heroBadge}</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/70 border border-rose-200 dark:border-rose-900 text-rose-700 dark:text-rose-300 text-[11px] font-black tracking-wide shadow-2xs">
+                <Sparkles className="w-3.5 h-3.5 text-rose-500 animate-sparkle-twinkle" />
+                <span>{settings?.heroBadge || (dir === 'rtl' ? 'خدمة التسوق والاستخراج الأولى للبنات في مصر 🛍️✨' : t.heroBadge)}</span>
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white tracking-tight leading-tight text-balance">
-                {settings?.heroTitle || t.heroTitle}
+                {settings?.heroTitle || (dir === 'rtl' ? 'كل سلات وفساتين شي إن.. بالجنيه المصري لباب بيتكِ' : t.heroTitle)}
               </h1>
               <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 max-w-xl leading-relaxed text-balance">
-                {settings?.heroSubtitle || t.heroSubtitle}
+                {settings?.heroSubtitle || (dir === 'rtl' ? 'وداعاً لمشاكل الدفع بالدولار وبطاقات البنوك! الصقي رابط سلتك، واحسبي إجمالي طلبك بالجنيه فوراً، وادفعي عبر إنستاباي أو فودافون كاش واستلمي شحنتك أينما كنتِ في مصر.' : t.heroSubtitle)}
               </p>
             </motion.div>
 
