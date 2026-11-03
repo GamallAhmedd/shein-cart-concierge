@@ -579,7 +579,7 @@ export function ExtractedGoodsView({
 
               <form onSubmit={handleSubmitOrder} className="p-6 space-y-4 text-xs">
                 {error && (
-                  <div className="p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-800 dark:text-rose-200 rounded-xl text-xs font-bold flex items-center gap-2">
+                  <div id="checkout-error" role="alert" aria-live="polite" className="p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-800 dark:text-rose-200 rounded-xl text-xs font-bold flex items-center gap-2">
                     <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
                     <span>{error}</span>
                   </div>
@@ -599,7 +599,7 @@ export function ExtractedGoodsView({
 
                 <div className="text-start">
                   <div className="flex items-center justify-between mb-1">
-                    <label className="block font-black text-neutral-700 dark:text-neutral-300">
+                    <label htmlFor="checkout-name" className="block font-black text-neutral-700 dark:text-neutral-300">
                       {isRtl ? 'الاسم بالكامل (ثنائي أو ثلاثي)' : 'Full Recipient Name'}
                     </label>
                     <span className="text-[10px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold bg-[#EBF0F4] dark:bg-[#200D1F] px-2 py-0.5 rounded-md border border-[#DDE3E8] dark:border-[#3A0F34]">
@@ -609,12 +609,15 @@ export function ExtractedGoodsView({
                   <div className="relative">
                     <User className={`w-4 h-4 absolute top-1/2 -translate-y-1/2 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
                     <input
+                      id="checkout-name"
+                      name="recipient_name"
+                      autoComplete="name"
                       type="text"
                       required
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
                       placeholder={isRtl ? 'مثال: سارة أحمد محمود' : 'Full Name'}
-                      className={`w-full py-2.5 bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] text-neutral-900 dark:text-white ${
+                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] text-neutral-900 dark:text-white ${
                         isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                       }`}
                     />
@@ -623,7 +626,7 @@ export function ExtractedGoodsView({
 
                 <div className="text-start">
                   <div className="flex items-center justify-between mb-1">
-                    <label className="block font-black text-neutral-700 dark:text-neutral-300">
+                    <label htmlFor="checkout-phone" className="block font-black text-neutral-700 dark:text-neutral-300">
                       {isRtl
                         ? 'رقم الموبايل في مصر (InstaPay أو Vodafone Cash)'
                         : 'Egyptian Mobile (InstaPay / Vodafone Cash)'}
@@ -635,12 +638,15 @@ export function ExtractedGoodsView({
                   <div className="relative">
                     <Phone className={`w-4 h-4 absolute top-1/2 -translate-y-1/2 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
                     <input
+                      id="checkout-phone"
+                      name="tel"
+                      autoComplete="tel"
                       type="tel"
                       required
                       value={customerPhone}
                       onChange={(e) => setCustomerPhone(e.target.value)}
                       placeholder="010XXXXXXXX"
-                      className={`w-full py-2.5 bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] font-mono text-neutral-900 dark:text-white ${
+                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] font-mono text-neutral-900 dark:text-white ${
                         isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                       }`}
                     />
@@ -649,7 +655,7 @@ export function ExtractedGoodsView({
 
                 <div className="text-start">
                   <div className="flex items-center justify-between mb-1">
-                    <label className="block font-black text-neutral-700 dark:text-neutral-300">
+                    <label htmlFor="checkout-address" className="block font-black text-neutral-700 dark:text-neutral-300">
                       {isRtl ? 'عنوان التوصيل بالتفصيل في مصر' : 'Delivery Address in Egypt'}
                     </label>
                     <span className="text-[10px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold bg-[#EBF0F4] dark:bg-[#200D1F] px-2 py-0.5 rounded-md border border-[#DDE3E8] dark:border-[#3A0F34]">
@@ -659,12 +665,15 @@ export function ExtractedGoodsView({
                   <div className="relative">
                     <MapPin className={`w-4 h-4 absolute top-3 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
                     <textarea
+                      id="checkout-address"
+                      name="shipping_address"
+                      autoComplete="street-address"
                       rows={2}
                       required
                       value={shippingAddress}
                       onChange={(e) => setShippingAddress(e.target.value)}
                       placeholder={isRtl ? 'مثال: عمارة 12، شارع النصر، المعادي، القاهرة' : 'e.g. Building 12, Nasr Street, Maadi, Cairo'}
-                      className={`w-full py-2.5 bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] text-neutral-900 dark:text-white ${
+                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] text-neutral-900 dark:text-white ${
                         isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                       }`}
                     />
@@ -673,7 +682,7 @@ export function ExtractedGoodsView({
 
                 <div className="text-start">
                   <div className="flex items-center justify-between mb-1">
-                    <label className="block font-black text-neutral-700 dark:text-neutral-300">
+                    <label htmlFor="checkout-notes" className="block font-black text-neutral-700 dark:text-neutral-300">
                       {isRtl ? 'ملاحظات إضافية على الطلب' : 'Additional Order Notes'}
                     </label>
                     <span className="text-[10px] text-neutral-400 font-bold bg-neutral-100 dark:bg-[#1f192b] px-2 py-0.5 rounded-md border border-[#DDE3E8] dark:border-[#3A0F34]/50">
@@ -683,6 +692,8 @@ export function ExtractedGoodsView({
                   <div className="relative">
                     <FileText className={`w-4 h-4 absolute top-3 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
                     <textarea
+                      id="checkout-notes"
+                      name="order_notes"
                       rows={2}
                       value={customerNotes}
                       onChange={(e) => setCustomerNotes(e.target.value)}
@@ -691,7 +702,7 @@ export function ExtractedGoodsView({
                           ? 'أي تعليمات أو مقاسات بديلة أو أوقات تسليم مفضلة...'
                           : 'Any instructions, sizing notes, or preferred delivery timing...'
                       }
-                      className={`w-full py-2.5 bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] text-neutral-900 dark:text-white text-xs ${
+                      className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] text-neutral-900 dark:text-white text-xs ${
                         isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                       }`}
                     />

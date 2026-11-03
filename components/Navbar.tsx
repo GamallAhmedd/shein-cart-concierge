@@ -72,7 +72,7 @@ export function Navbar({ onOpenAuth }: { onOpenAuth?: () => void }) {
                   </span>
                 )}
               </div>
-              <p className="text-[10px] sm:text-[11px] text-neutral-500 dark:text-[#9BAAB6] font-medium tracking-tight mt-0.5">
+              <p className="hidden xl:block text-[10px] sm:text-[11px] text-[#66596A] font-medium tracking-tight mt-0.5">
                 {user?.role === 'admin'
                   ? (lang === 'ar' ? 'لوحة تحكم وإدارة المشرف' : 'Admin Operations Control')
                   : (lang === 'ar' ? 'بوابتكِ لشراء كل ما تحبين من شي إن بالجنيه المصري ✨' : t.brandSubtitle)}
@@ -122,7 +122,7 @@ export function Navbar({ onOpenAuth }: { onOpenAuth?: () => void }) {
                   )}
                   <span className="relative z-10 flex items-center gap-1.5">
                     <TrendingUp className="w-3.5 h-3.5" />
-                    <span>{lang === 'ar' ? 'الإحصائيات والتحليلات' : 'Analytics & Revenue'}</span>
+                    <span>{lang === 'ar' ? 'المبيعات والتحصيل' : 'Analytics'}</span>
                   </span>
                 </Link>
               </>
@@ -185,7 +185,7 @@ export function Navbar({ onOpenAuth }: { onOpenAuth?: () => void }) {
 
             {/* New Order Button (Hidden for Admins, visible on md+) */}
             {user?.role !== 'admin' && (
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="hidden md:block">
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="hidden xl:block">
                 <Link
                   href="/"
                   className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#EBF0F4] hover:bg-[#DDE3E8] dark:bg-[#240E23] dark:hover:bg-[#321330] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#DDE3E8]/20 transition-colors"
@@ -201,7 +201,7 @@ export function Navbar({ onOpenAuth }: { onOpenAuth?: () => void }) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setSupportOpen(true)}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white dark:bg-[#1A0919] hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] text-neutral-700 dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34]/50 transition-colors cursor-pointer"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white text-neutral-700 border border-[#DDE3E8] hover:bg-[#EBF0F4] transition-colors cursor-pointer"
               title={t.support}
             >
               <Headphones className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />

@@ -1,37 +1,43 @@
-﻿@import "tailwindcss";
-
-@custom-variant dark (&:where(.dark, .dark *));
+@import "tailwindcss";
 
 @layer base {
   :root {
-    --background: #DDE3E8;
-    --foreground: #3A0F34;
-    --brand-aubergine: #3A0F34;
-    --brand-aubergine-ink: #3A0F34;
-    --brand-ice-silver: #DDE3E8;
-    --brand-ice-canvas: #E7EDF2;
-    --brand-mauve-mid: #7E4A76;
-    --brand-gradient: linear-gradient(135deg, #3A0F34 0%, #682E60 45%, #9E7497 75%, #DDE3E8 100%);
-    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* Phase 2: Refined Design System Tokens */
+    --color-canvas: #DDE3E8;
+    --color-paper: #F8F9FA;
+    --color-surface: #FFFFFF;
+    --color-ink: #3A0F34;
+    --color-accent: #682E60;
+    --color-muted-ink: #66596A;
+    --color-border: #C7CCD2;
+    --color-control-border: #918797;
+
+    /* Semantic mappings */
+    --background: var(--color-canvas);
+    --foreground: var(--color-ink);
+    --brand-aubergine: var(--color-ink);
+    --brand-ice-silver: var(--color-canvas);
+    --brand-gradient: linear-gradient(135deg, #3A0F34 0%, #682E60 45%, #DDE3E8 100%);
+
+    --radius-btn: 8px;
+    --radius-surface: 12px;
+    --radius-card: 16px;
     --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  html.dark {
-    --background: #150614;
-    --foreground: #DDE3E8;
-    color-scheme: dark;
-  }
-
   body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Cairo', 'Tajawal', sans-serif;
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-ibm-plex-arabic), var(--font-manrope), system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     margin: 0;
     padding: 0;
-    transition: background-color 0.25s ease, color 0.25s ease;
+    font-weight: 400;
+    line-height: 1.6;
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.65) 0%, rgba(221, 227, 232, 0.95) 75%, #D4DCE2 100%);
+    background-attachment: fixed;
   }
 
   [dir="rtl"] {
@@ -42,11 +48,17 @@
     display: block;
     max-width: 100%;
   }
+
+  /* Form inputs minimum 16px to prevent iOS auto-zoom */
+  input, select, textarea {
+    font-size: 16px;
+  }
 }
 
-/* Tabular numbers & text balancing */
+/* Tabular numbers for all statistics & prices */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
+  font-family: var(--font-manrope), monospace;
 }
 
 .text-balance {
@@ -57,157 +69,53 @@
   text-wrap: pretty;
 }
 
-/* Editorial Canvas & Paper Atmosphere (Ice Silver Base) */
-body {
-  background-color: #DDE3E8 !important;
-  color: #3A0F34 !important;
-  background-image: 
-    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.55) 0%, rgba(221, 227, 232, 0.95) 70%, #D4DCE2 100%);
-  background-attachment: fixed;
+/* Subtle, dignified card surfaces with hairline border */
+.editorial-surface {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
 }
 
-.dark body {
-  background-color: #150614;
-  background-image: 
-    radial-gradient(ellipse at 50% 0%, rgba(58, 15, 52, 0.35) 0%, rgba(21, 6, 20, 0.98) 75%, #10040F 100%);
-  color: #DDE3E8;
+.editorial-card-interactive {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Dark mode theme surface overrides with Deep Aubergine & Ice Silver undertones */
-.dark .bg-\[\#F9FAFB\],
-.dark .bg-\[\#FBFBFC\],
-.dark .bg-neutral-50 {
-  background-color: #1F0A1D !important;
+.editorial-card-interactive:hover {
+  border-color: var(--color-control-border);
+  box-shadow: 0 4px 16px -4px rgba(58, 15, 52, 0.08);
 }
 
-.dark .bg-white {
-  background-color: #1A0919 !important;
+/* Primary Editorial Button: Deep Aubergine Ink on Ice Silver */
+.btn-primary-editorial {
+  background-color: var(--color-ink);
+  color: var(--color-canvas);
+  border: 1px solid rgba(221, 227, 232, 0.4);
+  border-radius: var(--radius-btn);
+  font-weight: 600;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+  min-height: 44px;
 }
 
-.dark .bg-neutral-100 {
-  background-color: #270F25 !important;
+.btn-primary-editorial:hover {
+  background-color: var(--color-accent);
 }
 
-.dark .text-neutral-900,
-.dark .text-neutral-950 {
-  color: #DDE3E8 !important;
+/* Secondary Button: Paper Surface with Ink Border */
+.btn-secondary-editorial {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-control-border);
+  border-radius: var(--radius-btn);
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  min-height: 44px;
 }
 
-.dark .text-neutral-800,
-.dark .text-neutral-700 {
-  color: #C8D3DC !important;
-}
-
-.dark .text-neutral-600,
-.dark .text-neutral-500 {
-  color: #9BAAB6 !important;
-}
-
-.dark .border-neutral-100,
-.dark .border-neutral-200,
-.dark .border-neutral-200\/80,
-.dark .border-neutral-200\/60,
-.dark .border-neutral-200\/50,
-.dark .border-neutral-300 {
-  border-color: rgba(221, 227, 232, 0.2) !important;
-}
-
-.dark input,
-.dark textarea {
-  color: #DDE3E8 !important;
-}
-
-.dark input::placeholder,
-.dark textarea::placeholder {
-  color: #798894 !important;
-}
-
-/* Custom Fashion & Editorial Keyframe Animations */
-@keyframes delicate-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-@keyframes fashion-float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-}
-
-@keyframes pulse-aubergine-glow {
-  0%, 100% {
-    opacity: 0.35;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.03);
-  }
-}
-
-@keyframes sparkle-twinkle {
-  0%, 100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.18) rotate(12deg);
-    opacity: 1;
-  }
-}
-
-.animate-fashion-float {
-  animation: fashion-float 3.5s ease-in-out infinite;
-}
-
-.animate-pulse-aubergine-glow {
-  animation: pulse-aubergine-glow 4s ease-in-out infinite;
-}
-
-.animate-sparkle-twinkle {
-  animation: sparkle-twinkle 2.5s ease-in-out infinite;
-}
-
-/* Editorial Glass & Surface Cards (Ice Silver #DDE3E8 base with Deep Aubergine #3A0F34 drawing/borders) */
-.fashion-glass-card {
-  background: rgba(245, 248, 250, 0.92);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1.5px solid rgba(58, 15, 52, 0.22);
-  color: #3A0F34;
-  box-shadow: 0 10px 40px -10px rgba(58, 15, 52, 0.08);
-}
-
-.dark .fashion-glass-card {
-  background: rgba(26, 9, 25, 0.94);
-  border: 1px solid rgba(221, 227, 232, 0.22);
-  color: #DDE3E8;
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.65);
-}
-
-/* Shimmering Editorial Deep Aubergine & Ice Silver Border */
-.editorial-shimmer-border {
-  position: relative;
-}
-.editorial-shimmer-border::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(90deg, #3A0F34, #682E60, #DDE3E8, #3A0F34);
-  background-size: 300% 100%;
-  animation: delicate-shimmer 6s linear infinite;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  pointer-events: none;
+.btn-secondary-editorial:hover {
+  background-color: var(--color-paper);
 }
 
 /* Selection Color: Aubergine ink background with Ice Silver text */
@@ -216,7 +124,7 @@ body {
   color: #DDE3E8;
 }
 
-/* Clean micro scrollbars */
+/* Clean, unobtrusive micro scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -225,31 +133,19 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(58, 15, 52, 0.25);
+  background: var(--color-border);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(58, 15, 52, 0.5);
+  background: var(--color-control-border);
 }
 
-.dark ::-webkit-scrollbar-thumb {
-  background: rgba(221, 227, 232, 0.25);
-}
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(221, 227, 232, 0.5);
-}
-
-/* Google Identity Services button container fix for dark mode */
-.google-gsi-wrapper,
-div:has(> iframe[src*="accounts.google.com/gsi"]),
-div[id*="g_id_signin"] {
-  color-scheme: light !important;
-  background-color: transparent !important;
-  background: transparent !important;
-}
-
-iframe[src*="accounts.google.com/gsi"] {
-  color-scheme: light !important;
-  background-color: transparent !important;
-  border-radius: 9999px !important;
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

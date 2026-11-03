@@ -36,7 +36,7 @@ export default function HomePage() {
   const router = useRouter();
   const { user, isLoading } = useAuth();
   const { t, dir } = useThemeLang();
-  const [guestMode, setGuestMode] = useState(false);
+  const [guestMode, setGuestMode] = useState(true);
   const [authOpen, setAuthOpen] = useState(false);
   const [extractedData, setExtractedData] = useState<ExtractedCartResult | null>(null);
   const [settings, setSettings] = useState<SystemSettings | null>(null);
@@ -159,10 +159,10 @@ export default function HomePage() {
                 <span>{settings?.heroBadge || (dir === 'rtl' ? 'خدمة التسوق والاستخراج الأولى للبنات في مصر 🛍️✨' : t.heroBadge)}</span>
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#3A0F34] dark:text-white tracking-tight leading-tight text-balance">
-                {settings?.heroTitle || (dir === 'rtl' ? 'كل سلات وفساتين شي إن.. بالجنيه المصري لباب بيتكِ' : t.heroTitle)}
+                {settings?.heroTitle || (dir === 'rtl' ? 'اختياراتك من SHEIN، لحد باب بيتك.' : t.heroTitle)}
               </h1>
               <p className="text-xs sm:text-sm text-[#3A0F34]/80 dark:text-[#DDE3E8] max-w-xl font-medium leading-relaxed text-balance">
-                {settings?.heroSubtitle || (dir === 'rtl' ? 'وداعاً لمشاكل الدفع بالدولار وبطاقات البنوك! الصقي رابط سلتك، واحسبي إجمالي طلبك بالجنيه فوراً، وادفعي عبر إنستاباي أو فودافون كاش واستلمي شحنتك أينما كنتِ في مصر.' : t.heroSubtitle)}
+                {settings?.heroSubtitle || (dir === 'rtl' ? 'الصقي رابط سلتك، اعرفي التكلفة بالجنيه المصري، وكمّلي طلبك بالدفع المحلي.' : t.heroSubtitle)}
               </p>
             </motion.div>
 

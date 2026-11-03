@@ -2,113 +2,129 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Truck, Sparkles, Clock, AlertCircle } from 'lucide-react';
+import { Plane, Calendar } from 'lucide-react';
 import { useThemeLang } from '@/lib/theme-lang-context';
+
+interface ActiveShipmentData {
+  code: string;
+  status: string;
+  currentOrders: number;
+  maxOrders?: number;
+  remainingSlots?: number;
+  percent?: number;
+}
 
 export function ShipmentBatchLiveNudge() {
   const { dir } = useThemeLang();
   const isRtl = dir === 'rtl';
 
-  const [shipmentInfo, setShipmentInfo] = useState<{
-    code: string;
-    totalItems: number;
-    maxItems: number;
-    remaining: number;
-    percent: number;
-  } | null>(null);
+  const [shipmentInfo, setShipmentInfo] = useState<ActiveShipmentData | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
     fetch('/api/shipments')
       .then((res) => res.json())
       .then((data) => {
+        if (!isMounted) return;
         if (data.success && Array.isArray(data.data) && data.data.length > 0) {
-          // Find the active/preparing shipment or take first
-          const active =
-            data.data.find((s: any) => s.status === 'PREPARING' || s.status === 'IN_TRANSIT') ||
-            data.data[0];
+          // Find an active batch currently accepting or preparing orders
+          const active = data.data.find(
+            (s: any) => s.status === 'PREPARING' || s.status === 'IN_TRANSIT'
+          );
 
           if (active) {
-            const max = active.maxItems || 40;
-            // Simulated realistic filled items if empty, or calculate
-            const filled = active.orderIds ? Math.max(active.orderIds.length * 4, 31) : 31;
-            const current = Math.min(filled, max - 4);
-            const remaining = Math.max(max - current, 4);
-            const percent = Math.min(Math.round((current / max) * 100), 92);
+            const currentOrders = Array.isArray(active.orderIds) ? active.orderIds.length : 0;
+            const maxOrders = typeof active.maxOrders === 'number' && active.maxOrders > 0 ? active.maxOrders : undefined;
+            const remainingSlots = maxOrders !== undefined ? Math.max(maxOrders - currentOrders, 0) : undefined;
+            const percent = maxOrders !== undefined && maxOrders > 0
+              ? Math.min(Math.round((currentOrders / maxOrders) * 100), 100)
+              : undefined;
 
             setShipmentInfo({
-              code: active.code || (isRtl ? 'شحنة الأسبوع الحالية' : 'Current Batch'),
-              totalItems: current,
-              maxItems: max,
-              remaining,
+              code: active.code || (isRtl ? 'دفعة الشحن الجوي الحالية' : 'Current Air Shipment'),
+              status: active.status,
+              currentOrders,
+              maxOrders,
+              remainingSlots,
               percent,
             });
+          } else {
+            setShipmentInfo(null);
           }
+        } else {
+          setShipmentInfo(null);
         }
       })
       .catch(() => {
-        // Fallback default
-        setShipmentInfo({
-          code: isRtl ? 'شحنة الأسبوع الحالية لمصر' : 'Current Egypt Batch',
-          totalItems: 32,
-          maxItems: 40,
-          remaining: 8,
-          percent: 80,
-        });
+        // Honest fallback: if network fails or no data, do not display fabricated urgency counts
+        if (isMounted) setShipmentInfo(null);
+      })
+      .finally(() => {
+        if (isMounted) setLoading(false);
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, [isRtl]);
 
-  if (!shipmentInfo) return null;
+  // If no active shipment is registered in the database, don't show simulated scarcity
+  if (loading || !shipmentInfo) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
+    <motion.aside
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="rounded-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 bg-white/95 dark:bg-[#1A0919] p-4 shadow-xs"
+      transition={{ duration: 0.3 }}
+      aria-label={isRtl ? 'معلومات دفعة الشحن الحالية' : 'Current Shipment Batch Information'}
+      className="rounded-2xl border border-[#C7CCD2] bg-[#F8F9FA] p-4 text-[#3A0F34] shadow-xs"
     >
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-3 w-full sm:w-auto">
-          <div className="w-9 h-9 rounded-xl bg-[#3A0F34] text-white flex items-center justify-center shrink-0 shadow-xs shadow-[#3A0F34]/25 border border-[#DDE3E8]/30">
-            <Truck className="w-4 h-4" />
+          <div className="w-9 h-9 rounded-xl bg-[#3A0F34] text-[#DDE3E8] flex items-center justify-center shrink-0 border border-[#C7CCD2]/40">
+            <Plane className="w-4 h-4" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-black text-neutral-950 dark:text-white">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xs font-semibold text-[#3A0F34]">
                 {shipmentInfo.code}
               </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8]">
-                <Clock className="w-2.5 h-2.5" />
-                {isRtl
-                  ? `متبقي ${shipmentInfo.remaining} قطع فقط للإغلاق`
-                  : `Only ${shipmentInfo.remaining} items remaining`}
-              </span>
+              {shipmentInfo.remainingSlots !== undefined && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#DDE3E8] text-[#3A0F34] border border-[#C7CCD2]">
+                  <Calendar className="w-3 h-3" />
+                  {isRtl
+                    ? `متاح ${shipmentInfo.remainingSlots} طلبات قبل اكتمال الشحنة`
+                    : `${shipmentInfo.remainingSlots} orders remaining in this batch`}
+                </span>
+              )}
             </div>
-            <p className="text-[11px] text-neutral-500 dark:text-[#9BAAB6] mt-0.5">
+            <p className="text-xs text-[#66596A] mt-0.5">
               {isRtl
-                ? 'اطلبي الآن لتنضم سلتكِ لدفعة الشحن الجوي الحالية وتستلمي في أقرب موعد بمصر ✈️'
-                : 'Order now to join this expedited air shipment batch'}
+                ? 'تجميع وشحن جوي مباشر لمطار القاهرة ثم تسليم منزلي لجميع المحافظات'
+                : 'Direct air consolidation to Cairo airport with nationwide home delivery'}
             </p>
           </div>
         </div>
 
-        {/* Progress bar meter */}
-        <div className="w-full sm:w-48 space-y-1.5 shrink-0">
-          <div className="flex items-center justify-between text-[10px] font-bold text-neutral-600 dark:text-[#DDE3E8]">
-            <span>{isRtl ? 'اكتمال دفعة الشحن:' : 'Batch Capacity:'}</span>
-            <span className="font-mono tabular-nums text-[#3A0F34] dark:text-[#DDE3E8] font-black">
-              {shipmentInfo.percent}%
-            </span>
+        {/* Real capacity meter if maxOrders is configured */}
+        {shipmentInfo.percent !== undefined && (
+          <div className="w-full sm:w-44 space-y-1 shrink-0">
+            <div className="flex items-center justify-between text-[11px] font-medium text-[#66596A]">
+              <span>{isRtl ? 'امتلاء الدفعة:' : 'Capacity:'}</span>
+              <span className="font-mono tabular-nums text-[#3A0F34] font-semibold">
+                {shipmentInfo.percent}%
+              </span>
+            </div>
+            <div className="w-full h-1.5 rounded-full bg-[#DDE3E8] overflow-hidden">
+              <div
+                style={{ width: `${shipmentInfo.percent}%` }}
+                className="h-full bg-[#3A0F34] rounded-full transition-all duration-500"
+              />
+            </div>
           </div>
-          <div className="w-full h-2 rounded-full bg-neutral-100 dark:bg-[#251024] overflow-hidden">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: `${shipmentInfo.percent}%` }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="h-full bg-[#3A0F34] dark:bg-[#DDE3E8] rounded-full"
-            />
-          </div>
-        </div>
+        )}
       </div>
-    </motion.div>
+    </motion.aside>
   );
 }

@@ -540,6 +540,9 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
         <AnimatePresence>
           {error && (
             <motion.div
+              id="fullpage-login-error"
+              role="alert"
+              aria-live="polite"
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
@@ -555,18 +558,21 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
         <form onSubmit={handleSubmit} className="space-y-3">
           {mode === 'signup' && (
             <div className="text-start">
-              <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
+              <label htmlFor="full-login-name" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
                 {isRtl ? 'الاسم الكريم' : 'Full Name'}
               </label>
               <div className="relative">
                 <User className={`w-4 h-4 absolute top-1/2 -translate-y-1/2 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
                 <input
+                  id="full-login-name"
+                  name="name"
+                  autoComplete="name"
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={isRtl ? 'أحمد جمال' : 'Sara Ahmed'}
-                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
+                  className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
                     isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                   }`}
                 />
@@ -575,18 +581,21 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
           )}
 
           <div className="text-start">
-            <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
+            <label htmlFor="full-login-email" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
               {isRtl ? 'البريد الإلكتروني' : 'Email Address'}
             </label>
             <div className="relative">
               <Mail className={`w-4 h-4 absolute top-1/2 -translate-y-1/2 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
               <input
+                id="full-login-email"
+                name="email"
+                autoComplete="email"
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
+                className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
                   isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                 }`}
               />
@@ -595,17 +604,20 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
 
           {mode === 'signup' && (
             <div className="text-start">
-              <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
+              <label htmlFor="full-login-phone" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
                 {isRtl ? 'رقم الهاتف (للتواصل أو فودافون كاش)' : 'Phone Number (Vodafone Cash / Contact)'}
               </label>
               <div className="relative">
                 <Phone className={`w-4 h-4 absolute top-1/2 -translate-y-1/2 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
                 <input
+                  id="full-login-phone"
+                  name="tel"
+                  autoComplete="tel"
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="010XXXXXXXX"
-                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-mono ${
+                  className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-mono ${
                     isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                   }`}
                 />
@@ -614,18 +626,21 @@ export function FullPageLoginCard({ onGuestContinue }: FullPageLoginCardProps) {
           )}
 
           <div className="text-start">
-            <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
+            <label htmlFor="full-login-password" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
               {isRtl ? 'كلمة المرور' : 'Password'}
             </label>
             <div className="relative">
               <Lock className={`w-4 h-4 absolute top-1/2 -translate-y-1/2 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
               <input
+                id="full-login-password"
+                name="password"
+                autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] ${
+                className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] ${
                   isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                 }`}
               />

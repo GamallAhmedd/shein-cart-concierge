@@ -1,26 +1,30 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { IBM_Plex_Sans_Arabic, Manrope } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import { FloatingSupportButton } from '@/components/FloatingSupportButton';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
+  subsets: ['arabic', 'latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-ibm-plex-arabic',
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const manrope = Manrope({
   subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-manrope',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'SHEIN Cart Extractor & Concierge — Egypt',
+  title: 'SHEIN Concierge Egypt — اختياراتك من شي إن لحد باب بيتك',
   description:
-    'Extract goods from SHEIN shopping carts, direct conversion, admin review & payment with InstaPay and Vodafone Cash in Egypt.',
+    'خدمة كونسيرج تسوق للعميلات في مصر: شاركي رابط سلتك، اعرفي التكلفة بالجنيه المصري، وادفعي محلياً عبر إنستاباي أو فودافون كاش مع التوصيل لباب بيتك.',
 };
 
 export default function RootLayout({
@@ -30,8 +34,10 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="ar"
+      dir="rtl"
+      className={`${ibmPlexArabic.variable} ${manrope.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         <script

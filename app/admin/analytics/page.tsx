@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
@@ -23,15 +23,12 @@ import {
   ArrowRight,
   ArrowLeft,
   RefreshCw,
-  Sliders,
-  DollarSign,
   Package,
-  Calendar,
   Percent,
   CheckCheck,
-  Printer,
   ChevronRight,
-  Sparkles,
+  Ban,
+  ArrowUpRight,
 } from 'lucide-react';
 
 function formatLastSeen(dateString?: string, isRtl = true): { label: string; isOnline: boolean } {
@@ -71,6 +68,7 @@ export default function AdminAnalyticsPage() {
   const [loading, setLoading] = useState(true);
   const [authOpen, setAuthOpen] = useState(false);
   const [timeRange, setTimeRange] = useState<'all' | '30d' | '7d'>('all');
+  const [lastRefreshedAt, setLastRefreshedAt] = useState<Date | null>(null);
 
   const fetchData = async () => {
     setLoading(true);
@@ -88,6 +86,7 @@ export default function AdminAnalyticsPage() {
       if (ordersJson.success) setOrders(ordersJson.data);
       if (settingsJson.success) setSettings(settingsJson.data);
       if (usersJson.success) setRegisteredUsers(usersJson.data);
+      setLastRefreshedAt(new Date());
     } catch (err) {
       console.error('Failed to load analytics data:', err);
     } finally {
@@ -111,37 +110,46 @@ export default function AdminAnalyticsPage() {
   // Calculations
   const stats = useMemo(() => {
     const totalOrders = filteredOrders.length;
-    const nonRejectedOrders = filteredOrders.filter((o) => o.status !== 'REJECTED');
+
+    // Active pipeline orders: exclude both REJECTED and CANCELLED
+    const activeOrders = filteredOrders.filter(
+      (o) => o.status !== 'REJECTED' && o.status !== 'CANCELLED'
+    );
+
+    // Paid / fulfilled orders
     const paidOrDoneOrders = filteredOrders.filter((o) =>
       ['PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'COMPLETED'].includes(o.status)
     );
 
     // Financials
-    const totalGmv = nonRejectedOrders.reduce((sum, o) => sum + (o.totalCash || 0), 0);
-    const totalCommission = nonRejectedOrders.reduce((sum, o) => sum + (o.dynamicFeeAmount || 0), 0);
+    const totalPipelineGmv = activeOrders.reduce((sum, o) => sum + (o.totalCash || 0), 0);
+    const totalEstimatedCommission = activeOrders.reduce((sum, o) => sum + (o.dynamicFeeAmount || 0), 0);
     const totalPaidGmv = paidOrDoneOrders.reduce((sum, o) => sum + (o.totalCash || 0), 0);
     const totalPaidCommission = paidOrDoneOrders.reduce((sum, o) => sum + (o.dynamicFeeAmount || 0), 0);
-    const averageOrderValue = totalOrders > 0 ? Math.round(totalGmv / (nonRejectedOrders.length || 1)) : 0;
+    const averageOrderValue = activeOrders.length > 0 ? Math.round(totalPipelineGmv / activeOrders.length) : 0;
 
     // Items
-    const totalItems = nonRejectedOrders.reduce((sum, o) => sum + (o.itemsCount || o.items?.length || 0), 0);
-    const avgItemsPerOrder = nonRejectedOrders.length > 0 ? (totalItems / nonRejectedOrders.length).toFixed(1) : '0';
+    const totalItems = activeOrders.reduce((sum, o) => sum + (o.itemsCount || o.items?.length || 0), 0);
+    const avgItemsPerOrder = activeOrders.length > 0 ? (totalItems / activeOrders.length).toFixed(1) : '0';
 
-    // Status breakdown
+    // Status breakdown (all 7 exhaustive cases with 0 leakage)
     const pendingReview = filteredOrders.filter((o) => o.status === 'PENDING_APPROVAL').length;
     const awaitingPayment = filteredOrders.filter((o) => o.status === 'APPROVED_PENDING_PAYMENT').length;
     const paymentReview = filteredOrders.filter((o) => o.status === 'PAYMENT_UNDER_REVIEW').length;
-    const paidAndFulfillment = filteredOrders.filter((o) => ['PAID', 'PROCESSING', 'SHIPPED'].includes(o.status)).length;
+    const paidAndFulfillment = filteredOrders.filter((o) =>
+      ['PAID', 'PROCESSING', 'SHIPPED'].includes(o.status)
+    ).length;
     const completed = filteredOrders.filter((o) => o.status === 'DELIVERED' || o.status === 'COMPLETED').length;
+    const cancelled = filteredOrders.filter((o) => o.status === 'CANCELLED').length;
     const rejected = filteredOrders.filter((o) => o.status === 'REJECTED').length;
 
-    // Payment methods
-    const instapayOrders = filteredOrders.filter((o) => o.payment?.method === 'instapay');
-    const vodafoneOrders = filteredOrders.filter((o) => o.payment?.method === 'vodafone_cash');
+    // Payment methods (from paid / confirmed orders with payment info)
+    const instapayOrders = paidOrDoneOrders.filter((o) => o.payment?.method === 'instapay');
+    const vodafoneOrders = paidOrDoneOrders.filter((o) => o.payment?.method === 'vodafone_cash');
     const instapayVolume = instapayOrders.reduce((sum, o) => sum + (o.totalCash || 0), 0);
     const vodafoneVolume = vodafoneOrders.reduce((sum, o) => sum + (o.totalCash || 0), 0);
 
-    // Customer aggregation
+    // Customer aggregation for the current selected time period
     const customerMap = new Map<
       string,
       { name: string; email: string; phone: string; count: number; totalSpent: number; lastOrder: string }
@@ -159,7 +167,7 @@ export default function AdminAnalyticsPage() {
       };
 
       existing.count += 1;
-      if (o.status !== 'REJECTED') {
+      if (o.status !== 'REJECTED' && o.status !== 'CANCELLED') {
         existing.totalSpent += o.totalCash || 0;
       }
       if (new Date(o.createdAt).getTime() > new Date(existing.lastOrder).getTime()) {
@@ -173,12 +181,14 @@ export default function AdminAnalyticsPage() {
       .sort((a, b) => b.totalSpent - a.totalSpent)
       .slice(0, 5);
 
-    const conversionRate = totalOrders > 0 ? Math.round((paidOrDoneOrders.length / totalOrders) * 100) : 0;
+    // Paid order ratio: percentage of total submitted orders that reached paid or completed status
+    const paidRatio = totalOrders > 0 ? Math.round((paidOrDoneOrders.length / totalOrders) * 100) : 0;
 
     return {
       totalOrders,
-      totalGmv,
-      totalCommission,
+      activeOrdersCount: activeOrders.length,
+      totalPipelineGmv,
+      totalEstimatedCommission,
       totalPaidGmv,
       totalPaidCommission,
       averageOrderValue,
@@ -189,51 +199,53 @@ export default function AdminAnalyticsPage() {
       paymentReview,
       paidAndFulfillment,
       completed,
+      cancelled,
       rejected,
       instapayOrders: instapayOrders.length,
       instapayVolume,
       vodafoneOrders: vodafoneOrders.length,
       vodafoneVolume,
       topCustomers,
-      conversionRate,
+      paidRatio,
+      paidOrDoneCount: paidOrDoneOrders.length,
       uniqueCustomersCount: registeredUsers.length > 0 ? registeredUsers.length : customerMap.size,
     };
   }, [filteredOrders, registeredUsers]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+    visible: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.02 } },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 14 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as const } },
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] as const } },
   };
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-[#FBFBFC] dark:bg-[#0c0a0f] flex items-center justify-center">
-        <div className="w-9 h-9 border-3 border-[#3A0F34] dark:border-[#DDE3E8] border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-[#DDE3E8]/30 flex items-center justify-center">
+        <div className="w-9 h-9 border-3 border-[#3A0F34] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   if (!user || user.role !== 'admin') {
     return (
-      <div className="min-h-screen bg-neutral-100/60 dark:bg-[#0c0a0f] text-neutral-900 dark:text-white">
+      <div className="min-h-screen bg-[#DDE3E8]/30 text-[#3A0F34]">
         <Navbar onOpenAuth={() => setAuthOpen(true)} />
         <div className="flex flex-col items-center justify-center min-h-[70vh] gap-6 p-4">
-          <div className="p-8 bg-white dark:bg-[#14101e] rounded-3xl border border-neutral-200 dark:border-[#2a243a] shadow-xl text-center max-w-md space-y-4">
-            <ShieldCheck className="w-12 h-12 text-rose-600 mx-auto" />
-            <h2 className="text-2xl font-black">{isRtl ? 'صلاحيات المشرف مطلوبة' : 'Admin Access Required'}</h2>
-            <p className="text-neutral-500 text-xs leading-relaxed">
+          <div className="p-8 bg-[#FFFFFF] rounded-2xl border border-[#C7CCD2] shadow-sm text-center max-w-md space-y-4">
+            <ShieldCheck className="w-12 h-12 text-[#3A0F34] mx-auto" />
+            <h2 className="text-2xl font-bold">{isRtl ? 'صلاحيات المشرف مطلوبة' : 'Admin Access Required'}</h2>
+            <p className="text-[#66596A] text-sm leading-relaxed">
               {isRtl
-                ? 'يرجى تسجيل الدخول بحساب المشرف (Admin) للاطلاع على تحليلات وأرباح المنصة.'
-                : 'Please sign in with your supervisor account to view analytics and revenue data.'}
+                ? 'يرجى تسجيل الدخول بحساب المشرف للاطلاع على بيانات المبيعات والتحصيل.'
+                : 'Please sign in with your supervisor account to view sales and collection data.'}
             </p>
             <button
               onClick={() => setAuthOpen(true)}
-              className="w-full py-3 bg-neutral-950 dark:bg-[#3A0F34] hover:bg-neutral-800 text-white font-black rounded-xl text-xs cursor-pointer shadow-md"
+              className="w-full py-3 bg-[#3A0F34] hover:bg-[#682E60] text-white font-semibold rounded-xl text-sm cursor-pointer shadow-sm transition-colors"
             >
               {isRtl ? 'تسجيل دخول المشرف' : 'Sign In as Admin'}
             </button>
@@ -244,39 +256,46 @@ export default function AdminAnalyticsPage() {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-[#FBFBFC] dark:bg-[#0c0a0f] text-neutral-900 dark:text-white pb-32 md:pb-24 transition-colors relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-[#3A0F34]/10 via-[#DDE3E8]/5 to-transparent dark:from-[#3A0F34]/20 dark:via-[#3A0F34]/10 dark:to-transparent pointer-events-none blur-3xl -z-10" />
+  const needsActionCount = stats.pendingReview + stats.paymentReview;
 
+  return (
+    <div className="min-h-screen bg-[#DDE3E8]/25 text-[#3A0F34] pb-24 transition-colors">
       <Navbar onOpenAuth={() => setAuthOpen(true)} />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-6">
         {/* Title Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2">
-          <div className="space-y-1.5 text-start">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-black uppercase tracking-wider border border-[#DDE3E8] dark:border-[#3A0F34]/60">
-                <TrendingUp className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
-                {isRtl ? 'تحليلات المنصة والأرباح' : 'Business Intelligence Hub'}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-1">
+          <div className="space-y-1 text-start">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFFFFF] text-[#3A0F34] text-xs font-semibold border border-[#C7CCD2]">
+                <TrendingUp className="w-3.5 h-3.5 text-[#682E60]" />
+                {isRtl ? 'المبيعات والتحصيل' : 'Sales & Collections'}
               </span>
-              <span className="text-[11px] font-mono text-neutral-500 bg-white dark:bg-[#1a1626] px-2.5 py-0.5 rounded-full border border-neutral-200 dark:border-[#2f2742]">
-                {isRtl ? 'تحديث فوري' : 'Live Real-time'}
+              <span className="text-xs text-[#66596A] bg-[#FFFFFF] px-2.5 py-1 rounded-full border border-[#C7CCD2] flex items-center gap-1.5">
+                <Clock className="w-3 h-3 text-[#66596A]" />
+                {lastRefreshedAt ? (
+                  <span>
+                    {isRtl ? 'آخر تحديث:' : 'Updated:'}{' '}
+                    <span className="font-mono">{lastRefreshedAt.toLocaleTimeString(isRtl ? 'ar-EG' : 'en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
+                  </span>
+                ) : (
+                  <span>{isRtl ? 'جاري التحميل...' : 'Loading...'}</span>
+                )}
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-black text-neutral-950 dark:text-white tracking-tight">
-              {isRtl ? 'تحليلات مبيعات سلال شي إن' : 'SHEIN Orders & Revenue Intelligence'}
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#3A0F34] tracking-tight">
+              {isRtl ? 'مؤشرات الأداء المالي والتشغيلي' : 'Financial & Operational Intelligence'}
             </h1>
-            <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 max-w-2xl">
+            <p className="text-xs sm:text-sm text-[#66596A] max-w-2xl">
               {isRtl
-                ? 'رؤية مالية وتشغيلية شاملة لحجم المبيعات بالجنيه المصري، بوابات الدفع، والعملاء الأكثر طلباً.'
-                : 'Complete operational & financial visibility into EGP order volume, dynamic service fees, payment channels, and top client lifetime values.'}
+                ? 'رؤية دقيقة لحجم المبيعات الفعلي، رسوم الخدمة المحصلة، وحالات الطلبات دون بيانات تقريبية.'
+                : 'Accurate metrics on confirmed revenue, collected service fees, and order status lifecycle.'}
             </p>
           </div>
 
           {/* Quick Actions & Range Filter */}
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center p-1 bg-white dark:bg-[#14111d] rounded-2xl border border-neutral-200 dark:border-[#2a243a] shadow-xs text-xs font-bold">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex items-center p-1 bg-[#FFFFFF] rounded-xl border border-[#C7CCD2] shadow-xs text-xs font-medium">
               {[
                 { key: 'all', label: isRtl ? 'الكل' : 'All Time' },
                 { key: '30d', label: isRtl ? 'آخر 30 يوم' : '30 Days' },
@@ -285,10 +304,10 @@ export default function AdminAnalyticsPage() {
                 <button
                   key={tab.key}
                   onClick={() => setTimeRange(tab.key as any)}
-                  className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
                     timeRange === tab.key
-                      ? 'bg-[#3A0F34] text-white shadow-xs font-black'
-                      : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
+                      ? 'bg-[#3A0F34] text-white font-semibold'
+                      : 'text-[#66596A] hover:text-[#3A0F34]'
                   }`}
                 >
                   {tab.label}
@@ -298,355 +317,449 @@ export default function AdminAnalyticsPage() {
 
             <Link
               href="/admin"
-              className="px-4 py-2.5 bg-white dark:bg-[#14111d] hover:bg-neutral-50 dark:hover:bg-[#1d1829] text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-[#2a243a] rounded-2xl text-xs font-black transition-all flex items-center gap-2 shadow-xs"
+              className="px-3.5 py-1.5 bg-[#FFFFFF] hover:bg-[#F8F9FA] text-[#3A0F34] border border-[#C7CCD2] rounded-xl text-xs font-semibold transition-colors flex items-center gap-1.5 shadow-xs"
             >
-              <ShieldCheck className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
-              <span>{isRtl ? 'إدارة الطلبات' : 'Orders Hub'}</span>
+              <ShieldCheck className="w-4 h-4 text-[#682E60]" />
+              <span>{isRtl ? 'لوحة إدارة الطلبات' : 'Orders Hub'}</span>
             </Link>
 
             <button
               onClick={fetchData}
-              className="p-2.5 bg-white dark:bg-[#14111d] hover:bg-neutral-50 dark:hover:bg-[#1d1829] text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-[#2a243a] rounded-2xl transition-all shadow-xs cursor-pointer"
+              className="p-2 bg-[#FFFFFF] hover:bg-[#F8F9FA] text-[#3A0F34] border border-[#C7CCD2] rounded-xl transition-colors shadow-xs cursor-pointer"
               title={isRtl ? 'تحديث البيانات' : 'Refresh'}
+              aria-label={isRtl ? 'تحديث البيانات الآن' : 'Refresh Data'}
             >
-              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-[#682E60]' : ''}`} />
             </button>
           </div>
         </div>
 
-        {/* 6 Key Financial & Operational Metric Cards */}
+        {/* Action Required Row (يحتاج إجراء فوري) */}
+        {needsActionCount > 0 && (
+          <div className="bg-[#FFFFFF] border border-[#918797]/60 rounded-2xl p-4 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-start">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-[#682E60]/10 text-[#682E60] flex items-center justify-center shrink-0">
+                <AlertCircle className="w-4 h-4" />
+              </div>
+              <div>
+                <h2 className="text-xs font-bold text-[#3A0F34] flex items-center gap-1.5">
+                  <span>{isRtl ? 'يحتاج إجراء فوري' : 'Action Required'}</span>
+                  <span className="px-2 py-0.2 rounded-full bg-[#682E60] text-white text-[11px] font-mono">
+                    {needsActionCount}
+                  </span>
+                </h2>
+                <p className="text-[11px] text-[#66596A]">
+                  {isRtl
+                    ? 'يوجد طلبات بانتظار مراجعة الأسعار أو التحقق من إيصالات التحويل البنكي.'
+                    : 'Orders are waiting for price quotation or bank transfer receipt verification.'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 flex-wrap">
+              {stats.pendingReview > 0 && (
+                <Link
+                  href="/admin"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F8F9FA] hover:bg-[#DDE3E8]/50 border border-[#C7CCD2] text-[#3A0F34] text-xs font-semibold transition-colors"
+                >
+                  <Clock className="w-3.5 h-3.5 text-amber-600" />
+                  <span>{stats.pendingReview} {isRtl ? 'بانتظار التسعير' : 'Pending Price'}</span>
+                  <ArrowUpRight className="w-3 h-3 text-[#66596A]" />
+                </Link>
+              )}
+              {stats.paymentReview > 0 && (
+                <Link
+                  href="/admin"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F8F9FA] hover:bg-[#DDE3E8]/50 border border-[#C7CCD2] text-[#3A0F34] text-xs font-semibold transition-colors"
+                >
+                  <FileCheck className="w-3.5 h-3.5 text-[#682E60]" />
+                  <span>{stats.paymentReview} {isRtl ? 'فحص إيصال التحويل' : 'Verify Receipt'}</span>
+                  <ArrowUpRight className="w-3 h-3 text-[#66596A]" />
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* 4 Equal-Height KPI Cards */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-2 lg:grid-cols-6 gap-4"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4"
         >
-          {/* 1. Gross Volume */}
+          {/* 1. Paid & Confirmed GMV */}
           <motion.div
             variants={itemVariants}
-            className="col-span-2 bg-[#3A0F34] text-white p-6 rounded-3xl shadow-xl shadow-[#3A0F34]/20 border border-[#DDE3E8]/30 relative overflow-hidden"
+            className="bg-[#FFFFFF] p-5 rounded-2xl border border-[#C7CCD2] shadow-xs text-start flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between text-[#DDE3E8] text-xs font-bold mb-2">
-              <span>{isRtl ? 'إجمالي حجم المبيعات (GMV)' : 'Gross Merchandise Value'}</span>
-              <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-mono">EGP</span>
+            <div>
+              <div className="flex items-center justify-between text-[#66596A] text-xs font-semibold mb-2">
+                <span>{isRtl ? 'المبيعات المؤكدة (المسددة)' : 'Confirmed Paid GMV'}</span>
+                <span className="text-[10px] bg-[#DDE3E8]/60 text-[#3A0F34] px-1.5 py-0.5 rounded font-mono font-medium">
+                  EGP
+                </span>
+              </div>
+              <div className="text-2xl sm:text-3xl font-bold tracking-tight text-[#3A0F34] tabular-nums">
+                {stats.totalPaidGmv.toLocaleString()} <span className="text-xs font-medium text-[#66596A]">ج.م</span>
+              </div>
             </div>
-            <div className="text-3xl sm:text-4xl font-black tracking-tight">
-              {stats.totalGmv.toLocaleString()} <span className="text-sm font-bold">ج.م</span>
-            </div>
-            <p className="text-[11px] text-[#DDE3E8] mt-2 font-medium">
+            <p className="text-[11px] text-[#66596A] mt-3 pt-2 border-t border-[#C7CCD2]/40">
               {isRtl
-                ? `منها ${stats.totalPaidGmv.toLocaleString()} ج.م مدفوعة ومؤكدة`
-                : `${stats.totalPaidGmv.toLocaleString()} EGP paid & verified`}
+                ? `من إجمالي حجم سلال نشطة: ${stats.totalPipelineGmv.toLocaleString()} ج.م`
+                : `From total active pipeline: ${stats.totalPipelineGmv.toLocaleString()} EGP`}
             </p>
           </motion.div>
 
-          {/* 2. Platform Commission */}
+          {/* 2. Collected Dynamic Service Fees */}
           <motion.div
             variants={itemVariants}
-            className="col-span-2 bg-white dark:bg-[#14111d] p-6 rounded-3xl border border-neutral-200/80 dark:border-[#2a243a] shadow-xs hover:shadow-md transition-shadow text-start"
+            className="bg-[#FFFFFF] p-5 rounded-2xl border border-[#C7CCD2] shadow-xs text-start flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between text-neutral-400 dark:text-neutral-500 text-xs font-bold mb-2">
-              <span>{isRtl ? 'أرباح ورسوم الخدمة' : 'Net Dynamic Commission'}</span>
-              <Percent className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
+            <div>
+              <div className="flex items-center justify-between text-[#66596A] text-xs font-semibold mb-2">
+                <span>{isRtl ? 'رسوم الخدمة المحصلة' : 'Collected Service Fees'}</span>
+                <Percent className="w-4 h-4 text-[#682E60]" />
+              </div>
+              <div className="text-2xl sm:text-3xl font-bold tracking-tight text-emerald-700 tabular-nums">
+                {stats.totalPaidCommission.toLocaleString()} <span className="text-xs font-medium text-[#66596A]">ج.م</span>
+              </div>
             </div>
-            <div className="text-3xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight">
-              {stats.totalCommission.toLocaleString()} <span className="text-xs font-bold text-neutral-400">ج.م</span>
-            </div>
-            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-2">
+            <p className="text-[11px] text-[#66596A] mt-3 pt-2 border-t border-[#C7CCD2]/40">
               {isRtl
-                ? `${stats.totalPaidCommission.toLocaleString()} ج.م محصلة بالفعل`
-                : `${stats.totalPaidCommission.toLocaleString()} EGP collected & fulfilled`}
+                ? `رسوم تقديرية لجميع السلال: ${stats.totalEstimatedCommission.toLocaleString()} ج.م`
+                : `Estimated for all pipeline: ${stats.totalEstimatedCommission.toLocaleString()} EGP`}
             </p>
           </motion.div>
 
-          {/* 3. Total Orders */}
+          {/* 3. Paid & Executed Orders */}
           <motion.div
             variants={itemVariants}
-            className="bg-white dark:bg-[#14111d] p-5 rounded-3xl border border-neutral-200/80 dark:border-[#2a243a] shadow-xs text-start"
+            className="bg-[#FFFFFF] p-5 rounded-2xl border border-[#C7CCD2] shadow-xs text-start flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between text-neutral-400 dark:text-neutral-500 text-xs font-bold mb-2">
-              <span>{isRtl ? 'إجمالي الطلبات' : 'Total Orders'}</span>
-              <Package className="w-4 h-4 text-neutral-400" />
+            <div>
+              <div className="flex items-center justify-between text-[#66596A] text-xs font-semibold mb-2">
+                <span>{isRtl ? 'الطلبات المسددة والمنفذة' : 'Paid & Fulfilled Orders'}</span>
+                <Package className="w-4 h-4 text-[#66596A]" />
+              </div>
+              <div className="text-2xl sm:text-3xl font-bold tracking-tight text-[#3A0F34] tabular-nums">
+                {stats.paidOrDoneCount}
+              </div>
             </div>
-            <div className="text-2xl sm:text-3xl font-black text-neutral-950 dark:text-white">
-              {stats.totalOrders}
-            </div>
-            <div className="text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold mt-1">
-              {stats.conversionRate}% {isRtl ? 'نسبة التحويل' : 'Conversion'}
-            </div>
+            <p className="text-[11px] text-[#66596A] mt-3 pt-2 border-t border-[#C7CCD2]/40">
+              {isRtl
+                ? `من إجمالي ${stats.totalOrders} طلب مسجل بالمنظومة`
+                : `Out of ${stats.totalOrders} total submitted orders`}
+            </p>
           </motion.div>
 
-          {/* 4. Average Order Value */}
+          {/* 4. Paid Orders Ratio */}
           <motion.div
             variants={itemVariants}
-            className="bg-white dark:bg-[#14111d] p-5 rounded-3xl border border-neutral-200/80 dark:border-[#2a243a] shadow-xs text-start"
+            className="bg-[#FFFFFF] p-5 rounded-2xl border border-[#C7CCD2] shadow-xs text-start flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between text-neutral-400 dark:text-neutral-500 text-xs font-bold mb-2">
-              <span>{isRtl ? 'متوسط السلة (AOV)' : 'Avg Order Value'}</span>
-              <ShoppingBag className="w-4 h-4 text-amber-500" />
+            <div>
+              <div className="flex items-center justify-between text-[#66596A] text-xs font-semibold mb-2">
+                <span>{isRtl ? 'نسبة الطلبات المدفوعة' : 'Paid Orders Ratio'}</span>
+                <CheckCircle2 className="w-4 h-4 text-[#682E60]" />
+              </div>
+              <div className="text-2xl sm:text-3xl font-bold tracking-tight text-[#3A0F34] tabular-nums">
+                {stats.paidRatio}%
+              </div>
             </div>
-            <div className="text-2xl sm:text-3xl font-black text-neutral-950 dark:text-white">
-              {stats.averageOrderValue.toLocaleString()}
-            </div>
-            <div className="text-[11px] text-neutral-400 mt-1">
-              {stats.avgItemsPerOrder} {isRtl ? 'قطع لكل سلة' : 'items / cart'}
-            </div>
+            <p className="text-[11px] text-[#66596A] mt-3 pt-2 border-t border-[#C7CCD2]/40">
+              {isRtl
+                ? `متوسط السلة: ${stats.averageOrderValue.toLocaleString()} ج.م (${stats.avgItemsPerOrder} قطع)`
+                : `Avg cart: ${stats.averageOrderValue.toLocaleString()} EGP (${stats.avgItemsPerOrder} items)`}
+            </p>
           </motion.div>
         </motion.div>
 
-        {/* Status Pipeline & Payment Breakdown Grid */}
+        {/* Status Breakdown & Payment Methods Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Order Lifecycle Pipeline */}
-          <div className="lg:col-span-2 bg-white dark:bg-[#14111d] p-6 sm:p-7 rounded-3xl border border-neutral-200/80 dark:border-[#2a243a] shadow-xs space-y-6 text-start">
+          {/* Order Status Distribution (توزيع حالات الطلبات) */}
+          <div className="lg:col-span-2 bg-[#FFFFFF] p-6 rounded-2xl border border-[#C7CCD2] shadow-xs space-y-5 text-start">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-black text-neutral-950 dark:text-white">
-                  {isRtl ? 'مسار دورة حياة الطلبات (Order Lifecycle Funnel)' : 'Order Lifecycle Funnel'}
+                <h3 className="text-base sm:text-lg font-bold text-[#3A0F34]">
+                  {isRtl ? 'توزيع حالات الطلبات (Order Status Distribution)' : 'Order Status Distribution'}
                 </h3>
-                <p className="text-xs text-neutral-400">
-                  {isRtl ? 'متابعة أداء السلال من لحظة الاستخراج حتى التسليم' : 'Status progression from cart extraction to delivery'}
+                <p className="text-xs text-[#66596A]">
+                  {isRtl ? 'حصر شامل ودقيق لجميع السلال المسجلة في الفترة دون فقد أو تكرار' : 'Exact breakdown of all orders across system statuses'}
                 </p>
               </div>
-              <span className="text-xs font-bold text-neutral-400">
-                {stats.totalOrders} {isRtl ? 'طلب كلي' : 'orders'}
+              <span className="text-xs font-semibold text-[#66596A] bg-[#F8F9FA] px-2.5 py-1 rounded-full border border-[#C7CCD2]">
+                {stats.totalOrders} {isRtl ? 'طلب كلي' : 'total'}
               </span>
             </div>
 
-            {/* Pipeline Visual Bar */}
-            <div className="w-full h-3 rounded-full bg-neutral-100 dark:bg-[#1f1a2c] overflow-hidden flex">
+            {/* Status Visual Distribution Bar */}
+            <div className="w-full h-3 rounded-full bg-[#DDE3E8]/40 overflow-hidden flex" title={isRtl ? 'شريط توزيع الحالات' : 'Status Bar'}>
               {stats.totalOrders > 0 && (
                 <>
-                  <div
-                    style={{ width: `${(stats.pendingReview / stats.totalOrders) * 100}%` }}
-                    className="bg-amber-400 h-full transition-all"
-                    title={`Pending Review: ${stats.pendingReview}`}
-                  />
-                  <div
-                    style={{ width: `${(stats.awaitingPayment / stats.totalOrders) * 100}%` }}
-                    className="bg-blue-500 h-full transition-all"
-                    title={`Awaiting Payment: ${stats.awaitingPayment}`}
-                  />
-                  <div
-                    style={{ width: `${(stats.paymentReview / stats.totalOrders) * 100}%` }}
-                    className="bg-[#3A0F34] dark:bg-[#DDE3E8] h-full transition-all"
-                    title={`Receipt Review: ${stats.paymentReview}`}
-                  />
-                  <div
-                    style={{ width: `${(stats.paidAndFulfillment / stats.totalOrders) * 100}%` }}
-                    className="bg-emerald-500 h-full transition-all"
-                    title={`Paid: ${stats.paidAndFulfillment}`}
-                  />
-                  <div
-                    style={{ width: `${(stats.completed / stats.totalOrders) * 100}%` }}
-                    className="bg-neutral-800 dark:bg-neutral-300 h-full transition-all"
-                    title={`Completed: ${stats.completed}`}
-                  />
-                  <div
-                    style={{ width: `${(stats.rejected / stats.totalOrders) * 100}%` }}
-                    className="bg-rose-500 h-full transition-all"
-                    title={`Rejected: ${stats.rejected}`}
-                  />
+                  {stats.pendingReview > 0 && (
+                    <div
+                      style={{ width: `${(stats.pendingReview / stats.totalOrders) * 100}%` }}
+                      className="bg-amber-400 h-full transition-all"
+                      title={`${isRtl ? 'بانتظار التسعير' : 'Pending Review'}: ${stats.pendingReview}`}
+                    />
+                  )}
+                  {stats.awaitingPayment > 0 && (
+                    <div
+                      style={{ width: `${(stats.awaitingPayment / stats.totalOrders) * 100}%` }}
+                      className="bg-blue-500 h-full transition-all"
+                      title={`${isRtl ? 'بانتظار سداد العميل' : 'Awaiting Payment'}: ${stats.awaitingPayment}`}
+                    />
+                  )}
+                  {stats.paymentReview > 0 && (
+                    <div
+                      style={{ width: `${(stats.paymentReview / stats.totalOrders) * 100}%` }}
+                      className="bg-[#682E60] h-full transition-all"
+                      title={`${isRtl ? 'فحص الإيصال' : 'Receipt Review'}: ${stats.paymentReview}`}
+                    />
+                  )}
+                  {stats.paidAndFulfillment > 0 && (
+                    <div
+                      style={{ width: `${(stats.paidAndFulfillment / stats.totalOrders) * 100}%` }}
+                      className="bg-emerald-500 h-full transition-all"
+                      title={`${isRtl ? 'مدفوع وجاري الشحن' : 'Paid & Processing'}: ${stats.paidAndFulfillment}`}
+                    />
+                  )}
+                  {stats.completed > 0 && (
+                    <div
+                      style={{ width: `${(stats.completed / stats.totalOrders) * 100}%` }}
+                      className="bg-[#3A0F34] h-full transition-all"
+                      title={`${isRtl ? 'مكتمل ومسلّم' : 'Completed'}: ${stats.completed}`}
+                    />
+                  )}
+                  {stats.cancelled > 0 && (
+                    <div
+                      style={{ width: `${(stats.cancelled / stats.totalOrders) * 100}%` }}
+                      className="bg-neutral-400 h-full transition-all"
+                      title={`${isRtl ? 'ملغي' : 'Cancelled'}: ${stats.cancelled}`}
+                    />
+                  )}
+                  {stats.rejected > 0 && (
+                    <div
+                      style={{ width: `${(stats.rejected / stats.totalOrders) * 100}%` }}
+                      className="bg-rose-500 h-full transition-all"
+                      title={`${isRtl ? 'مرفوض' : 'Rejected'}: ${stats.rejected}`}
+                    />
+                  )}
                 </>
               )}
             </div>
 
-            {/* Status Breakdown Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <div className="p-3.5 rounded-2xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-900/40">
-                <div className="flex items-center gap-1.5 text-amber-800 dark:text-amber-300 font-bold text-xs">
-                  <Clock className="w-3.5 h-3.5" />
+            {/* Status Breakdown Grid (7 buckets, sum = totalOrders) */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-200">
+                <div className="flex items-center gap-1.5 text-amber-900 font-semibold text-xs">
+                  <Clock className="w-3.5 h-3.5 text-amber-700" />
                   <span>{isRtl ? 'قيد مراجعة المشرف' : 'Pending Review'}</span>
                 </div>
-                <div className="text-xl font-black text-amber-900 dark:text-amber-200 mt-1">
+                <div className="text-xl font-bold text-amber-950 mt-1 tabular-nums">
                   {stats.pendingReview}
                 </div>
-                <p className="text-[10px] text-amber-700/80 mt-0.5">{isRtl ? 'تحتاج تأكيد الأسعار' : 'Awaiting pricing check'}</p>
+                <p className="text-[10px] text-amber-800 mt-0.5">{isRtl ? 'بانتظار تسعير المقاسات' : 'Awaiting quote'}</p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200/60 dark:border-blue-900/40">
-                <div className="flex items-center gap-1.5 text-blue-800 dark:text-blue-300 font-bold text-xs">
-                  <CreditCard className="w-3.5 h-3.5" />
+              <div className="p-3 rounded-xl bg-blue-50/70 border border-blue-200">
+                <div className="flex items-center gap-1.5 text-blue-900 font-semibold text-xs">
+                  <CreditCard className="w-3.5 h-3.5 text-blue-700" />
                   <span>{isRtl ? 'بانتظار سداد العميل' : 'Awaiting Payment'}</span>
                 </div>
-                <div className="text-xl font-black text-blue-900 dark:text-blue-200 mt-1">
+                <div className="text-xl font-bold text-blue-950 mt-1 tabular-nums">
                   {stats.awaitingPayment}
                 </div>
-                <p className="text-[10px] text-blue-700/80 mt-0.5">{isRtl ? 'تمت الموافقة للعميل' : 'Customer notified'}</p>
+                <p className="text-[10px] text-blue-800 mt-0.5">{isRtl ? 'تم إرسال إجمالي الجنيه' : 'Quoted, unpaid'}</p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34]/50">
-                <div className="flex items-center gap-1.5 text-[#3A0F34] dark:text-[#DDE3E8] font-bold text-xs">
-                  <FileCheck className="w-3.5 h-3.5" />
+              <div className="p-3 rounded-xl bg-[#682E60]/10 border border-[#682E60]/30">
+                <div className="flex items-center gap-1.5 text-[#3A0F34] font-semibold text-xs">
+                  <FileCheck className="w-3.5 h-3.5 text-[#682E60]" />
                   <span>{isRtl ? 'فحص إيصال التحويل' : 'Verify Receipt'}</span>
                 </div>
-                <div className="text-xl font-black text-[#3A0F34] dark:text-[#DDE3E8] mt-1">
+                <div className="text-xl font-bold text-[#3A0F34] mt-1 tabular-nums">
                   {stats.paymentReview}
                 </div>
-                <p className="text-[10px] text-[#3A0F34]/80 dark:text-[#DDE3E8]/80 mt-0.5">{isRtl ? 'تم رفع سكرين التحويل' : 'Uploaded screenshot'}</p>
+                <p className="text-[10px] text-[#66596A] mt-0.5">{isRtl ? 'تم رفع صورة التحويل' : 'Receipt uploaded'}</p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-900/40">
-                <div className="flex items-center gap-1.5 text-emerald-800 dark:text-emerald-300 font-bold text-xs">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>{isRtl ? 'مدفوع وجاري الشراء' : 'Paid & Processing'}</span>
+              <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200">
+                <div className="flex items-center gap-1.5 text-emerald-900 font-semibold text-xs">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>{isRtl ? 'مدفوع وجاري التنفيذ' : 'Paid & Processing'}</span>
                 </div>
-                <div className="text-xl font-black text-emerald-900 dark:text-emerald-200 mt-1">
+                <div className="text-xl font-bold text-emerald-950 mt-1 tabular-nums">
                   {stats.paidAndFulfillment}
                 </div>
-                <p className="text-[10px] text-emerald-700/80 mt-0.5">{isRtl ? 'تم التحقق من المبلغ' : 'Confirmed funds'}</p>
+                <p className="text-[10px] text-emerald-800 mt-0.5">{isRtl ? 'تم تأكيد المبلغ بالبنك' : 'Confirmed & active'}</p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-[#1c1827] border border-neutral-200 dark:border-[#2f2742]">
-                <div className="flex items-center gap-1.5 text-neutral-700 dark:text-neutral-300 font-bold text-xs">
-                  <CheckCheck className="w-3.5 h-3.5" />
+              <div className="p-3 rounded-xl bg-[#DDE3E8]/40 border border-[#C7CCD2]">
+                <div className="flex items-center gap-1.5 text-[#3A0F34] font-semibold text-xs">
+                  <CheckCheck className="w-3.5 h-3.5 text-[#3A0F34]" />
                   <span>{isRtl ? 'مكتمل ومسلّم' : 'Completed'}</span>
                 </div>
-                <div className="text-xl font-black text-neutral-900 dark:text-white mt-1">
+                <div className="text-xl font-bold text-[#3A0F34] mt-1 tabular-nums">
                   {stats.completed}
                 </div>
-                <p className="text-[10px] text-neutral-500 mt-0.5">{isRtl ? 'وصل لباب البيت' : 'Delivered to door'}</p>
+                <p className="text-[10px] text-[#66596A] mt-0.5">{isRtl ? 'تم التوصيل للعميل' : 'Delivered'}</p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200/60 dark:border-rose-900/40">
-                <div className="flex items-center gap-1.5 text-rose-800 dark:text-rose-300 font-bold text-xs">
-                  <XCircle className="w-3.5 h-3.5" />
-                  <span>{isRtl ? 'مرفوض / ملغي' : 'Rejected'}</span>
+              <div className="p-3 rounded-xl bg-neutral-100 border border-neutral-300">
+                <div className="flex items-center gap-1.5 text-neutral-700 font-semibold text-xs">
+                  <Ban className="w-3.5 h-3.5 text-neutral-600" />
+                  <span>{isRtl ? 'ملغي' : 'Cancelled'}</span>
                 </div>
-                <div className="text-xl font-black text-rose-900 dark:text-rose-200 mt-1">
+                <div className="text-xl font-bold text-neutral-900 mt-1 tabular-nums">
+                  {stats.cancelled}
+                </div>
+                <p className="text-[10px] text-neutral-500 mt-0.5">{isRtl ? 'إلغاء بطلب العميل' : 'Cancelled order'}</p>
+              </div>
+
+              <div className="p-3 rounded-xl bg-rose-50/70 border border-rose-200 col-span-2 sm:col-span-1">
+                <div className="flex items-center gap-1.5 text-rose-900 font-semibold text-xs">
+                  <XCircle className="w-3.5 h-3.5 text-rose-700" />
+                  <span>{isRtl ? 'مرفوض' : 'Rejected'}</span>
+                </div>
+                <div className="text-xl font-bold text-rose-950 mt-1 tabular-nums">
                   {stats.rejected}
                 </div>
-                <p className="text-[10px] text-rose-700/80 mt-0.5">{isRtl ? 'نفاد كمية أو إلغاء' : 'Out of stock or cancelled'}</p>
+                <p className="text-[10px] text-rose-800 mt-0.5">{isRtl ? 'منتج غير متاح/ممنوع' : 'Rejected policy/stock'}</p>
               </div>
             </div>
           </div>
 
           {/* Payment Methods Distribution */}
-          <div className="bg-white dark:bg-[#14111d] p-6 sm:p-7 rounded-3xl border border-neutral-200/80 dark:border-[#2a243a] shadow-xs space-y-6 text-start">
-            <div>
-              <h3 className="text-lg font-black text-neutral-950 dark:text-white">
-                {isRtl ? 'توزيع بوابات الدفع (Egypt)' : 'Payment Methods Share'}
+          <div className="bg-[#FFFFFF] p-6 rounded-2xl border border-[#C7CCD2] shadow-xs space-y-5 text-start flex flex-col justify-between">
+            <div className="space-y-1">
+              <h3 className="text-base sm:text-lg font-bold text-[#3A0F34]">
+                {isRtl ? 'توزيع بوابات الدفع المسددة' : 'Verified Payment Channels'}
               </h3>
-              <p className="text-xs text-neutral-400">
-                {isRtl ? 'حجم المعاملات عبر إنستاباي ومحافظ الكاش' : 'Transaction split across InstaPay vs Vodafone Cash'}
+              <p className="text-xs text-[#66596A]">
+                {isRtl ? 'حجم المعاملات المؤكدة والمدفوعة فعلياً' : 'Volume collected via InstaPay vs Vodafone Cash'}
               </p>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3.5">
               {/* InstaPay */}
-              <div className="p-4 rounded-2xl bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34]/50 space-y-2">
+              <div className="p-3.5 rounded-xl bg-[#F8F9FA] border border-[#C7CCD2] space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#1a1626] p-1 border border-[#DDE3E8] dark:border-[#3A0F34]/60 flex items-center justify-center shrink-0">
+                    <div className="w-7 h-7 rounded-lg bg-white p-1 border border-[#C7CCD2] flex items-center justify-center shrink-0">
                       <img src="/images/instapay.png" alt="InstaPay" className="w-full h-full object-contain" />
                     </div>
                     <div>
-                      <h4 className="font-black text-sm text-neutral-900 dark:text-white">InstaPay (إنستاباي)</h4>
-                      <span className="text-[10px] text-neutral-400">{stats.instapayOrders} {isRtl ? 'طلب مسدد' : 'orders'}</span>
+                      <h4 className="font-bold text-xs text-[#3A0F34]">InstaPay (إنستاباي)</h4>
+                      <span className="text-[10px] text-[#66596A]">{stats.instapayOrders} {isRtl ? 'طلب مسدد' : 'paid'}</span>
                     </div>
                   </div>
-                  <span className="font-mono font-black text-sm text-[#3A0F34] dark:text-[#DDE3E8]">
+                  <span className="font-mono font-bold text-xs text-[#3A0F34] tabular-nums">
                     {stats.instapayVolume.toLocaleString()} ج.م
                   </span>
                 </div>
-                <div className="w-full h-1.5 rounded-full bg-[#DDE3E8] dark:bg-[#321330] overflow-hidden">
+                <div className="w-full h-1.5 rounded-full bg-[#DDE3E8] overflow-hidden">
                   <div
                     style={{
-                      width: `${stats.totalGmv > 0 ? (stats.instapayVolume / stats.totalGmv) * 100 : 0}%`,
+                      width: `${stats.totalPaidGmv > 0 ? (stats.instapayVolume / stats.totalPaidGmv) * 100 : 0}%`,
                     }}
-                    className="h-full bg-[#3A0F34] dark:bg-[#DDE3E8] rounded-full"
+                    className="h-full bg-[#3A0F34] rounded-full"
                   />
                 </div>
               </div>
 
               {/* Vodafone Cash */}
-              <div className="p-4 rounded-2xl bg-rose-50/70 dark:bg-rose-950/20 border border-rose-200/60 dark:border-rose-900/40 space-y-2">
+              <div className="p-3.5 rounded-xl bg-[#F8F9FA] border border-[#C7CCD2] space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#1a1626] p-0.5 border border-rose-200 dark:border-rose-800 flex items-center justify-center shrink-0">
+                    <div className="w-7 h-7 rounded-lg bg-white p-0.5 border border-[#C7CCD2] flex items-center justify-center shrink-0">
                       <img src="/images/vodafone-cash.png" alt="Vodafone Cash" className="w-full h-full object-contain" />
                     </div>
                     <div>
-                      <h4 className="font-black text-sm text-neutral-900 dark:text-white">فودافون كاش ومحافظ المحمول</h4>
-                      <span className="text-[10px] text-neutral-400">{stats.vodafoneOrders} {isRtl ? 'طلب مسدد' : 'orders'}</span>
+                      <h4 className="font-bold text-xs text-[#3A0F34]">فودافون كاش</h4>
+                      <span className="text-[10px] text-[#66596A]">{stats.vodafoneOrders} {isRtl ? 'طلب مسدد' : 'paid'}</span>
                     </div>
                   </div>
-                  <span className="font-mono font-black text-sm text-rose-700 dark:text-rose-300">
+                  <span className="font-mono font-bold text-xs text-[#3A0F34] tabular-nums">
                     {stats.vodafoneVolume.toLocaleString()} ج.م
                   </span>
                 </div>
-                <div className="w-full h-1.5 rounded-full bg-rose-200/60 dark:bg-rose-900/40 overflow-hidden">
+                <div className="w-full h-1.5 rounded-full bg-[#DDE3E8] overflow-hidden">
                   <div
                     style={{
-                      width: `${stats.totalGmv > 0 ? (stats.vodafoneVolume / stats.totalGmv) * 100 : 0}%`,
+                      width: `${stats.totalPaidGmv > 0 ? (stats.vodafoneVolume / stats.totalPaidGmv) * 100 : 0}%`,
                     }}
-                    className="h-full bg-rose-600 rounded-full"
+                    className="h-full bg-[#682E60] rounded-full"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="p-4 bg-neutral-50 dark:bg-[#1a1626] rounded-2xl border border-neutral-200 dark:border-[#2f2742] flex items-center justify-between text-xs font-bold">
-              <span className="text-neutral-500">{isRtl ? 'العملاء الفريدين المسجلين' : 'Unique Customer Base'}</span>
-              <span className="font-black text-neutral-950 dark:text-white font-mono">{stats.uniqueCustomersCount}</span>
+            <div className="p-3 bg-[#F8F9FA] rounded-xl border border-[#C7CCD2] flex items-center justify-between text-xs">
+              <span className="text-[#66596A]">{isRtl ? 'العملاء المسجلون بالنظام' : 'Registered Users'}</span>
+              <span className="font-bold text-[#3A0F34] font-mono tabular-nums">{stats.uniqueCustomersCount}</span>
             </div>
           </div>
         </div>
 
-        {/* Top Customers Leaderboard */}
-        <div className="bg-white dark:bg-[#14111d] rounded-3xl border border-neutral-200/80 dark:border-[#2a243a] shadow-xs overflow-hidden text-start">
-          <div className="p-6 border-b border-neutral-100 dark:border-[#241e33] flex items-center justify-between">
+        {/* Top Customers Leaderboard (إنفاق العميل في الفترة المحددة) */}
+        <div className="bg-[#FFFFFF] rounded-2xl border border-[#C7CCD2] shadow-xs overflow-hidden text-start">
+          <div className="p-5 border-b border-[#C7CCD2]/60 flex items-center justify-between">
             <div>
-              <h3 className="text-lg font-black text-neutral-950 dark:text-white">
-                {isRtl ? 'قائمة العملاء الأكثر طلباً (Top Customer Leaderboard)' : 'Top Customer Leaderboard'}
+              <h3 className="text-base font-bold text-[#3A0F34]">
+                {isRtl ? 'قائمة العملاء الأكثر طلباً' : 'Top Customer Leaderboard'}
               </h3>
-              <p className="text-xs text-neutral-400">
-                {isRtl ? 'أعلى العملاء من حيث إجمالي الإنفاق وتكرار الطلبات' : 'Highest lifetime spend and cart submissions'}
+              <p className="text-xs text-[#66596A]">
+                {isRtl
+                  ? 'ترتيب العملاء بحسب حجم الإنفاق والطلبات في الفترة المحددة'
+                  : 'Ranked by total expenditure and orders during the selected period'}
               </p>
             </div>
-            <Users className="w-5 h-5 text-[#3A0F34] dark:text-[#DDE3E8]" />
+            <Users className="w-5 h-5 text-[#682E60]" />
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-neutral-50 dark:bg-[#1a1626] border-b border-neutral-200 dark:border-[#2a243a] text-[11px] font-black uppercase tracking-wider text-neutral-500">
-                  <th className="py-3.5 px-6">{isRtl ? 'العميل' : 'Customer'}</th>
-                  <th className="py-3.5 px-6">{isRtl ? 'الهاتف' : 'Phone'}</th>
-                  <th className="py-3.5 px-6">{isRtl ? 'عدد الطلبات' : 'Orders Count'}</th>
-                  <th className="py-3.5 px-6">{isRtl ? 'إجمالي المشتريات (LTV)' : 'Total Spend'}</th>
-                  <th className="py-3.5 px-6">{isRtl ? 'آخر طلب' : 'Last Active'}</th>
+                <tr className="bg-[#F8F9FA] border-b border-[#C7CCD2] text-[11px] font-semibold uppercase tracking-wider text-[#66596A]">
+                  <th className="py-3 px-5">{isRtl ? 'العميل' : 'Customer'}</th>
+                  <th className="py-3 px-5">{isRtl ? 'الهاتف' : 'Phone'}</th>
+                  <th className="py-3 px-5">{isRtl ? 'عدد الطلبات' : 'Orders Count'}</th>
+                  <th className="py-3 px-5">{isRtl ? 'إنفاق العميل في الفترة المحددة (EGP)' : 'Period Spend (EGP)'}</th>
+                  <th className="py-3 px-5">{isRtl ? 'آخر طلب' : 'Last Active'}</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-100 dark:divide-[#221c2e]">
+              <tbody className="divide-y divide-[#C7CCD2]/40">
                 {stats.topCustomers.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-neutral-400 font-bold">
+                    <td colSpan={5} className="py-8 text-center text-[#66596A]">
                       {isRtl ? 'لا توجد بيانات عملاء كافية حتى الآن' : 'No customer records yet'}
                     </td>
                   </tr>
                 ) : (
                   stats.topCustomers.map((c, i) => (
-                    <tr key={i} className="hover:bg-neutral-50/50 dark:hover:bg-[#1a1626]/50 transition-colors">
-                      <td className="py-4 px-6 font-bold text-neutral-900 dark:text-white flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] flex items-center justify-center font-mono text-[10px] font-black">
+                    <tr key={i} className="hover:bg-[#F8F9FA]/70 transition-colors">
+                      <td className="py-3.5 px-5 font-semibold text-[#3A0F34] flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-[#DDE3E8]/60 text-[#3A0F34] flex items-center justify-center font-mono text-[10px] font-bold">
                           {i + 1}
                         </span>
                         <div>
                           <div>{c.name}</div>
-                          <div className="text-[10px] text-neutral-400 font-normal">{c.email}</div>
+                          <div className="text-[10px] text-[#66596A] font-normal">{c.email}</div>
                         </div>
                       </td>
-                      <td className="py-4 px-6 font-mono text-neutral-600 dark:text-neutral-300" dir="ltr">
+                      <td className="py-3.5 px-5 font-mono text-[#66596A]" dir="ltr">
                         {c.phone}
                       </td>
-                      <td className="py-4 px-6 font-black text-neutral-900 dark:text-white">
+                      <td className="py-3.5 px-5 font-bold text-[#3A0F34] tabular-nums">
                         {c.count} {isRtl ? 'طلبات' : 'orders'}
                       </td>
-                      <td className="py-4 px-6 font-mono font-black text-emerald-600 dark:text-emerald-400 text-sm">
+                      <td className="py-3.5 px-5 font-mono font-bold text-emerald-700 text-xs tabular-nums">
                         {c.totalSpent.toLocaleString()} ج.م
                       </td>
-                      <td className="py-4 px-6 text-neutral-500 text-[11px]">
-                        {new Date(c.lastOrder).toLocaleDateString()}
+                      <td className="py-3.5 px-5 text-[#66596A] text-[11px]">
+                        {new Date(c.lastOrder).toLocaleDateString(isRtl ? 'ar-EG' : 'en-US')}
                       </td>
                     </tr>
                   ))
@@ -657,37 +770,37 @@ export default function AdminAnalyticsPage() {
         </div>
 
         {/* Customer Directory & Last Login Activity */}
-        <div className="bg-white dark:bg-[#14111d] rounded-3xl border border-neutral-200/80 dark:border-[#2a243a] shadow-xs overflow-hidden text-start">
-          <div className="p-6 border-b border-neutral-100 dark:border-[#241e33] flex items-center justify-between">
+        <div className="bg-[#FFFFFF] rounded-2xl border border-[#C7CCD2] shadow-xs overflow-hidden text-start">
+          <div className="p-5 border-b border-[#C7CCD2]/60 flex items-center justify-between">
             <div>
-              <h3 className="text-lg font-black text-neutral-950 dark:text-white flex items-center gap-2">
+              <h3 className="text-base font-bold text-[#3A0F34] flex items-center gap-2">
                 <span>{isRtl ? 'سجل تواجد ونشاط العملاء' : 'Customer Activity & Last Seen'}</span>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200/60 font-mono font-bold">
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono font-semibold">
                   {registeredUsers.length} {isRtl ? 'حساب مسجل' : 'Registered Users'}
                 </span>
               </h3>
-              <p className="text-xs text-neutral-400">
-                {isRtl ? 'تتبع لحظي لآخر توقيت دخول لكل عميل مسجل وتاريخ إنشائه' : 'Real-time tracking of when each customer was last active'}
+              <p className="text-xs text-[#66596A]">
+                {isRtl ? 'تتبع لحظي لآخر توقيت دخول لكل عميل مسجل وتاريخ إنشائه' : 'Real-time tracking of customer login activity'}
               </p>
             </div>
-            <Clock className="w-5 h-5 text-emerald-600" />
+            <Clock className="w-5 h-5 text-[#682E60]" />
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-neutral-50 dark:bg-[#1a1626] border-b border-neutral-200 dark:border-[#2a243a] text-[11px] font-black uppercase tracking-wider text-neutral-500">
-                  <th className="py-3.5 px-6">{isRtl ? 'العميل' : 'Customer'}</th>
-                  <th className="py-3.5 px-6">{isRtl ? 'الرتبة' : 'Role'}</th>
-                  <th className="py-3.5 px-6">{isRtl ? 'رقم الهاتف' : 'Phone'}</th>
-                  <th className="py-3.5 px-6">{isRtl ? 'تاريخ التسجيل' : 'Joined'}</th>
-                  <th className="py-3.5 px-6">{isRtl ? 'آخر ظهور / تسجيل دخول' : 'Last Active / Login'}</th>
+                <tr className="bg-[#F8F9FA] border-b border-[#C7CCD2] text-[11px] font-semibold uppercase tracking-wider text-[#66596A]">
+                  <th className="py-3 px-5">{isRtl ? 'العميل' : 'Customer'}</th>
+                  <th className="py-3 px-5">{isRtl ? 'الرتبة' : 'Role'}</th>
+                  <th className="py-3 px-5">{isRtl ? 'رقم الهاتف' : 'Phone'}</th>
+                  <th className="py-3 px-5">{isRtl ? 'تاريخ التسجيل' : 'Joined'}</th>
+                  <th className="py-3 px-5">{isRtl ? 'آخر ظهور / تسجيل دخول' : 'Last Active / Login'}</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-100 dark:divide-[#221c2e]">
+              <tbody className="divide-y divide-[#C7CCD2]/40">
                 {registeredUsers.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-neutral-400 font-bold">
+                    <td colSpan={5} className="py-8 text-center text-[#66596A]">
                       {isRtl ? 'جاري تحميل سجل المستخدمين...' : 'Loading registered users...'}
                     </td>
                   </tr>
@@ -695,40 +808,40 @@ export default function AdminAnalyticsPage() {
                   registeredUsers.map((u) => {
                     const lastSeen = formatLastSeen(u.lastLoginAt, isRtl);
                     return (
-                      <tr key={u.id} className="hover:bg-neutral-50/50 dark:hover:bg-[#1a1626]/50 transition-colors">
-                        <td className="py-4 px-6 font-bold text-neutral-900 dark:text-white flex items-center gap-2.5">
+                      <tr key={u.id} className="hover:bg-[#F8F9FA]/70 transition-colors">
+                        <td className="py-3.5 px-5 font-semibold text-[#3A0F34] flex items-center gap-2.5">
                           {u.avatar ? (
-                            <img src={u.avatar} alt={u.name} className="w-7 h-7 rounded-full bg-neutral-100 dark:bg-neutral-800 object-cover border border-neutral-200 dark:border-neutral-700" />
+                            <img src={u.avatar} alt={u.name} className="w-7 h-7 rounded-full bg-neutral-100 object-cover border border-[#C7CCD2]" />
                           ) : (
                             <div className="w-7 h-7 rounded-full bg-[#3A0F34] text-white flex items-center justify-center font-bold text-xs">
                               {u.name?.charAt(0) || 'U'}
                             </div>
                           )}
                           <div>
-                            <div className="font-bold">{u.name}</div>
-                            <div className="text-[10px] text-neutral-400 font-normal">{u.email}</div>
+                            <div className="font-semibold">{u.name}</div>
+                            <div className="text-[10px] text-[#66596A] font-normal">{u.email}</div>
                           </div>
                         </td>
-                        <td className="py-4 px-6">
-                          <span className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase ${
+                        <td className="py-3.5 px-5">
+                          <span className={`px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase ${
                             u.role === 'admin'
-                              ? 'bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 border border-[#DDE3E8] dark:border-[#3A0F34]/60'
-                              : 'bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300'
+                              ? 'bg-[#682E60]/10 text-[#682E60] border border-[#682E60]/30'
+                              : 'bg-neutral-100 text-[#66596A]'
                           }`}>
                             {u.role === 'admin' ? (isRtl ? 'مشرف' : 'Admin') : (isRtl ? 'عميل' : 'Customer')}
                           </span>
                         </td>
-                        <td className="py-4 px-6 font-mono text-neutral-600 dark:text-neutral-300" dir="ltr">
+                        <td className="py-3.5 px-5 font-mono text-[#66596A]" dir="ltr">
                           {u.phone || '-'}
                         </td>
-                        <td className="py-4 px-6 text-neutral-500 text-[11px]">
+                        <td className="py-3.5 px-5 text-[#66596A] text-[11px]">
                           {u.createdAt ? new Date(u.createdAt).toLocaleDateString(isRtl ? 'ar-EG' : 'en-US') : '-'}
                         </td>
-                        <td className="py-4 px-6">
-                          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold ${
+                        <td className="py-3.5 px-5">
+                          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium ${
                             lastSeen.isOnline
-                              ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60'
-                              : 'bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300'
+                              ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                              : 'bg-neutral-100 text-[#66596A]'
                           }`}>
                             {lastSeen.isOnline && (
                               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />

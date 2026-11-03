@@ -1,6 +1,6 @@
-﻿'use client';
+'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { extractSheinUrl } from '@/lib/shein-extractor';
 import { ExtractedCartResult } from '@/lib/types';
@@ -16,25 +16,16 @@ import {
   ShoppingBag,
   CheckCircle2,
   AlertCircle,
-  ShieldCheck,
   RotateCcw,
   Shirt,
-  Heart,
-  Crown,
+  HelpCircle,
+  ChevronDown,
 } from 'lucide-react';
 
 interface CartExtractorCardProps {
   onExtracted: (result: ExtractedCartResult) => void;
   currentDynamicFeePercent: number;
 }
-
-const FASHION_CATEGORIES = [
-  { label: 'فساتين وسواريه 👗', tag: 'Dresses' },
-  { label: 'شنط وإكسسوارات 👜', tag: 'Bags & Accessories' },
-  { label: 'ميك أب وعناية 💄', tag: 'Beauty & Skincare' },
-  { label: 'شوزات وكعوب 👠', tag: 'Shoes' },
-  { label: 'سلة مشتريات كاملة 🛒', tag: 'Full Cart' },
-];
 
 export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: CartExtractorCardProps) {
   const { t, dir } = useThemeLang();
@@ -46,9 +37,9 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
   const [error, setError] = useState<string | null>(null);
   const [detectedUrl, setDetectedUrl] = useState<string | null>(null);
   const [pasteSuccess, setPasteSuccess] = useState(false);
-  const [selectedTag, setSelectedTag] = useState<number>(0);
+  const [showGuide, setShowGuide] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('action') === 'new' || window.location.hash === '#cart-extractor-card') {
@@ -70,7 +61,6 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
     setDetectedUrl(link);
   };
 
-  // One-click clipboard paste handler
   const handlePasteClipboard = async () => {
     setError(null);
     try {
@@ -84,15 +74,15 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
         }
       }
     } catch (err) {
-      console.warn('Clipboard read error or not permitted:', err);
+      console.warn('Clipboard read error or permission denied:', err);
     }
 
     if (textareaRef.current) {
       textareaRef.current.focus();
       setError(
         isRtl
-          ? 'المربع جاهز للكتابة أو اللصق! اضغطي ضغطة مطولة داخل المربع واختاري لصق (Paste).'
-          : 'Input is focused! Long press inside the box and choose Paste.'
+          ? 'المربع جاهز للكتابة أو اللصق! اضغطي داخل المربع واختاري لصق (Paste).'
+          : 'Input is focused! Paste your link directly inside the box.'
       );
     }
   };
@@ -108,8 +98,8 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
     if (!inputText.trim()) {
       setError(
         isRtl
-          ? 'من فضلكِ الصقي رابط السلة أو المنتج أولاً في المربع المخصص بالأسفل.'
-          : 'Please paste your SHEIN cart share text or URL first.'
+          ? 'من فضلكِ الصقي رابط سلتكِ أو رسالة المشاركة من شي إن أولاً.'
+          : 'Please paste your SHEIN cart link or share message first.'
       );
       if (textareaRef.current) textareaRef.current.focus();
       return;
@@ -143,8 +133,8 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
         throw new Error(
           json.error ||
             (isRtl
-              ? 'تعذر استخراج المنتجات من رابط شي إن. يرجى التأكد من صلاحية الرابط.'
-              : 'Failed to extract goods from SHEIN link.')
+              ? 'تعذر قراءة محتويات السلة من الرابط. يرجى التأكد من صلاحية الرابط والمحاولة مجدداً.'
+              : 'Failed to extract items from SHEIN link.')
         );
       }
 
@@ -157,136 +147,53 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    <div
       id="cart-extractor-card"
-      className="relative rounded-[36px] p-6 sm:p-10 bg-[#EDF2F6]/95 dark:bg-[#1A0919]/95 border-2 border-[#3A0F34]/20 dark:border-[#DDE3E8]/20 shadow-[0_20px_60px_-15px_rgba(58,15,52,0.08)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] space-y-7 transition-colors overflow-hidden"
+      className="relative rounded-3xl p-6 sm:p-8 bg-[#FFFFFF] border border-[#C7CCD2] shadow-sm space-y-6 transition-colors text-start"
     >
-      {/* Delicate Atmospheric Ambient Vignette */}
-      <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-gradient-to-bl from-[#3A0F34]/10 via-[#DDE3E8]/20 to-transparent dark:from-[#3A0F34]/25 dark:via-[#1A0919]/40 pointer-events-none blur-3xl -z-10" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-gradient-to-tr from-[#DDE3E8]/30 via-[#3A0F34]/5 to-transparent dark:from-[#240E23]/30 pointer-events-none blur-3xl -z-10" />
-
-      {/* Top Graphic Header: Haute Fashion & Female Shopper Focus */}
-      <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6 pb-1">
-        <div className="space-y-2.5 text-center sm:text-start">
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-black uppercase tracking-wider border border-[#DDE3E8] dark:border-[#3A0F34] shadow-xs">
-              <Crown className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8] animate-sparkle-twinkle" />
-              <span>{isRtl ? 'المستخرج الذكي لسلات شي إن للبنات' : 'SHEIN Smart Cart Extractor'}</span>
-            </span>
-            {currentDynamicFeePercent > 0 && (
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#EBF0F4] dark:bg-[#240E23] text-[#3A0F34] dark:text-[#DDE3E8] text-[11px] font-bold border border-[#DDE3E8]">
-                +{currentDynamicFeePercent}% {t.feeLabel}
-              </span>
-            )}
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#3A0F34] dark:text-white tracking-tight text-balance leading-snug">
-            {isRtl ? 'معاكي سلة أو دريس عاجبك من شي إن؟ 🛍️✨' : t.extractorTitle}
-          </h2>
-          <p className="text-xs sm:text-sm text-[#3A0F34]/80 dark:text-[#DDE3E8] max-w-xl leading-relaxed font-medium text-balance">
-            {isRtl
-              ? 'الصقي الرابط في الصندوق السحري بالأسفل، وسنقوم بحساب الإجمالي بالجنيه المصري فوراً ومراجعة مقاساتك والشراء والتوصيل لباب بيتكِ في أي محافظة بمصر!'
-              : t.extractorDesc}
-          </p>
-        </div>
-
-        {/* Fashion Cart Visual Emblem */}
-        <motion.div
-          whileHover={{ scale: 1.05, rotate: [0, -2, 2, 0] }}
-          transition={{ duration: 0.3 }}
-          className="relative shrink-0 flex items-center justify-center cursor-default"
-        >
-          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-[#EBF0F4] dark:bg-[#240E23] border border-[#DDE3E8] dark:border-[#3A0F34] flex flex-col items-center justify-center gap-1.5 shadow-sm shadow-[#3A0F34]/10">
-            <div className="w-12 h-12 rounded-2xl bg-[#3A0F34] text-white flex items-center justify-center shadow-md shadow-[#3A0F34]/30 border border-[#DDE3E8]/30">
-              <ShoppingBag className="w-6 h-6 animate-fashion-float" />
-            </div>
-            <span className="text-[10px] font-black text-[#3A0F34] dark:text-[#DDE3E8] tracking-wider">SHEIN EGYPT</span>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Interactive Fashion Category Pills (Chic & Delightful) */}
-      <div className="relative z-10 pt-1">
-        <div className="text-[11px] font-bold text-neutral-500 dark:text-[#9BAAB6] mb-2 flex items-center gap-1.5">
-          <Heart className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8] fill-[#3A0F34] dark:fill-[#DDE3E8]" />
-          <span>{isRtl ? 'مشترياتكِ المفضلة اليوم من شي إن:' : 'Popular SHEIN Categories:'}</span>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {FASHION_CATEGORIES.map((cat, idx) => (
-            <motion.button
-              key={idx}
-              type="button"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              onClick={() => {
-                setSelectedTag(idx);
-                if (textareaRef.current) textareaRef.current.focus();
-              }}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                selectedTag === idx
-                  ? 'bg-[#3A0F34] text-white shadow-xs shadow-[#3A0F34]/30 border border-[#3A0F34]'
-                  : 'bg-[#EBF0F4] dark:bg-[#1E0C1D] text-[#3A0F34] dark:text-[#DDE3E8] hover:bg-[#DDE3E8] dark:hover:bg-[#2C102A] border border-[#DDE3E8] dark:border-[#3A0F34]/60'
-              }`}
-            >
-              <span>{cat.label}</span>
-            </motion.button>
-          ))}
-        </div>
-      </div>
-
-      {/* 1. Visual Guide / Walkthrough on How to get the SHEIN Link */}
-      <div className="relative z-10">
-        <SheinLinkGuide />
-      </div>
-
-      {/* 2. THE MAIN HERO DROPZONE */}
-      <form onSubmit={handleExtract} className="relative z-10 space-y-4 pt-1">
-        {/* Visual Callout Heading */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1">
+      <form onSubmit={handleExtract} className="space-y-4">
+        {/* Input Bar Header: Clear, accessible label + Paste & Clear buttons */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <label
             htmlFor="shein-cart-input"
-            className="text-xs sm:text-sm font-black text-neutral-950 dark:text-white flex items-center gap-2"
+            className="text-sm font-semibold text-[#3A0F34] flex items-center gap-2"
           >
-            <Sparkles className="w-4 h-4 text-[#3A0F34] dark:text-[#DDE3E8]" />
-            <span>{isRtl ? 'الصقي رابط سلتكِ أو منتجكِ هنا:' : 'Paste your SHEIN link here:'}</span>
+            <Link2 className="w-4 h-4 text-[#682E60]" />
+            <span>{isRtl ? 'الصقي رابط سلتكِ أو رسالة المشاركة من SHEIN' : 'Paste your SHEIN link or share message'}</span>
           </label>
 
-          {/* Quick Action Buttons (Paste & Clear) */}
+          {/* Quick Action Buttons */}
           <div className="flex items-center gap-2">
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.96 }}
+            <button
               type="button"
               onClick={handlePasteClipboard}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 cursor-pointer shadow-xs ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs ${
                 pasteSuccess
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-[#EBF0F4] hover:bg-[#DDE3E8] dark:bg-[#240E23] dark:hover:bg-[#321330] text-[#3A0F34] dark:text-[#DDE3E8] border border-[#DDE3E8] dark:border-[#3A0F34]'
+                  ? 'bg-emerald-700 text-white'
+                  : 'bg-[#F8F9FA] hover:bg-[#DDE3E8]/60 text-[#3A0F34] border border-[#C7CCD2]'
               }`}
-              title={isRtl ? 'لصق الرابط من الحافظة مباشرة' : 'Paste from clipboard'}
+              title={isRtl ? 'لصق سريع من الحافظة' : 'Quick Paste'}
             >
               {pasteSuccess ? (
                 <>
-                  <ClipboardCheck className="w-3.5 h-3.5 text-white" />
+                  <ClipboardCheck className="w-3.5 h-3.5" />
                   <span>{isRtl ? 'تم اللصق بنجاح!' : 'Pasted!'}</span>
                 </>
               ) : (
                 <>
-                  <ClipboardPaste className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
+                  <ClipboardPaste className="w-3.5 h-3.5 text-[#682E60]" />
                   <span>{isRtl ? 'لصق سريع من الحافظة' : 'Quick Paste'}</span>
                 </>
               )}
-            </motion.button>
+            </button>
 
             {inputText.length > 0 && (
               <button
                 type="button"
                 onClick={handleClear}
-                className="p-1.5 rounded-xl text-neutral-400 hover:text-[#3A0F34] hover:bg-[#EBF0F4] dark:hover:bg-[#240E23] transition-colors cursor-pointer"
-                title={isRtl ? 'مسح الرابط' : 'Clear'}
+                className="p-1.5 rounded-xl text-[#66596A] hover:text-[#3A0F34] hover:bg-[#F8F9FA] transition-colors cursor-pointer border border-[#C7CCD2]"
+                title={isRtl ? 'مسح النص' : 'Clear'}
+                aria-label={isRtl ? 'مسح الرابط' : 'Clear input'}
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
@@ -294,77 +201,84 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
           </div>
         </div>
 
-        {/* Input Box Container with Ice Silver Border & Deep Aubergine Accent */}
-        <div className="relative rounded-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 focus-within:border-[#3A0F34] dark:focus-within:border-[#DDE3E8] focus-within:ring-3 focus-within:ring-[#3A0F34]/15 transition-all bg-[#F9FBFC] dark:bg-[#180817] overflow-hidden shadow-xs">
-          {/* Header indicator inside the box */}
-          <div className="flex items-center justify-between px-4 sm:px-5 pt-3 pb-2 border-b border-[#DDE3E8] dark:border-[#3A0F34]/60 bg-white/70 dark:bg-[#1E0C1D]">
-            <div className="flex items-center gap-2">
-              <Link2 className="w-3.5 h-3.5 text-[#3A0F34] dark:text-[#DDE3E8]" />
-              <span className="text-xs font-black text-neutral-900 dark:text-neutral-200">
-                {isRtl ? 'سلة أو منتجات شي إن (SHEIN)' : 'SHEIN Cart Extractor Input'}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500 dark:text-[#9BAAB6]">
-              <Shirt className="w-3 h-3 text-[#3A0F34] dark:text-[#DDE3E8]" />
-              <span>{isRtl ? 'يقبل السلة بالكامل أو رابط فستان/قطعة واحدة' : 'Cart or single item'}</span>
-            </div>
-          </div>
-
+        {/* Input Box Container (16px minimum font size to avoid mobile Safari zoom) */}
+        <div className="relative rounded-2xl border border-[#918797] focus-within:border-[#3A0F34] focus-within:ring-2 focus-within:ring-[#3A0F34]/20 transition-all bg-[#F8F9FA] overflow-hidden shadow-xs">
           <textarea
             id="shein-cart-input"
+            name="shein_cart_link"
             ref={textareaRef}
-            rows={4}
+            rows={3}
             value={inputText}
             onChange={(e) => handleTextChange(e.target.value)}
             placeholder={
               isRtl
-                ? 'الصقي هنا رابط السلة (مثال: onelink.shein.com/...) أو رابط أي فستان/منتج عاجبك، أو رسالة المشاركة كاملة كما نسختيها من تطبيق شي إن...'
-                : 'Paste your SHEIN cart link (https://onelink.shein.com/...) or single item link here...'
+                ? 'الصقي هنا رابط السلة (onelink.shein.com/...) أو رسالة المشاركة كاملة كما تم نسخها من تطبيق SHEIN...'
+                : 'Paste your SHEIN cart link (https://onelink.shein.com/...) or share text here...'
             }
-            className="w-full px-4 sm:px-5 py-3.5 text-xs sm:text-sm text-neutral-900 dark:text-white bg-transparent focus:outline-none placeholder:text-neutral-400 dark:placeholder:text-neutral-500 font-sans resize-y leading-relaxed font-medium"
+            aria-describedby={error ? 'shein-cart-error' : undefined}
+            className="w-full px-4 py-3 text-[16px] sm:text-sm text-[#3A0F34] bg-transparent focus:outline-none placeholder:text-[#66596A]/60 font-sans resize-y leading-relaxed"
           />
 
-          {/* Bottom Bar inside the box */}
-          <div className="px-4 sm:px-5 py-2.5 bg-[#EBF0F4]/60 dark:bg-[#130712] border-t border-[#DDE3E8] dark:border-[#3A0F34]/60 flex items-center justify-between text-[11px] text-neutral-500 dark:text-[#9BAAB6]">
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>{isRtl ? 'الصندوق جاهز للاستخراج الفوري' : 'Ready'}</span>
-            </span>
-            <span className="font-mono tabular-nums text-[11px]">
-              {inputText.length} {t.chars}
-            </span>
+          {/* Sub-bar inside input with char count and helper */}
+          <div className="px-4 py-2 bg-[#DDE3E8]/30 border-t border-[#C7CCD2] flex items-center justify-between text-xs text-[#66596A]">
+            <div className="flex items-center gap-1.5 text-[11px]">
+              <Shirt className="w-3 h-3 text-[#682E60]" />
+              <span>{isRtl ? 'يقبل رابط السلة كاملة أو رابط قطعة مفردة' : 'Accepts full cart link or single item'}</span>
+            </div>
+            {inputText.length > 0 && (
+              <span className="font-mono text-[11px] tabular-nums">
+                {inputText.length} {t.chars}
+              </span>
+            )}
           </div>
         </div>
 
-        {/* Real-time Link Detection Celebration Banner */}
+        {/* Subtle Link Guide Accordion Trigger */}
+        <div className="pt-0.5">
+          <button
+            type="button"
+            onClick={() => setShowGuide(!showGuide)}
+            className="inline-flex items-center gap-1.5 text-xs text-[#682E60] hover:text-[#3A0F34] font-medium transition-colors cursor-pointer"
+          >
+            <HelpCircle className="w-3.5 h-3.5" />
+            <span>{isRtl ? 'مش عارفة تجيبي الرابط من تطبيق SHEIN؟ شوفي الخطوات' : 'How to copy the cart link from SHEIN app'}</span>
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showGuide ? 'rotate-180' : ''}`} />
+          </button>
+
+          <AnimatePresence>
+            {showGuide && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden mt-3"
+              >
+                <SheinLinkGuide />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Real-time Link Detection Banner */}
         <AnimatePresence>
           {detectedUrl && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: -6 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: -6 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="p-4 rounded-2xl bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 dark:from-emerald-950/40 dark:via-[#17221e] dark:to-emerald-950/40 border border-emerald-300 dark:border-emerald-800 text-neutral-900 dark:text-white text-xs flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs"
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-950 text-xs flex items-center justify-between gap-3 shadow-xs"
             >
-              <div className="flex items-center gap-3 overflow-hidden w-full sm:w-auto">
-                <div className="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm shadow-emerald-600/30">
-                  <CheckCircle2 className="w-5 h-5" />
-                </div>
+              <div className="flex items-center gap-2.5 overflow-hidden">
+                <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
                 <div className="overflow-hidden">
-                  <span className="font-black text-emerald-900 dark:text-emerald-200 block text-xs flex items-center gap-1.5">
-                    <span>{isRtl ? 'تم التعرف على سلة شي إن بنجاح! 🎉' : 'Valid SHEIN Link Detected!'}</span>
+                  <span className="font-semibold block text-xs">
+                    {isRtl ? 'تم التعرف على رابط سلة SHEIN بنجاح' : 'Valid SHEIN link detected'}
                   </span>
-                  <span className="truncate font-mono text-[11px] text-neutral-600 dark:text-neutral-400 block mt-0.5 max-w-sm sm:max-w-md">
+                  <span className="truncate font-mono text-[11px] text-neutral-600 block max-w-sm sm:max-w-md">
                     {detectedUrl}
                   </span>
                 </div>
-              </div>
-
-              <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-end">
-                <span className="text-[11px] font-black text-emerald-700 dark:text-emerald-300 bg-white dark:bg-[#1a2520] px-3 py-1 rounded-full border border-emerald-300 dark:border-emerald-800">
-                  {isRtl ? 'جاهز للحساب بالجنيه ⬇️' : 'Ready to calculate'}
-                </span>
               </div>
             </motion.div>
           )}
@@ -374,75 +288,59 @@ export function CartExtractorCard({ onExtracted, currentDynamicFeePercent }: Car
         <AnimatePresence>
           {error && (
             <motion.div
-              initial={{ opacity: 0, y: -6 }}
+              id="shein-cart-error"
+              role="alert"
+              aria-live="polite"
+              initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              className="p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-300 dark:border-rose-900 text-rose-800 dark:text-rose-200 text-xs flex items-center gap-2.5 shadow-xs"
+              exit={{ opacity: 0, y: -4 }}
+              className="p-3.5 rounded-xl bg-rose-50 border border-rose-300 text-rose-900 text-xs flex items-center gap-2 shadow-xs"
             >
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-600 dark:text-rose-400" />
+              <AlertCircle className="w-4 h-4 shrink-0 text-rose-700" />
               <span className="font-medium">{error}</span>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* 3 Step Chic Flow Ribbon */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 py-1">
-          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold">
-            <span className="w-5 h-5 rounded-full bg-[#3A0F34] text-white font-black text-[10px] flex items-center justify-center shrink-0">1</span>
-            <span className="truncate">{isRtl ? 'انسخي الرابط من تطبيق SHEIN' : 'Copy link from SHEIN'}</span>
-          </div>
-          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold">
-            <span className="w-5 h-5 rounded-full bg-[#3A0F34] text-white font-black text-[10px] flex items-center justify-center shrink-0">2</span>
-            <span className="truncate">{isRtl ? 'اضغطي استخراج وشوفي السعر' : 'Extract & see EGP total'}</span>
-          </div>
-          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#EBF0F4] dark:bg-[#1E0C1D] border border-[#DDE3E8] dark:border-[#3A0F34]/60 text-[11px] text-[#3A0F34] dark:text-[#DDE3E8] font-bold">
-            <span className="w-5 h-5 rounded-full bg-[#3A0F34] text-white font-black text-[10px] flex items-center justify-center shrink-0">3</span>
-            <span className="truncate">{isRtl ? 'ادفعي بالمصري واستلمي بالبيت' : 'Pay in EGP & receive at home'}</span>
-          </div>
-        </div>
-
-        {/* Submit Button & Payment Trust Logos */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#DDE3E8] dark:border-[#3A0F34]/60">
-          {/* Payment Logos Badge */}
-          <div className="flex items-center gap-2.5">
-            <span className="text-[11px] font-bold text-neutral-500 dark:text-[#9BAAB6]">
-              {isRtl ? 'دفع آمن بالجنيه عبر:' : 'Payment via:'}
+        {/* Action Row: Payment logos once & Primary submit button */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-3 border-t border-[#C7CCD2]/60">
+          {/* Compact payment logos displayed once */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-[#66596A]">
+              {isRtl ? 'الدفع بالجنيه عبر:' : 'Payment via:'}
             </span>
-            <div className="flex items-center gap-2">
-              <div className="h-7 px-2.5 py-0.5 rounded-lg bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 flex items-center gap-1.5 shadow-2xs">
-                <img src="/images/instapay.png" alt="InstaPay" className="h-4 object-contain" />
-                <span className="text-[10px] font-black text-neutral-800 dark:text-neutral-200">InstaPay</span>
+            <div className="flex items-center gap-1.5">
+              <div className="h-6 px-2 py-0.5 rounded-lg bg-[#F8F9FA] border border-[#C7CCD2] flex items-center gap-1.5 shadow-2xs">
+                <img src="/images/instapay.png" alt="InstaPay" className="h-3.5 object-contain" />
+                <span className="text-[10px] font-semibold text-[#3A0F34]">InstaPay</span>
               </div>
-              <div className="h-7 px-2.5 py-0.5 rounded-lg bg-white dark:bg-[#1A0919] border border-[#DDE3E8] dark:border-[#3A0F34]/50 flex items-center gap-1.5 shadow-2xs">
-                <img src="/images/vodafone-cash.png" alt="Vodafone Cash" className="h-4 object-contain" />
-                <span className="text-[10px] font-black text-[#3A0F34] dark:text-[#DDE3E8]">Vodafone</span>
+              <div className="h-6 px-2 py-0.5 rounded-lg bg-[#F8F9FA] border border-[#C7CCD2] flex items-center gap-1.5 shadow-2xs">
+                <img src="/images/vodafone-cash.png" alt="Vodafone Cash" className="h-3.5 object-contain" />
+                <span className="text-[10px] font-semibold text-[#3A0F34]">Vodafone</span>
               </div>
             </div>
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.96 }}
-            transition={{ duration: 0.15 }}
+          <button
             type="submit"
             disabled={loading}
-            className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#3A0F34] via-[#5C1E52] to-[#3A0F34] hover:opacity-95 text-[#DDE3E8] font-black text-xs sm:text-sm rounded-2xl shadow-lg shadow-[#3A0F34]/25 transition-all flex items-center justify-center gap-2.5 cursor-pointer select-none disabled:opacity-50 border border-[#DDE3E8]/40"
+            className="px-6 py-3 bg-[#3A0F34] hover:bg-[#682E60] active:scale-[0.99] text-white font-semibold text-sm rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer select-none disabled:opacity-50"
           >
             {loading ? (
               <>
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                <span>{isRtl ? 'جاري فحص سلتكِ من شي إن وحساب الأسعار...' : t.extracting}</span>
+                <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                <span>{isRtl ? 'جاري فحص السلة وحساب الإجمالي...' : t.extracting}</span>
               </>
             ) : (
               <>
                 <ShoppingBag className="w-4 h-4" />
-                <span>{isRtl ? 'احسبي السلة واستخرجي المنتجات بالجنيه 🛍️' : t.extractBtn}</span>
+                <span>{isRtl ? 'اعرفي الإجمالي بالجنيه' : 'Calculate Total in EGP'}</span>
                 {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
               </>
             )}
-          </motion.button>
+          </button>
         </div>
       </form>
-    </motion.div>
+    </div>
   );
 }

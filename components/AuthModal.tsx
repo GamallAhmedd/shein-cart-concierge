@@ -357,13 +357,24 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
 
   const isRtl = dir === 'rtl';
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md">
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-md bg-white dark:bg-[#1A0919] text-neutral-900 dark:text-white rounded-3xl shadow-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 overflow-hidden transition-colors"
+        role="dialog" aria-modal="true" aria-labelledby="auth-modal-title" className="relative w-full max-w-md bg-white dark:bg-[#1A0919] text-neutral-900 dark:text-white rounded-3xl shadow-2xl border border-[#DDE3E8] dark:border-[#3A0F34]/60 overflow-hidden transition-colors"
       >
         {/* Header */}
         <div className="p-6 bg-[#EBF0F4] dark:bg-[#200D1F] border-b border-[#DDE3E8] dark:border-[#3A0F34]/60 flex items-center justify-between">
@@ -372,7 +383,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
               <Sparkles className="w-3 h-3" />
               <span>SHEIN Concierge</span>
             </div>
-            <h3 className="text-xl font-black text-neutral-950 dark:text-white tracking-tight">
+            <h3 id="auth-modal-title" className="text-xl font-black text-neutral-950 dark:text-white tracking-tight">
               {mode === 'signin'
                 ? defaultRole === 'admin'
                   ? (isRtl ? 'تسجيل دخول المشرف' : 'Admin Sign In')
@@ -512,7 +523,7 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
           )}
 
           {error && (
-            <div className="mb-4 p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs font-semibold flex items-center gap-2.5">
+            <div id="auth-modal-error" role="alert" aria-live="polite" className="mb-4 p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs font-semibold flex items-center gap-2.5">
               <AlertCircle className="w-4 h-4 flex-shrink-0" />
               <span>{error}</span>
             </div>
@@ -522,18 +533,21 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
           <form onSubmit={handleSubmit} className="space-y-3.5">
             {mode === 'signup' && (
               <div className="text-start">
-                <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
+                <label htmlFor="auth-modal-name" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
                   {isRtl ? 'الاسم بالكامل' : 'Full Name'}
                 </label>
                 <div className="relative">
                   <User className={`w-4 h-4 absolute top-1/2 -translate-y-1/2 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
                   <input
+                    id="auth-modal-name"
+                    name="name"
+                    autoComplete="name"
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder={isRtl ? 'مثال: سارة أحمد' : 'e.g. Sara Ahmed'}
-                    className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
+                    className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
                       isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                     }`}
                   />
@@ -542,18 +556,21 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
             )}
 
             <div className="text-start">
-              <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
+              <label htmlFor="auth-modal-email" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
                 {isRtl ? 'البريد الإلكتروني' : 'Email Address'}
               </label>
               <div className="relative">
                 <Mail className={`w-4 h-4 absolute top-1/2 -translate-y-1/2 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
                 <input
+                  id="auth-modal-email"
+                  name="email"
+                  autoComplete="email"
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
-                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
+                  className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] ${
                     isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                   }`}
                 />
@@ -562,17 +579,20 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
 
             {mode === 'signup' && (
               <div className="text-start">
-                <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
+                <label htmlFor="auth-modal-phone" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
                   {isRtl ? 'رقم الهاتف (للتواصل أو فودافون كاش)' : 'Phone Number (Vodafone Cash / Contact)'}
                 </label>
                 <div className="relative">
                   <Phone className={`w-4 h-4 absolute top-1/2 -translate-y-1/2 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
                   <input
+                    id="auth-modal-phone"
+                    name="tel"
+                    autoComplete="tel"
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="010XXXXXXXX"
-                    className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-mono ${
+                    className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] dark:focus:ring-[#DDE3E8] font-mono ${
                       isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                     }`}
                   />
@@ -581,18 +601,21 @@ export function AuthModal({ isOpen, onClose, defaultRole = 'user' }: AuthModalPr
             )}
 
             <div className="text-start">
-              <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
+              <label htmlFor="auth-modal-password" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">
                 {isRtl ? 'كلمة المرور' : 'Password'}
               </label>
               <div className="relative">
                 <Lock className={`w-4 h-4 absolute top-1/2 -translate-y-1/2 text-neutral-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
                 <input
+                  id="auth-modal-password"
+                  name="password"
+                  autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
                   type="password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className={`w-full py-2.5 text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] ${
+                  className={`w-full py-2.5 text-[16px] sm:text-xs bg-neutral-50 dark:bg-[#180817] border border-[#DDE3E8] dark:border-[#3A0F34] rounded-xl focus:bg-white dark:focus:bg-[#200D1F] focus:outline-none focus:ring-2 focus:ring-[#3A0F34] ${
                     isRtl ? 'pr-10 pl-3.5' : 'pl-10 pr-3.5'
                   }`}
                 />
